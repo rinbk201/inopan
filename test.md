@@ -1,4 +1,3 @@
-```mermaid
 erDiagram
 	user ||--|| user_info : "1人のユーザーは1つ以上の投稿を持つ"
     user ||--|| role_user : "userは一つのrole_userを持つ"
@@ -47,6 +46,7 @@ erDiagram
   string DiscordID "discord id"
   string X "X id"
   strinig FaceBook "FaceBookID"
+  string free_form "勉強中スキル,参考書などの自由記述"
   timestamp created_at
   timestamp deleted_at
  }
@@ -55,6 +55,7 @@ erDiagram
   int id PK
   string faculty "学部"
   string major "学科"
+  string initial "学科略称"
  }
 
  skills {
@@ -98,6 +99,9 @@ erDiagram
   int id PK
   references user_info_id FK "post投稿者(募集者)"
   string title "投稿タイトル"
+  timestamp launch "開催日時"
+  timestamp deadline "募集締め切り日"
+  int recruitment_numbers "募集人数"
   text description "投稿内容"
   string matching_message "マッチング成立時のメッセージ"
   timestamp created_at
@@ -147,4 +151,3 @@ erDiagram
   reference posts_id "参加するpostのID"
   reference user_info_id "参加者のuser_info_id"
  }
-```
