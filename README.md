@@ -15,5 +15,6 @@
   * After that. Please enter ```yarn```. the yarn starts installation node_module and module which deaclear "package.json" automatically.
   
 ## アプリの起動の仕方
+* cloneやpullをしたらとりあえず```yarn```
 * 開発環境用```yarn run dev```
 * 本番環境用は```yarn run builsd```→```yarn run start```
