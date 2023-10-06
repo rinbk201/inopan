@@ -4,7 +4,7 @@
   The project require Node enviroment.
   * 1, Check you have already installed Node or not. : ```node -v```
   * 2, if you not installed node. you can install "nodebrew??windowsだからマックよくわからん"
-  * 3, Check your node version. You can check with "node v". require version is "18.16.0"
+  * 3, Check your node version. You can check with ```node v```. require version is ```18.16.0```
 
 ## Clone project
   The project can clone from github with "git clone "repogitry https url".
