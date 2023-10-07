@@ -10,53 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Post {
-//   id        String     @default(cuid()) @id
-//   title     String
-//   content   String?
-//   published Boolean @default(false)
-//   author    User?   @relation(fields: [authorId], references: [id])
-//   authorId  String?
-// }
-
-// model User {
-//   id            String       @default(cuid()) @id
-//   name          String?
-//   email         String?   @unique
-//   createdAt     DateTime  @default(now()) @map(name: "created_at")
-//   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-//   posts         Post[]
-//   @@map(name: "users")
-// }
-
-// --追加-- 2023/10/07/15:18 田中
-
 //--データ構造--
-
-//ログインユーザー情報？
- model User {
-  user_ID Int @id
-  email String
-  password String //"hash"
-  role_user_id Int //reference
-  created_at DateTime
-  deleted_at DateTime
- }
-
-//ユーザーの権限
-//@COMMENT 列挙で省略可能?
- model Role_User {
-  id Int @id
-  role String //"管理者,一般ユーザー"
- }
-
-//ユーザーの情報
-model User_Info{
-  id  Int @id
+//ユーザーの情報(User_Info)
+model Profile{
+  id  Int @id @default(autoincrement())
   name  String
-  email  String  
+  email  String @unique 
   display_name String 
-  affiliation_id Int //reference 
+  affiliation_id Int 
   lab String 
   gender String 
   hobby String  
@@ -65,21 +26,40 @@ model User_Info{
   XID String 
   FaceBookID String  
   free_form  String 
-  created_at DateTime 
+  created_at DateTime @default(now())
   deleted_at DateTime
 }
 
+//ログインユーザー情報？
+ model User {
+  user_id Int @id
+  email String 
+  password String //"hash"
+  role_user_ID Int
+  created_at DateTime @default(now())
+  deleted_at DateTime
+ }
+
+ //ユーザーの権限
+//@COMMENT 列挙で省略可能?
+ model Role_User {
+  id Int @id @default(autoincrement())
+  // user User[]
+  role String //"管理者,一般ユーザー"
+ }
+
+
+
 //学部・学科
 model Affrilation{
-  id  Int  @id
+  id  Int  @id 
   faculty String  
-  major String  
-  initial AffrilationInitial
+  major String
 }
 
 //ユーザーの持つスキル(skills)
 model HavingSkills {
-  id  Int @id
+  id  Int @id @default(autoincrement())
   user_info_ID Int //FK,reference
   skill_ID  Int //FK,reference
   level Levels  
@@ -87,13 +67,13 @@ model HavingSkills {
 
 //スキル
  model Skill {
-  id Int @id
+  id Int @id @default(autoincrement())
   skill_field  SkillFields //"企画力,デザイン,フロントエンド,バックエンド,プレゼン力等"
  }
 
 //ユーザーの習得したプログラミング言語(programming_languages)
  model HavingLanguages{
-  id Int @id
+  id Int @id @default(autoincrement())
   user_info_ID Int //FK,reference
   language_ID Int //reference
   level Levels 
@@ -101,14 +81,14 @@ model HavingSkills {
 
 //このシステムにおけるプログラミング言語の詳細
 model Language {
-  id Int @id
+  id Int @id @default(autoincrement())
   language ProgrammingLanguages
 	area Int // "0:バックエンド,1:フロントエンド or 新しくテーブル作るか"
  }
 
 //ユーザーの興味のある業界
  model Interested_Industory {
-  id Int @id
+  id Int @id @default(autoincrement())
   user_info_ID Int //FK,reference
   industory_field  Industorys //FK,reference
   level Levels
@@ -117,13 +97,13 @@ model Language {
 //このシステムにおける業界の詳細
 // @COMMENT データの付随をさせない場合，列挙で定義できるのでいらない気がします
 model Industory {
-  id Int @id
+  id Int @id @default(autoincrement())
   name String 
  }
 
 //募集イベント
 model Posts {
-  id Int @id
+  id Int @id @default(autoincrement())
   user_info_ID Int  //FK,reference
   title String 
   launchDate DateTime 
@@ -131,7 +111,7 @@ model Posts {
   recruitment_numbers Int 
   description String 
   matching_message String 
-  created_at DateTime
+  created_at DateTime @default(now())
   modifyed_at DateTime
   deleted_at DateTime
  }
@@ -139,48 +119,48 @@ model Posts {
 //要求されるプログラミング言語
 //モデル
  model Requirement_Languages {
-  id Int @id
+  id Int @id @default(autoincrement())
   posts_ID Int //reference
   // language Langages　//reference
  }
 
 //ポストのログ
 model Logs {
-  id  Int @id
+  id  Int @id @default(autoincrement())
   posts_id Int //FK,reference
   // user_info User_Info //FK,reference
-  created_at DateTime
+  created_at DateTime @default(now())
   deleted_at DateTime
 }
 
 //ポストに残るリアクション(Reactions)
 model Postted_Reactions {
-  id Int @id 
+  id Int @id  @default(autoincrement())
   logs_ID Int //FK,reference
   reaction_ID Int //FK
  }
 
 //リアクションの詳細
 model Reaction {
-  id Int @id
+  id Int @id @default(autoincrement())
   reaction_name String //"宜しく or 一緒に頑張ろう or 楽しみましょう"
  }
 
 //興味を表明したポスト
 model Interested_Posts {
-  id Int @id
+  id Int @id @default(autoincrement())
   user_info_ID Int //FK , "興味ありした人のUser_info_id.user_info_idで検索すればユーザーが興味ありしたポスト情報が取得可能"
   posts_id Int //FK , "Post_idで検索すればpostに対して興味ありした人を取得可能"
   interest_level_id Int //FK
  }
 
 model Interested_Level {
-  id Int @id
+  id Int @id @default(autoincrement())
   state String  //"興味あり or 緩くやりたい or がちでやりたい"
  }
 
 model Participants {
-  id Int @id
+  id Int @id @default(autoincrement())
   posts_ID Int //reference
   user_info_ID Int //reference"参加者のuser_info_id"
  }
