@@ -1,22 +1,17 @@
 "use client";
-// データベースに接続するためのクライアントをインポート
+// // データベースに接続するためのクライアントをインポート
 import Header from "@/lib/componets/header";
-import { prisma } from "@/lib/prismaClient";
+// import { prisma } from "@/lib/prismaClient";
 
 import { Container, Grid } from "@mui/material";
 import AbilityCard from "@/lib/componets/abilityCard";
 import RaderChart from "@/lib/componets/raderChart";
 import styled from "styled-components";
-
-const StyledDiv = styled.div`
-  background-color: pink;
-`;
-
-export default async function Home() {
-  // Userテーブルから全てデータを取得
-  const users = prisma.user.findMany();
-  // Postテーブルから全てデータを取得
-  const posts = prisma.post.findMany();
+export default function Home() {
+  // // Userテーブルから全てデータを取得
+  // const users = prisma.user.findMany();
+  // // Postテーブルから全てデータを取得
+  // const posts = prisma.post.findMany();
 
   const demo_default_data = [
     { subject: "企画力", value: 10, fullMark: 100 },
@@ -31,7 +26,6 @@ export default async function Home() {
       <Header />
       <Grid container spacing={3}>
         <Grid>
-          <StyledDiv>こんにちは</StyledDiv>
           <h2>参加希望者一覧</h2>
           <AbilityCard></AbilityCard>
         </Grid>
