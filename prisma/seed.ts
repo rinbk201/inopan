@@ -1,11 +1,16 @@
 import { PrismaClient } from '@prisma/client'
 import { Faker, en, ja } from '@faker-js/faker'
+import { allFakers, allLocales } from '@faker-js/faker';
 const prisma = new PrismaClient()
+/*
 const faker = new Faker({ locale: [ja] })
-
+const faker_en = new Faker({ locale: [en] })
+console.log(allFakers['ja']); // the prebuilt Faker instance for de_AT
+console.log(allLocales['ja']); // the raw locale definitions for de_AT
 for(let i = 0; i < 100; i++) {
-	console.log(String(faker.internet.email()))
+	console.log(String(faker.person.sex()))
 }
+*/
 
 async function main() {
 	const sample_person1 = await prisma.profile.create({
@@ -28,10 +33,10 @@ async function main() {
 
 	const sample_person2 = await prisma.profile.create({
 		data: {
-			name: '電大太郎',
-			display_name: "でん君",
+			name: '電大花子',
+			display_name: "でんちゃん",
 			email: 'denkun@example.com',
-			affiliation_id: 1,
+			affiliation_id: 2,
 			lab: "情報セキュリティ研究室",
 			gender: "男",
 			hobby: "キャンプ",
