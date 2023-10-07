@@ -5,13 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -34,3 +28,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+# Install guid
+
+## 1st install Node and check Node version
+  The project require Node enviroment.
+  * 1, Check you have already installed Node or not. : ```node -v```
+  * 2, if you not installed node. you should install node.
+  * 3, Check your node version. You can check with ```node v```. require version is ```18.16.0```
+
+## Clone project
+  The project can clone from github with "git clone "repogitry https url".
+  * Note: I recommand Cloning from VSCode. if you are already complate collaborate VSCode with gitHub.
+
+## install yarn and node_module.
+  * Development is uses ```yarn```. Please install that with```npm install yarn```
+  * After that. Please enter ```yarn```. the yarn starts installation node_module and module which deaclear "package.json" automatically.
+## アプリの起動の仕方
+* cloneやpullをしたらとりあえず```yarn```
+* 開発環境用```yarn run dev```
+* 本番環境用は```yarn run builsd```→```yarn run start```
+
+
+## DB関係
+* DBの初期化```npx prisma init```
+* Prismaのスキーマを書き換えたら```npx prisma db push```
+* ブラウザで、DB内にアクセスしたいとき```npx prisma studio```
