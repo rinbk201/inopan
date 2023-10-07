@@ -152,4 +152,4 @@ erDiagram
   reference posts_id "参加するpostのID"
   reference user_info_id "参加者のuser_info_id"
  }
-```
+ ```
