@@ -45,6 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## install yarn and node_module.
   * Development is uses ```yarn```. Please install that with```npm install yarn```
   * After that. Please enter ```yarn```. the yarn starts installation node_module and module which deaclear "package.json" automatically.
+
 ## アプリの起動の仕方
 * cloneやpullをしたらとりあえず```yarn```
 * 開発環境用```yarn run dev```
