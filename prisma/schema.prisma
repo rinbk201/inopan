@@ -6,26 +6,34 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  user_id      Int      @id
+  email        String   @unique
+  password     String //"hash"
+  role_user_ID Int
+  created_at   DateTime @default(now())
+  deleted_at   DateTime
+  posts        Post[]
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id                  Int      @id @default(autoincrement())
+  title               String
+  launchDate          DateTime
+  deadlineDate        DateTime
+  recruitment_numbers Int
+  description         String
+  matching_message    String
+  created_at          DateTime @default(now())
+  modifyed_at         DateTime
+  deleted_at          DateTime
+  author              User     @relation(fields: [authorId], references: [user_id])
+  authorId            Int
 
   @@index([authorId])
 }

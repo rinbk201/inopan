@@ -1,4 +1,5 @@
 // データベースに接続するためのクライアントをインポート
+import Header from "@/lib/componets/header";
 import { prisma } from "@/lib/prismaClient";
 
 export default async function Home() {
@@ -9,6 +10,7 @@ export default async function Home() {
 
   return (
     <>
+     <Header />
       <h1 className="font-bold text-2xl">Users</h1>
       {/* Userテーブルの結果の一覧を画面に出力する */}
       {(await users).map((user, index) => (
