@@ -11,86 +11,196 @@ datasource db {
 }
 
 //--データ構造--
-//ユーザーの情報(User_Info)
-model Profile{
-  id  Int @id @default(autoincrement())
-  name  String
-  email  String @unique 
-  display_name String 
-  affiliation_id Int 
-  lab String 
-  gender String 
-  hobby String  
-  comment String  
-  DiscordID String  
-  XID String 
-  FaceBookID String  
-  free_form  String 
+
+//ユーザー
+ model User {
+
+  // ユーザーのID
+  id Int @id 
+  // ユーザー名(登録メールアドレス) 
+  email String @unique 
+  // パスワード
+  password String //"hash"
+  // 権限のID
+  role_user_ID Int
+  // 作成日
   created_at DateTime @default(now())
+  // 消去日
   deleted_at DateTime
+
+  //ユーザの情報
+  user_ID Profile? @relation("id")
+  user_email Profile? @relation("email")
+  //ユーザーの権限
+  role Role_User?
+
+ }
+
+
+//ユーザー情報(User_Info)
+model Profile{
+  @@id([id,user_ID])
+
+  // ユーザのID
+  user_ID  Int @unique
+  user__ID User @relation("id",fields: [user_ID],references: [id])
+  // ユーザー名(登録メールアドレス)
+  email  String @unique
+  user__email User @relation("email",fields: [email],references: [email])
+  // 参加者としてのID
+  participant_ID Int @unique
+  participant Participant @relation(fields: [participant_ID],references: [id])
+  // 興味のある募集イベントのID
+  interested_posts_ID Int
+  interested_posts Interested_Post @relation(fields: [interested_posts_ID],references: [id])
+  
+  //ユーザーの情報のID
+  id Int @unique
+  // 表示名
+  display_name String 
+  // 研究室
+  lab String
+  // 性別 
+  gender Gender
+  // 趣味
+  hobby String  
+  // 一言
+  comment String  
+  // ディスコードのID
+  Discord_ID String  
+  // XのID 
+  X_ID String 
+  // FaceBookのID
+  FaceBookID String  
+  // 自由記述(最近読んだ/好きな参考書を想定)
+  free_form  String 
+  // 作成日
+  created_at DateTime @default(now())
+  // 消去日
+  deleted_at DateTime
+  
+  // 学科
+  affriaffiliation Affrilation?
+  // 興味のある業界
+  interested_industorys Interested_Industory?
+  // 持つスキル分野
+  skills Having_Skill[]
+  // 習得しているプログラミング言語
+  langages Having_Languages[]
+  // 投稿した募集イベント
+  posts Post[]
+  // 投稿したコメント
+  log Log[]
+
+
+
 }
 
-//ログインユーザー情報？
- model User {
-  user_id Int @id
-  email String 
-  password String //"hash"
-  role_user_ID Int
-  created_at DateTime @default(now())
-  deleted_at DateTime
- }
-
- //ユーザーの権限
+//ユーザーの権限
 //@COMMENT 列挙で省略可能?
  model Role_User {
-  id Int @id @default(autoincrement())
-  // user User[]
-  role String //"管理者,一般ユーザー"
+  //ユーザーの権限をもつユーザーのID
+  user_ID Int @unique
+  user User @relation(fields: [user_ID],references: [id])
+
+  // ユーザー権限のID
+  id Int @id @default(autoincrement())  
+  //付与された権限
+  role Role 
  }
-
-
 
 //学部・学科
 model Affrilation{
+  //学科を持つユーザーデータ
+  profile_ID Int @unique
+  profiles Profile  @relation(fields: [profile_ID],references: [id])
+
+  // 学科ID
   id  Int  @id 
-  faculty String  
+  // 学部・研究科 
+  faculty String
+  // 学科・専攻 
   major String
+  //学科略称
+  initial AffrilationInitial
 }
 
-//ユーザーの持つスキル(skills)
-model HavingSkills {
-  id  Int @id @default(autoincrement())
-  user_info_ID Int //FK,reference
-  skill_ID  Int //FK,reference
-  level Levels  
+//ユーザーの持つスキル分野(skills)
+model Having_Skill {
+  // ユーザー情報のID
+  profile_ID Int @unique
+  profile Profile @relation(fields: [profile_ID],references: [id])
+
+  // ユーザーの持つスキル分野のID
+  id  Int @id  @default(autoincrement())
+  // 習得レベル
+  level Levels
+
+  // スキル分野
+  skill Skill? 
+
+  @@map("skills")
  }
 
-//スキル
+//スキル分野
  model Skill {
+  // スキルを持つユーザーの持つスキル分野のID
+  skills_ID Int @unique
+  skills Having_Skill @relation(fields: [skills_ID],references: [id])
+
+  // スキル分野のID
   id Int @id @default(autoincrement())
+  // スキル分野
   skill_field  SkillFields //"企画力,デザイン,フロントエンド,バックエンド,プレゼン力等"
  }
 
 //ユーザーの習得したプログラミング言語(programming_languages)
- model HavingLanguages{
+ model Having_Languages{
+  // ユーザーの習得したプログラミング言語が持つユーザー情報のID
+  profile_ID Int @unique
+  profile Profile @relation(fields: [profile_ID],references: [id])
+  
+  // ユーザーの習得したプログラミング言語のID
   id Int @id @default(autoincrement())
-  user_info_ID Int //FK,reference
-  language_ID Int //reference
-  level Levels 
+  // 習得レベル
+  level Levels
+
+  //プログラミング言語
+  language Language?
+
+  @@map("Langages")
  }
 
-//このシステムにおけるプログラミング言語の詳細
+//プログラミング言語
+// 列挙型だといらないのでは
 model Language {
+  // プログラミング言語をもつユーザーの習得したプログラミング言語のID
+  langages_ID Int @unique
+  langages Having_Languages @relation(fields: [langages_ID],references: [id])
+  // プログラミング言語をもつ必須プログラミング言語のID
+  requirementlangage_ID Int @unique
+  requirementlangage Requirement_Languages @relation(fields: [requirementlangage_ID],references: [id])
+
+
+  // 言語の固有ID
   id Int @id @default(autoincrement())
+  // プログラミング言語
   language ProgrammingLanguages
+  // 使用される分野
 	area Int // "0:バックエンド,1:フロントエンド or 新しくテーブル作るか"
  }
 
-//ユーザーの興味のある業界
+//興味のある業界
  model Interested_Industory {
+  //興味のある業界の持つユーザー情報
+  profile_ID Int @unique
+  profile Profile @relation(fields: [profile_ID],references: [id])
+
+  //興味のある業界のID
   id Int @id @default(autoincrement())
-  user_info_ID Int //FK,reference
-  industory_field  Industorys //FK,reference
+  //業界
+  industory_field  Industorys 
+  //レベル(興味の度合い)
   level Levels
  }
 
@@ -102,70 +212,174 @@ model Industory {
  }
 
 //募集イベント
-model Posts {
+model Post {
+  // 投稿したユーザーのID
+  profile_ID Int  
+  profile Profile @relation(fields: [profile_ID],references: [id])
+  // 興味のある募集イベントのID
+  intersted_ID Int @unique
+  intersted Interested_Post @relation(fields: [intersted_ID],references: [id])
+
+  // 募集中イベントのID
   id Int @id @default(autoincrement())
-  user_info_ID Int  //FK,reference
-  title String 
+  // タイトル
+  title String
+  // 募集開始日 
   launchDate DateTime 
-  deadlineDate DateTime  
+  // 募集締切日
+  deadlineDate DateTime
+  // 実施日
+  startDate DateTime
+  // 募集人数  
   recruitment_numbers Int 
+  // 詳細記述
   description String 
+  // マッチング時のメッセージ
   matching_message String 
+  // 作成日
   created_at DateTime @default(now())
+  // 更新日
   modifyed_at DateTime
+  // 消去日
   deleted_at DateTime
+
+  //参加者
+  participants Participant[]
+  //募集イベントへのコメント
+  log Log[]
+  //必須プログラミング言語
+  requirementlanguages Requirement_Languages[]
+
+  @@map("Posts")
  }
 
-//要求されるプログラミング言語
-//モデル
- model Requirement_Languages {
+//必須プログラミング言語
+model Requirement_Languages {
+  // 必須プログラミング言語を持つポストのID
+  post_ID Int
+  post Post @relation(fields: [post_ID],references: [id])
+
+  // 必須プログラミング言語のID
   id Int @id @default(autoincrement())
-  posts_ID Int //reference
-  // language Langages　//reference
+
+  // プログラミング言語
+  language Language?
  }
 
-//ポストのログ
-model Logs {
+//募集イベントへのコメント
+model Log {
+  // 募集イベントへのコメントを持つ募集イベントのID
+  post_ID Int 
+  post Post @relation(fields: [post_ID],references: [id])
+  // 募集イベントへのコメントを持つユーザー情報のID
+  profile_ID Int @unique
+  profile Profile @relation(fields: [profile_ID],references: [id])
+
+  // ポストのコメントのID
   id  Int @id @default(autoincrement())
-  posts_id Int //FK,reference
-  // user_info User_Info //FK,reference
+  // 作成日
   created_at DateTime @default(now())
+  // 消去日
   deleted_at DateTime
+
+  //コメントに対するリアクション
+  reactions LogReaction[]
+
+  @@map("Logs")
 }
 
-//ポストに残るリアクション(Reactions)
-model Postted_Reactions {
+//コメントに対するリアクション(Reactions)
+model LogReaction {
+  // コメントに対するリアクションを持つコメントのID
+  log_ID Int 
+  log Log @relation(fields: [log_ID],references: [id])
+
+  // コメントに対するリアクションのID
   id Int @id  @default(autoincrement())
-  logs_ID Int //FK,reference
-  reaction_ID Int //FK
+
+  //リアクション
+  reaction Reaction?
+
+  @@map("Reactions")
  }
 
 //リアクションの詳細
 model Reaction {
+  // リアクションを持つコメントに対するリアクションのID
+  logreaction_ID Int @unique
+  logreaction LogReaction @relation(fields: [logreaction_ID],references: [id])
+
+  // リアクションのID
   id Int @id @default(autoincrement())
-  reaction_name String //"宜しく or 一緒に頑張ろう or 楽しみましょう"
+  // リアクションの強さ
+  level ReactionLevel //"宜しく(LEVEL1) or 一緒に頑張ろう(LEVEL2) or 楽しみましょう(LEVEL3)"
  }
 
-//興味を表明したポスト
-model Interested_Posts {
+//興味を表明したイベント
+model Interested_Post {
+  //興味を表明したイベントの固有ID
   id Int @id @default(autoincrement())
-  user_info_ID Int //FK , "興味ありした人のUser_info_id.user_info_idで検索すればユーザーが興味ありしたポスト情報が取得可能"
-  posts_id Int //FK , "Post_idで検索すればpostに対して興味ありした人を取得可能"
-  interest_level_id Int //FK
+  //興味の強さ
+  interest_level_id InterestLevel 
+
+  // 募集イベント
+  // "Post_idで検索すればpostに対して興味ありした人を取得可能"
+  post Post?
+
+  // ユーザー情報
+  profile Profile[]
+
  }
 
+//興味レベル
+// @comment 列挙型だと必要なし?
 model Interested_Level {
   id Int @id @default(autoincrement())
   state String  //"興味あり or 緩くやりたい or がちでやりたい"
  }
 
-model Participants {
+//参加者
+model Participant {
+  // 参加者を持つ募集イベントのID
+  post_ID Int 
+  post Post @relation(fields: [post_ID],references: [id])
+
+  // 参加者のID
   id Int @id @default(autoincrement())
-  posts_ID Int //reference
-  user_info_ID Int //reference"参加者のuser_info_id"
+
+  //ユーザー情報
+  profile Profile?
+
  }
 
 // --列挙型部分--
+
+//性別
+enum Gender{
+  MAN
+  WOMAN
+  OTHER
+}
+
+// 付与される権限
+enum Role{
+  ADMIN
+  ROLE
+}
+
+//リアクションの強さ
+enum ReactionLevel{
+  LEVEL1
+  LEVEL2
+  LEVEL3
+}
+
+//興味の強さ
+enum InterestLevel{
+  LEVEL1
+  LEVEL2
+  LEVEL3
+}
 
 //学部学科略称のリスト
 enum AffrilationInitial{
@@ -214,7 +428,7 @@ enum SkillFields{
   OTHER
 }
 
-//保有スキル・取得言語のレベル
+//保有スキル・取得言語のレベル・興味の度合い
 enum Levels{
   LEVEL0
   LEVEL1
