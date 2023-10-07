@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { Faker, en, ja } from '@faker-js/faker'
 const prisma = new PrismaClient()
-const posts:any = []
 const faker = new Faker({ locale: [ja] })
 
 for(let i = 0; i < 100; i++) {
