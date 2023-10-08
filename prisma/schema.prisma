@@ -29,7 +29,7 @@ model UserInfo {
   affiliation  Affiliation         @relation(fields: [affiliationId], references: [id])
   affiliationId Int
   lab          String
-  gender       String
+  gender       Gender
   hobby        String
   comment      String
   discordId    String              @map("DiscordID")
@@ -51,7 +51,7 @@ model Affiliation {
   id      Int        @id
   faculty String
   major   String
-  initial String
+  initial AffrilationInitialEnum
   users   UserInfo[]
 }
 
@@ -66,7 +66,7 @@ model Skills {
 
 model Skill {
   id          Int     @id
-  skillName   String  @map("skill_name")
+  skillName   SkillFieldEnum  @map("skill_name")
   skills      Skills[]
 }
 
@@ -74,7 +74,7 @@ model ProgrammingLanguages {
   id         Int     @id
   userInfoId Int
   languageId Int
-  level      Int
+  level      FiveLevelEnum
   userInfo   UserInfo @relation(fields: [userInfoId], references: [id])
   language   Language @relation(fields: [languageId], references: [id])
 }
@@ -91,14 +91,14 @@ model InterestedIndustory {
   id         Int       @id
   userInfoId Int
   industoryId Int
-  level      Int
+  level      FiveLevelEnum
   userInfo   UserInfo  @relation(fields: [userInfoId], references: [id])
   industory  Industory @relation(fields: [industoryId], references: [id])
 }
 
 model Industory {
   id                Int                 @id
-  name              String
+  name              IndustoryEnum
   interestedIndustory InterestedIndustory[]
 }
 
@@ -106,6 +106,7 @@ model Post {
   id                Int                  @id
   userInfoId        Int
   title             String
+  url               String
   launchDay         DateTime
   deadline          DateTime
   recruitmentNumbers Int                 @map("recruitment_numbers")
@@ -159,7 +160,7 @@ model InterestedPosts {
 
 model InterestedLevel {
   id              Int              @id
-  state           String
+  state           ThreeLevelEnum
   interestedPosts InterestedPosts[]
 }
 
@@ -183,22 +184,8 @@ enum Role{
   ROLE
 }
 
-//リアクションの強さ
-enum ReactionLevel{
-  LEVEL1
-  LEVEL2
-  LEVEL3
-}
-
-//興味の強さ
-enum InterestLevel{
-  LEVEL1
-  LEVEL2
-  LEVEL3
-}
-
 //学部学科略称のリスト
-enum AffrilationInitial{
+enum AffrilationInitialEnum{
   // 工学部
   EJ//電気電子工学科
   EH//電子システム工学科
@@ -235,23 +222,13 @@ enum AffrilationInitial{
 }
 
 //ユーザーの保有スキルのフィールド
-enum SkillFields{
+enum SkillFieldEnum{
   PLANNING
   DESIGN
   FRONTEND
   BACKEND
   PRESENTATION
   OTHER
-}
-
-//保有スキル・取得言語のレベル・興味の度合い
-enum Levels{
-  LEVEL0
-  LEVEL1
-  LEVEL2
-  LEVEL3
-  LEVEL4
-  LEVEL5
 }
 
 //プログラミング言語
@@ -265,11 +242,28 @@ enum ProgrammingLanguageEnum{
 }
 
 //業界
-enum Industorys{
+enum IndustoryEnum{
   WEB
   GAME
   SI
   CHEMISTRY
   ADVERTISEMENT
   OTHER
+}
+
+//ポストに対する興味の強さ・リアクションの強さ
+enum ThreeLevelEnum{
+  LEVEL1
+  LEVEL2
+  LEVEL3
+}
+
+//保有スキル・取得言語のレベル・興味の度合い
+enum FiveLevelEnum{
+  LEVEL0
+  LEVEL1
+  LEVEL2
+  LEVEL3
+  LEVEL4
+  LEVEL5
 }
