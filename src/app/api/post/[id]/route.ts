@@ -24,7 +24,6 @@ export const PUT = async (req: Request, res: NextResponse) => {
     const id: number = parseInt(req.url.split("/post/")[1]);
 
     const {
-      userInfoId,
       title,
       launchDay,
       deadline,
@@ -37,7 +36,6 @@ export const PUT = async (req: Request, res: NextResponse) => {
     await main();
     const post = await prisma.post.update({
       data: {
-        userInfoId,
         title,
         launchDay,
         deadline,
