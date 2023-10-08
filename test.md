@@ -17,8 +17,9 @@ erDiagram
 	interested_posts ||--|| posts : "一つのinterested_postsは一つのpostsを持つ"
  	interested_posts ||--|| interested_level : "一つのinterested_postsは一つのinterested_levelを持つ"
 	posts ||--|| participants : "postsは一つ以上のparticipants(参加者)を持つ"
-    user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
-    skills ||--|| skill : "skillsは一つ以上のskillを持つ"
+    	user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
+    	skills ||--|| skill : "skillsは一つ以上のskillを持つ"
+	user_info ||--o{ logs : "user_infoは0個以上のskillsを持つ"
  
  user {
   int user_id PK
