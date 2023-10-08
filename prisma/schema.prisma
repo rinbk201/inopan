@@ -12,28 +12,252 @@ datasource db {
 }
 
 model User {
-  user_id      Int      @id
-  email        String   @unique
-  password     String //"hash"
-  role_user_ID Int
-  created_at   DateTime @default(now())
-  deleted_at   DateTime
-  posts        Post[]
+  userId    Int       @id @map("user_id") @default(autoincrement())
+  email     String    @map("e_mail")
+  password  String
+  createdAt DateTime  @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+  userInfo  UserInfo?
+}
+
+model UserInfo {
+  id                   Int                    @id @default(autoincrement())
+  userId               Int                    @unique
+  user                 User                   @relation(fields: [userId], references: [userId])
+  email                String                 @map("e_mail")
+  displayName          String                 @map("display_name")
+  affiliation          Affiliation            @relation(fields: [affiliationId], references: [id])
+  affiliationId        Int
+  lab                  String
+  gender               Gender
+  hobby                String
+  comment              String
+  discordId            String                 @map("DiscordID")
+  xId                  String                 @map("X")
+  facebookId           String                 @map("FaceBook")
+  freeForm             String                 @map("free_form")
+  createdAt            DateTime               @default(now()) @map("created_at")
+  deletedAt            DateTime?              @map("deleted_at")
+  posts                Post[]
+  skills               Skills[]
+  programmingLanguages ProgrammingLanguages[]
+  interestedIndustory  InterestedIndustory[]
+  interestedPosts      InterestedPosts[]
+  participants         Participants[]
+  log                  Log[]
+}
+
+model Affiliation {
+  id      Int                @id @default(autoincrement())
+  faculty String
+  major   String
+  initial AffrilationInitial
+  users   UserInfo[]
+}
+
+model Skills {
+  id         Int         @id @default(autoincrement())
+  userInfoId Int
+  level      SkillLevels
+  userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
+  skillName  SkillFields
+  skillId    Int?
+}
+
+model ProgrammingLanguages {
+  id         Int         @id @default(autoincrement())
+  userInfoId Int
+  languageId Int
+  level      SkillLevels
+  userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
+  language   Language    @relation(fields: [languageId], references: [id])
+}
+
+model Language {
+  id                   Int                     @id @default(autoincrement())
+  languageName         ProgrammingLanguageEnum @map("language_name")
+  area                 String
+  programmingLanguages ProgrammingLanguages[]
+  requirementLanguages RequirementLanguages[]
+}
+
+model InterestedIndustory {
+  id          Int           @id @default(autoincrement())
+  userInfoId  Int
+  level       InterestLevel
+  userInfo    UserInfo      @relation(fields: [userInfoId], references: [id])
+  industory   Industorys
+  Industory   Industory?    @relation(fields: [industoryId], references: [id])
+  industoryId Int?
+}
+
+model Industory {
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  interestedIndustory InterestedIndustory[]
 }
 
 model Post {
-  id                  Int      @id @default(autoincrement())
-  title               String
-  launchDate          DateTime
-  deadlineDate        DateTime
-  recruitment_numbers Int
-  description         String
-  matching_message    String
-  created_at          DateTime @default(now())
-  modifyed_at         DateTime
-  deleted_at          DateTime
-  author              User     @relation(fields: [authorId], references: [user_id])
-  authorId            Int
+  id                   Int                    @id @default(autoincrement())
+  userInfoId           Int
+  title                String
+  launchDay            DateTime
+  deadline             DateTime
+  recruitmentNumbers   Int                    @map("recruitment_numbers")
+  description          String
+  matchingMessage      String                 @map("matching_message")
+  createdAt            DateTime               @default(now()) @map("created_at")
+  modifiedAt           DateTime?              @map("modifyed_at")
+  deletedAt            DateTime?              @map("deleted_at")
+  userInfo             UserInfo               @relation(fields: [userInfoId], references: [id])
+  logs                 Log[]
+  requirementLanguages RequirementLanguages[]
+  interestedPosts      InterestedPosts[]
+  participants         Participants[]
+}
 
-  @@index([authorId])
+model RequirementLanguages {
+  id         Int      @id @default(autoincrement())
+  postId     Int      @map("ponts_id")
+  languageId Int
+  post       Post     @relation(fields: [postId], references: [id])
+  language   Language @relation(fields: [languageId], references: [id])
+}
+
+model Log {
+  id         Int        @id @default(autoincrement())
+  postId     Int        @map("posts_id")
+  userInfoId Int
+  createdAt  DateTime   @default(now()) @map("created_at")
+  deletedAt  DateTime?  @map("deleted_at")
+  post       Post       @relation(fields: [postId], references: [id])
+  userInfo   UserInfo   @relation(fields: [userInfoId], references: [id])
+  reactions  Reaction[]
+}
+
+model Reaction {
+  id            Int           @id @default(autoincrement())
+  logId         Int
+  reactionLevel ReactionLevel
+  log           Log           @relation(fields: [logId], references: [id])
+}
+
+model InterestedPosts {
+  id            Int           @id @default(autoincrement())
+  userInfoId    Int
+  postId        Int
+  interestLevel InterestLevel
+  userInfo      UserInfo      @relation(fields: [userInfoId], references: [id])
+  post          Post          @relation(fields: [postId], references: [id])
+}
+
+model Participants {
+  id         Int      @id @default(autoincrement())
+  postId     Int      @map("posts_id")
+  userInfoId Int
+  post       Post     @relation(fields: [postId], references: [id])
+  userInfo   UserInfo @relation(fields: [userInfoId], references: [id])
+}
+
+enum Gender {
+  MAN
+  WOMAN
+  OTHER
+}
+
+// 付与される権限
+enum Role {
+  ADMIN
+  ROLE
+}
+
+//リアクションの強さ
+enum ReactionLevel {
+  LEVEL1
+  LEVEL2
+  LEVEL3
+}
+
+//興味の強さ
+enum InterestLevel {
+  LEVEL1
+  LEVEL2
+  LEVEL3
+}
+
+//学部学科略称のリスト
+enum AffrilationInitial {
+  // 工学部
+  EJ //電気電子工学科
+  EH //電子システム工学科
+  ES //応用化学科
+  EK //機械工学科
+  EF //先端機械工学科
+  EC //情報通信工学科
+
+  // 工学部第二部
+  NE //電気電子工学科
+  NM //機械工学科
+  NC //情報通信工学科
+
+  // 未来科学部
+  FA //建築学科
+  FI //情報メディア学科
+  FR //ロボット・メカトロニクス学科
+
+  // システムデザイン工学部
+  AJ //情報システム工学科
+  AD //デザイン工学科
+
+  // 情報環境学部
+  JK //情報環境学科
+
+  // 理工学部理工学科
+  RU //理学系
+  RB //生命科学系
+  RD //情報システムデザイン学系
+  RM //機械工学系
+  RE //電子工学系
+  RG //建築・都市環境学系
+  RL //共通教育群
+}
+
+//ユーザーの保有スキルのフィールド
+enum SkillFields {
+  PLANNING
+  DESIGN
+  FRONTEND
+  BACKEND
+  PRESENTATION
+  OTHER
+}
+
+//保有スキル・取得言語のレベル・興味の度合い
+enum SkillLevels {
+  LEVEL0
+  LEVEL1
+  LEVEL2
+  LEVEL3
+  LEVEL4
+  LEVEL5
+}
+
+//プログラミング言語
+enum ProgrammingLanguageEnum {
+  C_Cpp // C/C++
+  Csharp // C#
+  Java
+  Python
+  JavaScript
+  OTHER
+}
+
+//業界
+enum Industorys {
+  WEB
+  GAME
+  SI
+  CHEMISTRY
+  ADVERTISEMENT
+  OTHER
 }
