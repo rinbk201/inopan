@@ -253,6 +253,7 @@ enum IndustoryEnum{
 
 //ポストに対する興味の強さ・リアクションの強さ
 enum ThreeLevelEnum{
+  LEVEL0
   LEVEL1
   LEVEL2
   LEVEL3
