@@ -106,7 +106,7 @@ model Post {
   id                Int                  @id
   userInfoId        Int
   title             String
-  launch            DateTime
+  launchDay         DateTime
   deadline          DateTime
   recruitmentNumbers Int                 @map("recruitment_numbers")
   description       String
