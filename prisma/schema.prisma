@@ -143,7 +143,7 @@ model Log {
 model Reaction {
   id        Int    @id
   logId     Int
-  reactionId Int
+  reactionLevel ReactionLevel
   log       Log    @relation(fields: [logId], references: [id])
 }
 
