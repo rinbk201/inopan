@@ -1,7 +1,6 @@
 ```mermaid
 erDiagram
 	user ||--|| user_info : "1人のユーザーは1つ以上の投稿を持つ"
-    user ||--|| role_user : "userは一つのrole_userを持つ"
 	posts ||--o{ logs : "1つの投稿は0以上のコメントを持つ"
 	user_info ||--o{ posts : "1人のユーザーは0個以上の投稿を持つ"
 	user_info ||--|{ programming_languages : "1人のユーザーは1つ以上のスキル持つ"
