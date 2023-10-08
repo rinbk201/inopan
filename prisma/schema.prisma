@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  userId    Int       @id @map("user_id")
+  userId    Int       @id @map("user_id") @default(autoincrement())
   email     String    @map("e_mail")
   password  String
   createdAt DateTime  @default(now()) @map("created_at")
@@ -21,7 +21,7 @@ model User {
 }
 
 model UserInfo {
-  id                   Int                    @id
+  id                   Int                    @id @default(autoincrement())
   userId               Int                    @unique
   user                 User                   @relation(fields: [userId], references: [userId])
   email                String                 @map("e_mail")
@@ -48,7 +48,7 @@ model UserInfo {
 }
 
 model Affiliation {
-  id      Int                @id
+  id      Int                @id @default(autoincrement())
   faculty String
   major   String
   initial AffrilationInitial
@@ -56,23 +56,16 @@ model Affiliation {
 }
 
 model Skills {
-  id         Int         @id
+  id         Int         @id @default(autoincrement())
   userInfoId Int
   level      SkillLevels
   userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
   skillName  SkillFields
-  Skill      Skill?      @relation(fields: [skillId], references: [id])
   skillId    Int?
 }
 
-model Skill {
-  id        Int      @id
-  skillName String   @map("skill_name")
-  skills    Skills[]
-}
-
 model ProgrammingLanguages {
-  id         Int         @id
+  id         Int         @id @default(autoincrement())
   userInfoId Int
   languageId Int
   level      SkillLevels
@@ -81,7 +74,7 @@ model ProgrammingLanguages {
 }
 
 model Language {
-  id                   Int                     @id
+  id                   Int                     @id @default(autoincrement())
   languageName         ProgrammingLanguageEnum @map("language_name")
   area                 String
   programmingLanguages ProgrammingLanguages[]
@@ -89,7 +82,7 @@ model Language {
 }
 
 model InterestedIndustory {
-  id          Int           @id
+  id          Int           @id @default(autoincrement())
   userInfoId  Int
   level       InterestLevel
   userInfo    UserInfo      @relation(fields: [userInfoId], references: [id])
@@ -99,13 +92,13 @@ model InterestedIndustory {
 }
 
 model Industory {
-  id                  Int                   @id
+  id                  Int                   @id @default(autoincrement())
   name                String
   interestedIndustory InterestedIndustory[]
 }
 
 model Post {
-  id                   Int                    @id
+  id                   Int                    @id @default(autoincrement())
   userInfoId           Int
   title                String
   launchDay            DateTime
@@ -124,7 +117,7 @@ model Post {
 }
 
 model RequirementLanguages {
-  id         Int      @id
+  id         Int      @id @default(autoincrement())
   postId     Int      @map("ponts_id")
   languageId Int
   post       Post     @relation(fields: [postId], references: [id])
@@ -132,7 +125,7 @@ model RequirementLanguages {
 }
 
 model Log {
-  id         Int        @id
+  id         Int        @id @default(autoincrement())
   postId     Int        @map("posts_id")
   userInfoId Int
   createdAt  DateTime   @default(now()) @map("created_at")
@@ -143,14 +136,14 @@ model Log {
 }
 
 model Reaction {
-  id            Int           @id
+  id            Int           @id @default(autoincrement())
   logId         Int
   reactionLevel ReactionLevel
   log           Log           @relation(fields: [logId], references: [id])
 }
 
 model InterestedPosts {
-  id            Int           @id
+  id            Int           @id @default(autoincrement())
   userInfoId    Int
   postId        Int
   interestLevel InterestLevel
@@ -159,7 +152,7 @@ model InterestedPosts {
 }
 
 model Participants {
-  id         Int      @id
+  id         Int      @id @default(autoincrement())
   postId     Int      @map("posts_id")
   userInfoId Int
   post       Post     @relation(fields: [postId], references: [id])
