@@ -138,14 +138,23 @@ model Log {
   deletedAt  DateTime? @map("deleted_at")
   post       Post     @relation(fields: [postId], references: [id])
   userInfo   UserInfo @relation(fields: [userInfoId], references: [id])
-  reactions  Reaction[]
+  reactions  Reactions[]
+}
+
+model Reactions {
+  id        Int    @id
+  
+  logId     Int
+  reactionId Int
+  log       Log    @relation(fields: [logId], references: [id])
+  reaction Reaction?
 }
 
 model Reaction {
   id        Int    @id
-  logId     Int
-  reactionId Int
-  log       Log    @relation(fields: [logId], references: [id])
+  reactionsName ThreeLevelEnum @map("reaction_name")
+  reactionsId Int @unique
+  reactions Reactions @relation(fields: [reactionsId],references: [id])
 }
 
 model InterestedPosts {
