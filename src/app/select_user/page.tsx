@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prismaClient";
 
 export default async function Home() {
   // Userテーブルから全てデータを取得
-  const users = prisma.user.findMany();
+  const users = prisma.userInfo.findMany();
   // Postテーブルから全てデータを取得
   const posts = prisma.post.findMany();
 
@@ -16,7 +16,7 @@ export default async function Home() {
       {(await users).map((user, index) => (
         <div key={user.id} className="bg-gray-800 m-2 w-[300px]">
           <p>id: {user.id}</p>
-          <p>name: {user.name}</p>
+          <p>name: {user.displayName}</p>
           <p>email: {user.email}</p>
           {/* Add more user attributes as needed */}
         </div>
