@@ -43,6 +43,7 @@ model UserInfo {
   programmingLanguages ProgrammingLanguages[]
   interestedIndustory  InterestedIndustory[]
   interestedPosts      InterestedPosts[]
+  bookmarkPosts        BookmarkPosts[]
   participants         Participants[]
   log                  Log[]
 }
@@ -147,6 +148,14 @@ model InterestedPosts {
   userInfoId    Int
   postId        Int
   interestLevel InterestLevel
+  userInfo      UserInfo      @relation(fields: [userInfoId], references: [id])
+  post          Post          @relation(fields: [postId], references: [id])
+}
+
+model BookmarkPosts {
+  id            Int           @id @default(autoincrement())
+  userInfoId    Int
+  postId        Int
   userInfo      UserInfo      @relation(fields: [userInfoId], references: [id])
   post          Post          @relation(fields: [postId], references: [id])
 }
