@@ -1,4 +1,4 @@
-```mermaid　
+```mermaid
 erDiagram
 	user ||--|| user_info : "1人のユーザーは1つ以上の投稿を持つ"
     user ||--|| role_user : "userは一つのrole_userを持つ"
@@ -152,4 +152,4 @@ erDiagram
   reference posts_id "参加するpostのID"
   reference user_info_id "参加者のuser_info_id"
  }
- ```
+```
