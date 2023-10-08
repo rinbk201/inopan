@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 const post_process = {
 	async get_all_posts(): Promise<any> {
 		try {
-			const res = await prisma.posts.findMany()
+			const res = await prisma.post.findMany()
 			return res
 		} catch (e: unknown) {
 			if (e instanceof Error) {
