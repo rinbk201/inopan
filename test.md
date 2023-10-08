@@ -1,7 +1,6 @@
-```mermaid　
+```mermaid
 erDiagram
 	user ||--|| user_info : "1人のユーザーは1つ以上の投稿を持つ"
-    user ||--|| role_user : "userは一つのrole_userを持つ"
 	posts ||--o{ logs : "1つの投稿は0以上のコメントを持つ"
 	user_info ||--o{ posts : "1人のユーザーは0個以上の投稿を持つ"
 	user_info ||--|{ programming_languages : "1人のユーザーは1つ以上のスキル持つ"
@@ -17,21 +16,16 @@ erDiagram
 	interested_posts ||--|| posts : "一つのinterested_postsは一つのpostsを持つ"
  	interested_posts ||--|| interested_level : "一つのinterested_postsは一つのinterested_levelを持つ"
 	posts ||--|| participants : "postsは一つ以上のparticipants(参加者)を持つ"
-    user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
-    skills ||--|| skill : "skillsは一つ以上のskillを持つ"
+    	user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
+    	skills ||--|| skill : "skillsは一つ以上のskillを持つ"
+	user_info ||--o{ logs : "user_infoは0個以上のskillsを持つ"
  
  user {
   int user_id PK
   string e_mail "ユーザー名"
   string password "hash"
-  reference role_user_id
   timestamp created_at
   timestamp deleted_at
- }
-
- role_user {
-  int id PK
-  string role "管理者,一般ユーザー"
  }
 
  user_info {
@@ -100,6 +94,8 @@ erDiagram
   int id PK
   references user_info_id FK "post投稿者(募集者)"
   string title "投稿タイトル"
+  string event_name "イベント名"
+  string event_url "イベントURL"
   timestamp launch "開催日時"
   timestamp deadline "募集締め切り日"
   int recruitment_numbers "募集人数"
@@ -152,4 +148,4 @@ erDiagram
   reference posts_id "参加するpostのID"
   reference user_info_id "参加者のuser_info_id"
  }
- ```
+```

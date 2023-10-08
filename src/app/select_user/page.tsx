@@ -9,7 +9,7 @@ import RaderChart from "@/lib/componets/raderChart";
 import { prisma } from "@/lib/prismaClient";
 export default function Home() {
   // Userテーブルから全てデータを取得
-  const users = prisma.user.findMany();
+  const users = prisma.userInfo.findMany();
   // Postテーブルから全てデータを取得
   const posts = prisma.post.findMany();
   console.log(users);
