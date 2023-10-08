@@ -1,19 +1,15 @@
 "use client";
 // // データベースに接続するためのクライアントをインポート
 import Header from "@/lib/componets/header";
-// import { prisma } from "@/lib/prismaClient";
 
 import { Container, Grid } from "@mui/material";
 import UserList from "@/lib/componets/organisms/UserList";
-import RaderChart from "@/lib/componets/raderChart";
-import { prisma } from "@/lib/prismaClient";
+import RaderChart from "@/lib/componets/atoms/RaderChart";
 export default function Home() {
-  // Userテーブルから全てデータを取得
-  const users = prisma.userInfo.findMany();
-  // Postテーブルから全てデータを取得
-  const posts = prisma.post.findMany();
-  console.log(users);
-  console.log(posts);
+  // // Userテーブルから全てデータを取得
+  // const users = prisma.userInfo.findMany();
+  // // Postテーブルから全てデータを取得
+  // const posts = prisma.post.findMany();
 
   const demo_default_data = [
     { subject: "企画力", value: 10, fullMark: 100 },

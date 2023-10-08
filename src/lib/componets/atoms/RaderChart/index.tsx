@@ -10,10 +10,10 @@ export default function raderchart(props: any) {
   const { data } = props;
   return (
     <RadarChart
-      cx={300}
+      cx={250}
       cy={250}
-      outerRadius={150}
-      width={600}
+      outerRadius={100}
+      width={500}
       height={500}
       data={data}
     >
