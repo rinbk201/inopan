@@ -13,9 +13,9 @@ erDiagram
 	reactions ||--|| reaction : "一つのreactionsは一つのreactionを持つ"
 	posts ||--o{ requirement_languages : "一つの投稿は０個以上の必須スキルを持つ"
 	requirement_languages ||--|{ language : "一つのrequirement_languagesは０個以上のlanguageを持つ"
-	user_info ||--o{ interested_posts : "一つのユーザ情報が0個以上の興味がある投稿を持つ"
-	interested_posts ||--|| posts : "一つのinterested_postsは一つのpostsを持つ"
- 	interested_posts ||--|| interested_level : "一つのinterested_postsは一つのinterested_levelを持つ"
+	user_info ||--o{ user_post_relationship  : "一つのユーザ情報が0個以上の興味がある投稿を持つ"
+	user_post_relationship ||--|| posts : "一つのuser_post_relationshipは一つのpostsを持つ"
+ 	user_post_relationship ||--|| application_level : "一つのuser_post_relationshipは一つのapplication_levelを持つ"
 	posts ||--|| participants : "postsは一つ以上のparticipants(参加者)を持つ"
     	user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
     	skills ||--|| skill : "skillsは一つ以上のskillを持つ"
@@ -136,16 +136,17 @@ erDiagram
   string reaction_name "宜しく or 一緒に頑張ろう or 楽しみましょう"
  }
 
- interested_posts {
+ user_post_relationship  {
   int id PK
   reference user_info_id FK "興味ありした人のUser_info_id.user_info_idで検索すればユーザーが興味ありしたポスト情報が取得可能"
   reference posts_id FK "Post_idで検索すればpostに対して興味ありした人を取得可能"
-  refafrence interest_level_id FK
+  refafrence application_level_id FK
+  boolean is_approved
  }
 
- interested_level {
+ application_level {
   int id PK
-  string state "興味あり or 緩くやりたい or がちでやりたい"
+  string state "bookmark or 緩くやりたい or 参加したい or がちでやりたい"
  }
 
  participants {
