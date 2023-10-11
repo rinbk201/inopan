@@ -17,3 +17,48 @@ export const GET = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+
+//UserInfoの編集用API
+export const PUT = async (req: Request, res: NextResponse) => {
+  try {
+    const user_info_id: number = parseInt(req.url.split("/user/")[1]);
+
+    const {
+      email,
+      displayName,
+      affiliationId,
+      lab,
+      gender,
+      hobby,
+      comment,
+      discordId,
+      xId,
+      facebookId,
+      freeForm
+    } = await req.json();
+
+    await main();
+    const post = await prisma.userInfo.update({
+      data: {
+        email,
+        displayName,
+        affiliationId,
+        lab,
+        gender,
+        hobby,
+        comment,
+        discordId,
+        xId,
+        facebookId,
+        freeForm
+      },
+      where: { id: user_info_id },
+    });
+    return NextResponse.json({ message: "Success", post }, { status: 200 });
+  } catch (err) {
+    console.log(err)
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
