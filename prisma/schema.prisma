@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  userId    Int       @id @map("user_id") @default(autoincrement())
+  userId    Int       @id @default(autoincrement()) @map("user_id")
   email     String    @map("e_mail")
   password  String
   createdAt DateTime  @default(now()) @map("created_at")
@@ -42,8 +42,7 @@ model UserInfo {
   skills               Skills[]
   programmingLanguages ProgrammingLanguages[]
   interestedIndustory  InterestedIndustory[]
-  interestedPosts      InterestedPosts[]
-  participants         Participants[]
+  userPostRelationship UserPostRelationship[]
   log                  Log[]
 }
 
@@ -112,8 +111,7 @@ model Post {
   userInfo             UserInfo               @relation(fields: [userInfoId], references: [id])
   logs                 Log[]
   requirementLanguages RequirementLanguages[]
-  interestedPosts      InterestedPosts[]
-  participants         Participants[]
+  UserPostRelationship UserPostRelationship[]
 }
 
 model RequirementLanguages {
@@ -142,21 +140,14 @@ model Reaction {
   log           Log           @relation(fields: [logId], references: [id])
 }
 
-model InterestedPosts {
-  id            Int           @id @default(autoincrement())
-  userInfoId    Int
-  postId        Int
-  interestLevel InterestLevel
-  userInfo      UserInfo      @relation(fields: [userInfoId], references: [id])
-  post          Post          @relation(fields: [postId], references: [id])
-}
-
-model Participants {
-  id         Int      @id @default(autoincrement())
-  postId     Int      @map("posts_id")
-  userInfoId Int
-  post       Post     @relation(fields: [postId], references: [id])
-  userInfo   UserInfo @relation(fields: [userInfoId], references: [id])
+model UserPostRelationship {
+  id               Int              @id @default(autoincrement())
+  userInfoId       Int
+  postId           Int
+  applicationLevel ApplicationLevel
+  rerationState    RelationState
+  userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
+  post             Post             @relation(fields: [postId], references: [id])
 }
 
 enum Gender {
@@ -183,6 +174,19 @@ enum InterestLevel {
   LEVEL1
   LEVEL2
   LEVEL3
+}
+
+enum ApplicationLevel {
+  BOOKMARK
+  CASUALLY_JOIN
+  NORMAL_JOIN
+  SERIOUSLY_JOIN
+}
+
+enum RelationState {
+  UNAPPROVED
+  APPROVED
+  CONFIRMED
 }
 
 //学部学科略称のリスト
