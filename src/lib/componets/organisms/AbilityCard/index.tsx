@@ -3,6 +3,7 @@ import AfficationIcon from "../../atoms/AffilicationIcon";
 import UserIcon from "../../atoms/UserIcon";
 import DashedLine from "../../atoms/DashedLine";
 import SkillData from "../../molecules/SkillData";
+import { useState } from "react";
 const getAffiliationColor = (affiliation_id: number) => {
   switch (affiliation_id) {
     case 1:
@@ -17,9 +18,20 @@ const getAffiliationColor = (affiliation_id: number) => {
       return "gray";
   }
 };
-const StyledCard = styled.div`
+const CheckBox = styled.input`
+  display: none;
+`;
+
+const StyledHover = `
+  &:hover {
+    background-color: whitesmoke;
+  }
+`;
+
+const StyledCard = styled.label`
   width: 45rem;
   height: 5rem;
+  background-color: ${(props) => (props.isChecked ? "#c8e6c9" : "white")};
   color: black;
   border-left: solid 8px ${(props) => getAffiliationColor(props.affiliationId)};
   line-height: 1.5;
@@ -30,9 +42,8 @@ const StyledCard = styled.div`
   display: flex;
   align-items: center;
   transition: background-color 0.3s;
-  &:hover {
-    background-color: whitesmoke;
-  }
+  position: relative;
+  ${(props) => (props.isChecked ? "" : StyledHover)}
 `;
 
 const UserAffiliationbox = styled.div`
@@ -51,36 +62,70 @@ const AffiliationText = styled.h2`
   font-size: 0.5rem;
 `;
 
+const CheckedIcon = styled.div`
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: var(--bold);
+`;
+
 interface abilityCardProps {
+  index: number;
   userData: object;
-  onAbilityCardClick: (userData: object) => void;
+  selectedNum: number;
+  onCheckAbilityCard: (index: number) => void;
 }
 export default function abilityCard({
+  index,
   userData,
-  onAbilityCardClick,
+  selectedNum,
+  onCheckAbilityCard,
 }: abilityCardProps) {
-  const handleAbilityCardClick = (userData: object) => {
-    onAbilityCardClick(userData);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckedAbilityCard = (index: number) => {
+    setIsChecked(!isChecked);
+    onCheckAbilityCard(index);
+  };
+
+  const checkedLabelStyle = {
+    backgroundColor: "#c8e6c9",
   };
 
   return (
-    <StyledCard
-      affiliationId={userData.affiliation_id}
-      onClick={() => handleAbilityCardClick(userData)}
-    >
-      <AfficationIcon
-        initial="FI"
-        affiliationColor={getAffiliationColor(userData.affiliation_id)}
-      ></AfficationIcon>
-      <UserIcon></UserIcon>
-      <UserAffiliationbox>
-        <UserNameText>{userData.display_name}</UserNameText>
-        <AffiliationText>未来科学部情報メディア学科</AffiliationText>
-        <DashedLine></DashedLine>
-      </UserAffiliationbox>
-      {Object.keys(userData.skill).map((key) => (
-        <SkillData skillName={key} value={userData.skill[key]}></SkillData>
-      ))}
-    </StyledCard>
+    <>
+      <CheckBox
+        type="checkbox"
+        id={"abilityCard_" + index}
+        name="abilityCard"
+        checked={isChecked}
+        onChange={() => handleCheckedAbilityCard(index)}
+      />
+      <StyledCard
+        htmlFor={"abilityCard_" + index}
+        affiliationId={userData.affiliation_id}
+        isChecked={isChecked}
+      >
+        <AfficationIcon
+          initial="FI"
+          affiliationColor={getAffiliationColor(userData.affiliation_id)}
+        ></AfficationIcon>
+        <UserIcon></UserIcon>
+        <UserAffiliationbox>
+          <UserNameText>{userData.display_name}</UserNameText>
+          <AffiliationText>未来科学部情報メディア学科</AffiliationText>
+          <DashedLine></DashedLine>
+        </UserAffiliationbox>
+        {Object.keys(userData.skill).map((key) => (
+          <SkillData skillName={key} value={userData.skill[key]}></SkillData>
+        ))}
+        {isChecked && <CheckedIcon>{selectedNum + 1}</CheckedIcon>}
+      </StyledCard>
+    </>
   );
 }
