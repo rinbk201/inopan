@@ -3,14 +3,25 @@ import SkillLabel from "../../atoms/SkillLabel";
 
 const SkillBox = styled.div`
   margin: 0.5rem;
+  text-align: center;
 `;
 
-export default function SkillData(props: any) {
-  const { index, skill } = props;
+const SkillValueText = styled.p`
+  font-size: 2rem;
+  font-weight: var(--heavy);
+  line-height: 1.6rem;
+  margin-top: 0.5rem;
+`;
+
+interface SkillDataProps {
+  skillName: string;
+  value: number;
+}
+export default function SkillData({ skillName, value }: SkillDataProps) {
   return (
     <SkillBox>
-      <SkillLabel index={index} skillName={skill.subject}></SkillLabel>
-      <p>{skill.value}</p>
+      <SkillLabel skillName={skillName}></SkillLabel>
+      <SkillValueText>{value}</SkillValueText>
     </SkillBox>
   );
 }

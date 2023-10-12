@@ -29,10 +29,15 @@ const StyledCard = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: whitesmoke;
+  }
 `;
 
 const UserAffiliationbox = styled.div`
-  width: 15rem;
+  width: 12rem;
+  margin: 0.3rem;
 `;
 
 const UserNameText = styled.h2`
@@ -45,18 +50,24 @@ const AffiliationText = styled.h2`
   font-weight: var(--thin);
   font-size: 0.5rem;
 `;
-export default function abilityCard(props: any) {
-  const demo_default_data = [
-    { subject: "企画力", value: 10, fullMark: 100 },
-    { subject: "プレゼン力", value: 5, fullMark: 100 },
-    { subject: "デザイン", value: 15, fullMark: 100 },
-    { subject: "フロントエンド", value: 20, fullMark: 100 },
-    { subject: "バックエンド", value: 10, fullMark: 100 },
-  ];
-  const { userData } = props;
-  console.log(userData.affiliation_id);
+
+interface abilityCardProps {
+  userData: object;
+  onAbilityCardClick: (userData: object) => void;
+}
+export default function abilityCard({
+  userData,
+  onAbilityCardClick,
+}: abilityCardProps) {
+  const handleAbilityCardClick = (userData: object) => {
+    onAbilityCardClick(userData);
+  };
+
   return (
-    <StyledCard affiliationId={userData.affiliation_id}>
+    <StyledCard
+      affiliationId={userData.affiliation_id}
+      onClick={() => handleAbilityCardClick(userData)}
+    >
       <AfficationIcon
         initial="FI"
         affiliationColor={getAffiliationColor(userData.affiliation_id)}
@@ -67,8 +78,8 @@ export default function abilityCard(props: any) {
         <AffiliationText>未来科学部情報メディア学科</AffiliationText>
         <DashedLine></DashedLine>
       </UserAffiliationbox>
-      {demo_default_data.map((item: any, index: number) => (
-        <SkillData index={index} skill={item}></SkillData>
+      {Object.keys(userData.skill).map((key) => (
+        <SkillData skillName={key} value={userData.skill[key]}></SkillData>
       ))}
     </StyledCard>
   );

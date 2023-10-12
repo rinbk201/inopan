@@ -1,50 +1,57 @@
 import styled from "styled-components";
-const getLabelColor = (index: number) => {
-  switch (index) {
-    case 0:
+
+const getLabelColor = (skillName: string) => {
+  switch (skillName) {
+    case "PLANNING":
       return "var(--pink)";
-    case 1:
+    case "PRESENTATION":
       return "var(--orange)";
-    case 2:
+    case "FRONTEND":
       return "var(--blue)";
-    case 3:
+    case "BACKEND":
       return "var(--green)";
-    case 4:
+    case "DESIGN":
       return "var(--purple)";
     default:
       return "gray";
   }
 };
-const getSkillInitial = (index: number) => {
-  switch (index) {
-    case 0:
+const getSkillInitial = (skillName: string) => {
+  switch (skillName) {
+    case "PLANNING":
       return "PL";
-    case 1:
+    case "PRESENTATION":
       return "PR";
-    case 2:
+    case "FRONTEND":
       return "FE";
-    case 3:
+    case "BACKEND":
       return "BE";
-    case 4:
+    case "DESIGN":
       return "DE";
     default:
       return "";
   }
 };
+
 const Label = styled.div`
   color: white;
-  background-color: ${(props) => getLabelColor(props.index)};
+  background-color: ${(props) => getLabelColor(props.skillName)};
+  padding: 0.1rem 1rem;
+  border-radius: 3px;
 `;
 
 const LabelText = styled.p`
   font-size: 0.2rem;
+  font-weight: var(--bold);
 `;
 
-export default function SkillLabel(props: any) {
-  const { index, skillName } = props;
+interface SkillLabelProps {
+  skillName: string;
+}
+export default function SkillLabel({ skillName }: SkillLabelProps) {
   return (
-    <Label index={index}>
-      <LabelText>{getSkillInitial(index)}</LabelText>
+    <Label skillName={skillName}>
+      <LabelText>{getSkillInitial(skillName)}</LabelText>
     </Label>
   );
 }

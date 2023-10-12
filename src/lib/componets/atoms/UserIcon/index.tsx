@@ -5,6 +5,7 @@ const Image = styled.div`
   height: 4rem;
   border-radius: 50%;
   border: 2px solid gainsboro;
+  margin: 0.5rem;
 `;
 
 export default function UserIcon() {

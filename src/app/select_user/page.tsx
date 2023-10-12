@@ -1,23 +1,24 @@
 "use client";
 // // データベースに接続するためのクライアントをインポート
 import Header from "@/lib/componets/header";
-
+import RaderChart from "@/lib/componets/atoms/RaderChart";
 import { Container, Grid } from "@mui/material";
 import UserList from "@/lib/componets/organisms/UserList";
-import RaderChart from "@/lib/componets/atoms/RaderChart";
+import { useEffect, useState } from "react";
 export default function Home() {
   // // Userテーブルから全てデータを取得
   // const users = prisma.userInfo.findMany();
   // // Postテーブルから全てデータを取得
   // const posts = prisma.post.findMany();
 
-  const demo_default_data = [
-    { subject: "企画力", value: 10, fullMark: 100 },
-    { subject: "プレゼン力", value: 5, fullMark: 100 },
-    { subject: "デザイン", value: 15, fullMark: 100 },
-    { subject: "フロントエンド", value: 20, fullMark: 100 },
-    { subject: "バックエンド", value: 10, fullMark: 100 },
-  ];
+  // FIX:DBからのデータ取得に修正
+  const demo_team_skill_data = {
+    PLANNING: 3,
+    DESIGN: 5,
+    FRONTEND: 4,
+    BACKEND: 3,
+    PRESENTATION: 1,
+  };
 
   const demo_user_list = [
     {
@@ -34,6 +35,13 @@ export default function Home() {
       FaceBookID: "hogehoge",
       free_form: "特にフロントエンドに興味があります",
       deleted_at: "2023-22-22",
+      skill: {
+        PLANNING: 3,
+        DESIGN: 5,
+        FRONTEND: 4,
+        BACKEND: 3,
+        PRESENTATION: 1,
+      },
     },
     {
       name: "電大花子",
@@ -49,8 +57,41 @@ export default function Home() {
       FaceBookID: "hogehoge",
       free_form: "特にフロントエンドに興味があります",
       deleted_at: "2023-22-22",
+      skill: {
+        PLANNING: 1,
+        DESIGN: 2,
+        FRONTEND: 3,
+        BACKEND: 2,
+        PRESENTATION: 5,
+      },
     },
   ];
+
+  // tempを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
+  const temp = [
+    { id: "PLANNING", subject: "企画力" },
+    { id: "PRESENTATION", subject: "プレゼン力" },
+    { id: "DESIGN", subject: "デザイン" },
+    { id: "FRONTEND", subject: "フロントエンド" },
+    { id: "BACKEND", subject: "バックエンド" },
+  ];
+  const [convertedTeamData, setTeamData] = useState(
+    temp.map((obj) => ({
+      ...obj,
+      value: demo_team_skill_data[obj.id] || 0,
+      // FIX: 募集人数から算出する式
+      fullMark: 25,
+    }))
+  );
+
+  const handleAbilityCardClick = (userData: object) => {
+    setTeamData(
+      convertedTeamData.map((obj) => ({
+        ...obj,
+        newValue: obj.value + userData.skill[obj.id] || 0,
+      }))
+    );
+  };
 
   return (
     <Container>
@@ -58,10 +99,13 @@ export default function Home() {
       <Grid container spacing={3}>
         <Grid>
           <h2>参加希望者一覧</h2>
-          <UserList list={demo_user_list}></UserList>
+          <UserList
+            list={demo_user_list}
+            onAbilityCardClick={handleAbilityCardClick}
+          ></UserList>
         </Grid>
         <Grid>
-          <RaderChart data={demo_default_data}></RaderChart>
+          <RaderChart data={convertedTeamData}></RaderChart>
         </Grid>
       </Grid>
     </Container>
