@@ -144,8 +144,8 @@ model UserPostRelationship {
   id               Int              @id @default(autoincrement())
   userInfoId       Int
   postId           Int
-  applicationLevel ApplicationLevel
-  rerationState    RelationState
+  applicationLevel ApplicationLevel @default(NO_APPLICATION)
+  relationState    RelationState    @default(UNAPPROVED)
   userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
   post             Post             @relation(fields: [postId], references: [id])
 }
