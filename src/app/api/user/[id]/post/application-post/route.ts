@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 //新たに参加希望を出した際に登録
 export const POST = async (req: Request, res: NextResponse) => {
     try {
-      const rerationState = "UNAPPROVED"
+      const relationState = "UNAPPROVED"
       const userInfoId: number = parseInt(req.url.split("/user/")[1]);
       const {
         postId,
@@ -19,7 +19,7 @@ export const POST = async (req: Request, res: NextResponse) => {
           userInfoId,
           postId,
           applicationLevel,
-          rerationState
+          relationState
         },
       });
       return NextResponse.json({ message: "Success", application }, { status: 201 });

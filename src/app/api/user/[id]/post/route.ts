@@ -17,11 +17,11 @@ export const GET = async (req: Request, res: NextResponse) => {
       }
     });
     for (var i in posts) {
-      if (posts[i].rerationState === "APPROVED") {
+      if (posts[i].relationState === "APPROVED") {
         data["APPROVED"].push(posts[i])
         continue
       }
-      if (posts[i].rerationState === "UNAPPROVED") {
+      if (posts[i].relationState === "UNAPPROVED") {
         if (posts[i].applicationLevel === "BOOKMARK") {
           data["BOOKMARK"].push(posts[i])
           continue
@@ -29,7 +29,7 @@ export const GET = async (req: Request, res: NextResponse) => {
         data["UNAPPROVED"].push(posts[i])
         continue
       }
-      if (posts[i].rerationState === "CONFIRMED") {
+      if (posts[i].relationState === "CONFIRMED") {
         data["CONFIRMED"].push(posts[i])
         continue
       }

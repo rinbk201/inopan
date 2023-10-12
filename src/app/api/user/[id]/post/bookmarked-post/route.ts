@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 //bookmarkをした際
 export const POST = async (req: Request, res: NextResponse) => {
     const applicationLevel = "BOOKMARK"
-    const rerationState = "UNAPPROVED"
+    const relationState = "UNAPPROVED"
     try {
       const userInfoId: number = parseInt(req.url.split("/user/")[1]);
       const {
@@ -19,7 +19,7 @@ export const POST = async (req: Request, res: NextResponse) => {
           userInfoId,
           postId,
           applicationLevel,
-          rerationState
+          relationState
         },
       });
       return NextResponse.json({ message: "Success", bookmark }, { status: 201 });
