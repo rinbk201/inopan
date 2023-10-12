@@ -9,7 +9,7 @@ erDiagram
 	user_info ||--o| interested_industory : "1つユーザーは０個以上の教務のある業界を持つ"
 	user_info ||--|| affiliation : "一つのuser_infoは一つのaffiliationを持つ"
 	interested_industory ||--|| industory : "1つ興味のある業界は一つの業界を持つ"
-	logs ||--o{ reactions : "一つのコメントは０個以上のリアクションを持つ"
+	logs ||--o{ reaction : "一つのコメントは０個以上のリアクションを持つ"
 	posts ||--o{ requirement_languages : "一つの投稿は０個以上の必須スキルを持つ"
 	requirement_languages ||--|{ language : "一つのrequirement_languagesは０個以上のlanguageを持つ"
 	user_info ||--o{ user_post_relationship  : "一つのユーザ情報が0個以上の興味がある投稿を持つ"
@@ -17,7 +17,8 @@ erDiagram
  	user_post_relationship ||--|| application_level : "一つのuser_post_relationshipは一つのapplication_levelを持つ"
     	user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
     	skills ||--|| skill : "skillsは一つ以上のskillを持つ"
-	user_info ||--o{ logs : "user_infoは0個以上のskillsを持つ"
+	user_info ||--o{ logs : "user_infoは0個以上のlogsを持つ"
+	user_info ||--|| reaction : "1人のユーザーは1つのreactionを持つ"
  
  user {
   int user_id PK
@@ -124,7 +125,7 @@ erDiagram
   timestamp deleted_at
  }
 
- reactions {
+ reaction {
   int id PK
   reference logs_id FK
 　reference user_info FK "誰のreactionか"
