@@ -10,13 +10,11 @@ erDiagram
 	user_info ||--|| affiliation : "一つのuser_infoは一つのaffiliationを持つ"
 	interested_industory ||--|| industory : "1つ興味のある業界は一つの業界を持つ"
 	logs ||--o{ reactions : "一つのコメントは０個以上のリアクションを持つ"
-	reactions ||--|| reaction : "一つのreactionsは一つのreactionを持つ"
 	posts ||--o{ requirement_languages : "一つの投稿は０個以上の必須スキルを持つ"
 	requirement_languages ||--|{ language : "一つのrequirement_languagesは０個以上のlanguageを持つ"
 	user_info ||--o{ user_post_relationship  : "一つのユーザ情報が0個以上の興味がある投稿を持つ"
 	user_post_relationship ||--|| posts : "一つのuser_post_relationshipは一つのpostsを持つ"
  	user_post_relationship ||--|| application_level : "一つのuser_post_relationshipは一つのapplication_levelを持つ"
-	posts ||--|| participants : "postsは一つ以上のparticipants(参加者)を持つ"
     	user_info ||--|{ skills : "user_infoは一つ以上のskillsを持つ"
     	skills ||--|| skill : "skillsは一つ以上のskillを持つ"
 	user_info ||--o{ logs : "user_infoは0個以上のskillsを持つ"
@@ -128,12 +126,7 @@ erDiagram
  reactions {
   int id PK
   reference logs_id FK
-  int reaction_id FK
- }
-
- reaction {
-  int id PK
-  string reaction_name "宜しく or 一緒に頑張ろう or 楽しみましょう"
+  int ReactionLevel "よろしく,ワイワイ,いいね,承知"
  }
 
  user_post_relationship  {
@@ -149,9 +142,4 @@ erDiagram
   string state "bookmark or 緩くやりたい or 参加したい or がちでやりたい"
  }
 
- participants {
-  int id PK
-  reference posts_id "参加するpostのID"
-  reference user_info_id "参加者のuser_info_id"
- }
 ```
