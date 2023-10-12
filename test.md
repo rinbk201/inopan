@@ -118,7 +118,7 @@ erDiagram
  logs {
   int id PK
   references posts_id FK
-  references user_info FK
+  references user_info FK "誰に紐ずくログか"
   timestamp created_at
   timestamp deleted_at
  }
@@ -126,6 +126,7 @@ erDiagram
  reactions {
   int id PK
   reference logs_id FK
+　reference user_info FK "誰のreactionか"
   int ReactionLevel "よろしく,ワイワイ,いいね,承知"
  }
 
