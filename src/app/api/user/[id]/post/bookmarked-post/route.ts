@@ -52,3 +52,28 @@ export const DELETE = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+
+//bookmarkしたpostの取得
+export const GET = async (req: Request, res: NextResponse) => {
+  try {
+    const user_info_id: number = parseInt(req.url.split("/user/")[1]);
+    await main();
+    const post_ids = await prisma.userPostRelationship.findMany({
+      where: {
+				AND: [
+					{ userInfoId: user_info_id },
+					{ applicationLevel: "BOOKMARK" }
+				]
+			}
+    });
+    const posts = []
+    for (var i = 0; i < post_ids.length; i++) {
+      
+    }
+    return NextResponse.json({ message: "Success", post_ids }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
