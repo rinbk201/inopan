@@ -148,6 +148,8 @@ model UserPostRelationship {
   relationState    RelationState    @default(UNAPPROVED)
   userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
   post             Post             @relation(fields: [postId], references: [id])
+
+  @@unique([userInfoId, postId],name: "postId_userInfoId")
 }
 
 enum Gender {
