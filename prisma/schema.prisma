@@ -145,7 +145,7 @@ model UserPostRelationship {
   userInfoId       Int
   postId           Int
   applicationLevel ApplicationLevel
-  rerationState    RelationState
+  relationState    RelationState
   userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
   post             Post             @relation(fields: [postId], references: [id])
 }
