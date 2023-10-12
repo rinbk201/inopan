@@ -177,6 +177,7 @@ enum InterestLevel {
 }
 
 enum ApplicationLevel {
+  NO_APPLICATION
   BOOKMARK
   CASUALLY_JOIN
   NORMAL_JOIN
