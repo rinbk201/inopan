@@ -144,8 +144,8 @@ model UserPostRelationship {
   id               Int              @id @default(autoincrement())
   userInfoId       Int
   postId           Int
-  applicationLevel ApplicationLevel
-  relationState    RelationState
+  applicationLevel ApplicationLevel @default(NO_APPLICATION)
+  relationState    RelationState    @default(UNAPPROVED)
   userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
   post             Post             @relation(fields: [postId], references: [id])
 }
@@ -177,6 +177,7 @@ enum InterestLevel {
 }
 
 enum ApplicationLevel {
+  NO_APPLICATION
   BOOKMARK
   CASUALLY_JOIN
   NORMAL_JOIN
