@@ -119,6 +119,7 @@ erDiagram
   int id PK
   references posts_id FK
   references user_info FK "誰に紐ずくログか"
+  string contents
   timestamp created_at
   timestamp deleted_at
  }
