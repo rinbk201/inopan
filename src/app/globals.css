@@ -1,6 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  /* color */
+  --pink: #db4c7c;
+  --orange: #f08247;
+  --green: #67be45;
+  --blue: #309ae8;
+  --purple: #a749c9;
+  /* font */
+  --font: "m-plus-2p", sans-serif;
+  /* font weight */
+  --thin: 100;
+  --light: 300;
+  --regular: 400;
+  --medium: 500;
+  --bold: 700;
+  --heavy: 800;
+}
 
 * {
   box-sizing: border-box;
@@ -9,7 +26,10 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: normal;
+  font-family: MS PMincho;
+  font-weight: var(--regular);
+  font-style: normal;
 }
 
 body {
