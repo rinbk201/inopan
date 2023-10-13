@@ -55,12 +55,15 @@ model Affiliation {
 }
 
 model Skills {
-  id         Int         @id @default(autoincrement())
-  userInfoId Int
-  level      SkillLevels
-  userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
-  skillName  SkillFields
-  skillId    Int?
+  id            Int         @id @default(autoincrement())
+  userInfoId    Int         @unique
+  userInfo      UserInfo    @relation(fields: [userInfoId], references: [id])
+  PLANNING      SkillLevels @default(LEVEL0)
+  DESIGN        SkillLevels @default(LEVEL0)
+  FRONTEND      SkillLevels @default(LEVEL0)
+  BACKEND       SkillLevels @default(LEVEL0)
+  PRESENTATION  SkillLevels @default(LEVEL0)
+  OTHER         SkillLevels @default(LEVEL0)
 }
 
 model ProgrammingLanguages {
@@ -105,6 +108,7 @@ model Post {
   recruitmentNumbers   Int                    @map("recruitment_numbers")
   description          String
   matchingMessage      String                 @map("matching_message")
+  confirmed            Boolean                @default(false)
   createdAt            DateTime               @default(now()) @map("created_at")
   modifiedAt           DateTime?              @map("modifyed_at")
   deletedAt            DateTime?              @map("deleted_at")
@@ -169,6 +173,7 @@ enum ReactionLevel {
   LEVEL1
   LEVEL2
   LEVEL3
+  LEVEL4
 }
 
 //興味の強さ
@@ -188,7 +193,6 @@ enum ApplicationLevel {
 enum RelationState {
   UNAPPROVED
   APPROVED
-  CONFIRMED
 }
 
 //学部学科略称のリスト
@@ -240,7 +244,6 @@ enum SkillFields {
 
 //保有スキル・取得言語のレベル・興味の度合い
 enum SkillLevels {
-  LEVEL0
   LEVEL1
   LEVEL2
   LEVEL3
