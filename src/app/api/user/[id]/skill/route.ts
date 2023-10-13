@@ -30,6 +30,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
       OTHER
     } = await req.json();
     await main();
+    console.log(PLANNING)
     const skills = await prisma.skills.update({
       data: {
         PLANNING,
