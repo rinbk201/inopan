@@ -58,12 +58,12 @@ model Skills {
   id            Int         @id @default(autoincrement())
   userInfoId    Int         @unique
   userInfo      UserInfo    @relation(fields: [userInfoId], references: [id])
-  PLANNING      SkillLevels @default(LEVEL0)
-  DESIGN        SkillLevels @default(LEVEL0)
-  FRONTEND      SkillLevels @default(LEVEL0)
-  BACKEND       SkillLevels @default(LEVEL0)
-  PRESENTATION  SkillLevels @default(LEVEL0)
-  OTHER         SkillLevels @default(LEVEL0)
+  PLANNING      SkillLevels @default(LEVEL1)
+  DESIGN        SkillLevels @default(LEVEL1)
+  FRONTEND      SkillLevels @default(LEVEL1)
+  BACKEND       SkillLevels @default(LEVEL1)
+  PRESENTATION  SkillLevels @default(LEVEL1)
+  OTHER         SkillLevels @default(LEVEL1)
 }
 
 model ProgrammingLanguages {
