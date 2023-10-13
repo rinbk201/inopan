@@ -105,6 +105,7 @@ model Post {
   recruitmentNumbers   Int                    @map("recruitment_numbers")
   description          String
   matchingMessage      String                 @map("matching_message")
+  confirmed            Boolean                @default(false)
   createdAt            DateTime               @default(now()) @map("created_at")
   modifiedAt           DateTime?              @map("modifyed_at")
   deletedAt            DateTime?              @map("deleted_at")
@@ -169,6 +170,7 @@ enum ReactionLevel {
   LEVEL1
   LEVEL2
   LEVEL3
+  LEVEL4
 }
 
 //興味の強さ
@@ -188,7 +190,6 @@ enum ApplicationLevel {
 enum RelationState {
   UNAPPROVED
   APPROVED
-  CONFIRMED
 }
 
 //学部学科略称のリスト
