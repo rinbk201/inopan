@@ -18,6 +18,10 @@ export const GET = async (req: Request, res: NextResponse) => {
     });
     for (var i in posts) {
       if (posts[i].relationState === "APPROVED") {
+        if (posts[i].post.confirmed === true) {
+          data["CONFIRMED"].push(posts[i])
+          continue
+        }
         data["APPROVED"].push(posts[i])
         continue
       }
@@ -27,10 +31,6 @@ export const GET = async (req: Request, res: NextResponse) => {
           continue
         }
         data["UNAPPROVED"].push(posts[i])
-        continue
-      }
-      if (posts[i].relationState === "CONFIRMED") {
-        data["CONFIRMED"].push(posts[i])
         continue
       }
     }
