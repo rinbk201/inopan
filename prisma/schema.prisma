@@ -244,7 +244,6 @@ enum SkillFields {
 
 //保有スキル・取得言語のレベル・興味の度合い
 enum SkillLevels {
-  LEVEL0
   LEVEL1
   LEVEL2
   LEVEL3
