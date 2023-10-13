@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 const Image = styled.div`
-  width: 4rem;
-  height: 4rem;
+  width: ${(props) => props.iconSize};
+  height: ${(props) => props.iconSize};
   border-radius: 50%;
   border: 2px solid gainsboro;
-  margin: 0.5rem;
+  background-image: ${(props) => props.iconImg};
 `;
-
-export default function UserIcon() {
-  return <Image></Image>;
+interface UserIconProps {
+  iconSize: string;
+  iconImg: string;
+}
+export default function UserIcon({ iconSize, iconImg }: UserIconProps) {
+  return <Image iconSize={iconSize} iconImg={iconImg}></Image>;
 }
