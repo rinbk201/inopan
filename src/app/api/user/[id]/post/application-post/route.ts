@@ -72,7 +72,9 @@ export const GET = async (req: Request, res: NextResponse) => {
     });
     const posts = []
     for (var i in post_relations) {
-      posts.push(post_relations[i].post)
+      if (post_relations[i].applicationLevel !== "BOOKMARK") {
+        posts.push(post_relations[i].post)
+      }
     }
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   } catch (err) {
