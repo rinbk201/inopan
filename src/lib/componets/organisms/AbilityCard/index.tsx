@@ -115,7 +115,7 @@ export default function abilityCard({
           initial="FI"
           affiliationColor={getAffiliationColor(userData.affiliation_id)}
         ></AfficationIcon>
-        <UserIcon></UserIcon>
+        <UserIcon iconSize="4rem"></UserIcon>
         <UserAffiliationbox>
           <UserNameText>{userData.display_name}</UserNameText>
           <AffiliationText>未来科学部情報メディア学科</AffiliationText>
