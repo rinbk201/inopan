@@ -7,12 +7,12 @@ export type PostType = {
 	launchDay: Date;
 	deadline: Date;
 	recruitmentNumbers: number;
-	description: string;
-	matchingMessage: string;
+	description: string | undefined;
+	matchingMessage: string | undefined;
 	confirmed: boolean;
 	createdAt: Date;
-	modifiedAt: Date;
-	deletedAt: Date;
+	modifiedAt: Date | undefined;
+	deletedAt: Date | undefined;
 }
 
 export type NewPostType = {
@@ -24,7 +24,7 @@ export type NewPostType = {
 	description: string | undefined;
 	matchingMessage: string | undefined;
 	requirementLanguages: string | undefined;
-	modifiedAt: Date;
+	modifiedAt: Date | undefined;
 }
 
 export type EditPostType = {
@@ -32,14 +32,14 @@ export type EditPostType = {
 	launchDay: Date;
 	deadline: Date;
 	recruitmentNumbers: number;
-	matchingMessage: string;
+	matchingMessage: string | undefined;
 	requirementLanguages: [
 		{
 			language: string;
 			level: number;
 		}
-	]
-	modifiedAt: Date;
+	] | undefined;
+	modifiedAt: Date | undefined;
 }
 
 export type NewUserRelationType = {
@@ -54,7 +54,7 @@ export type UserRelationType = {
 			applicationLevel: string;
       relationState: RelationState;
 		}
-	]
+	] | undefined
 }
 
 export type EditUserRelationStateType = {
@@ -72,14 +72,14 @@ export type UserInfoType = {
 	email: string;
 	displayName: string;
 	affiliationId: number;
-	lab: string;
+	lab: string | undefined;
 	gender: Gender;
-	hobby: string;
-	comment: string;
-	discordId: string;
-	xId: string;
-	facebookId: string;
-	freeForm: string;
+	hobby: string | undefined;
+	comment: string | undefined;
+	discordId: string | undefined;
+	xId: string | undefined;
+	facebookId: string | undefined;
+	freeForm: string | undefined;
 	createdAt: Date;
 	deletedAt: Date | null
 }
@@ -88,14 +88,14 @@ export type EditUserInfo = {
 	email: string;
 	displayName: string;
 	affiliationId: number;
-	lab: string;
+	lab: string | undefined;
 	gender: Gender;
-	hobby: string;
-	comment: string;
-	discordId: string;
-	xId: string;
-	facebookId: string;
-	freeForm: string
+	hobby: string | undefined;
+	comment: string | undefined;
+	discordId: string | undefined;
+	xId: string | undefined;
+	facebookId: string | undefined;
+	freeForm: string | undefined;
 }
 
 /**
@@ -126,7 +126,7 @@ export type UserRelatedPostType = {
 		}
 	]
 }
- */
+*/
 
 export type NewApplicationPostType = {
 	postId: number;
@@ -151,7 +151,7 @@ export type LanguageType = {
 			languageName: string;
 			level: number;
 		}
-	]
+	] | undefined
 }
 
 export type SkillType = {
