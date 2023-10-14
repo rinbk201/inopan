@@ -8,7 +8,7 @@ import DashedLine from "../../atoms/DashedLine";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import PersonIcon from "@mui/icons-material/Person";
 import UserIcon from "../../atoms/UserIcon";
-import { PostType } from "@/types";
+import { PostCardType, PostType } from "@/types";
 
 const PostTypeText = styled.p`
   font-size: 0.9rem;
@@ -44,9 +44,9 @@ const RecruitmentNumbersText = styled.p`
 `;
 
 interface PostCardProps {
-  postData: PostType;
+  postCardData: PostCardType;
 }
-export default function PostCard({ postData }:PostCardProps) {
+export default function PostCard({ postCardData }:PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
       <CardMedia
@@ -56,29 +56,29 @@ export default function PostCard({ postData }:PostCardProps) {
       />
       <CardContent>
         <PostTypeText>ハッカソン</PostTypeText>
-        <PostTitle>{postData.title}</PostTitle>
+        <PostTitle>{postCardData.PostType.title}</PostTitle>
         <InfoBox>
           <UserIcon iconSize="1.5rem" iconImg="/images/"></UserIcon>
-          <UserName>{postData.userInfoId}</UserName>
+          <UserName>{postCardData.autherName}</UserName>
         </InfoBox>
 
         <DashedLine></DashedLine>
         <InfoBox>
           <WatchLaterIcon sx={{ width: 18 }}></WatchLaterIcon>
-          <PostInfo>{formatDate(postData.launchDay, "/")}</PostInfo>
+          <PostInfo>{formatDate(postCardData.PostType.deadline, "/")}</PostInfo>
         </InfoBox>
         <InfoBox>
           <PersonIcon sx={{ width: 18 }}></PersonIcon>
           <PostInfo>募集人数</PostInfo>
         </InfoBox>
         <RecruitmentNumbersText>
-          {postData.recruitmentNumbers}人
+        {postCardData.approvedCount}/{postCardData.PostType.recruitmentNumbers}人
         </RecruitmentNumbersText>
-        <LinearProgress
+        {/* <LinearProgress
           color={"primary"}
           variant="determinate"
           value={(postData.userInfoId / postData.recruitmentNumbers) * 100}
-        />
+        /> */}
       </CardContent>
     </Card>
   );
