@@ -14,8 +14,8 @@ export const getAllRelations = async (post_id: number): Promise<UserRelationPost
   const res = await fetch(`http://localhost:3000/api/post/${post_id}/user-relation`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
-      //next: { revalidate: 10 }
+			//next: { revalidate: 60 * 30 }
+      next: { revalidate: 10 }
 		}
 	);
   const data = await res.json();
@@ -106,7 +106,7 @@ export const getAllApplicationUser = async (post_id: number): Promise<Paticipant
     teamSkill: teamSkill,
     RequirementNumber: requirement_number
   }
-  console.log(paticipants)
+  //console.log(paticipants)
 
 	return paticipants;
 }
@@ -166,6 +166,6 @@ export const getTeamSkill = async (post_id: number): Promise<SkillType> => {
     DESIGN: DESIGN,
     OTHER: OTHER
   }
-  console.log(teamSkill)
+  //console.log(teamSkill)
 	return teamSkill;
 }

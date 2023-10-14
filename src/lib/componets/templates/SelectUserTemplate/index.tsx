@@ -11,6 +11,8 @@ import styled from "styled-components";
 import SelectedMemberCard from "../../organisms/SelectedMemberCard";
 import { Card, CardContent } from "@mui/material";
 import { PaticipantSelectionIncludeTeamInfoType, SkillType, SkillFields , PaticipantSelectionType} from "@/types";
+import userList from "@/lib/componets/organisms/UserList";
+import { getAllApplicationUser } from "@/lib/utils/participantSelection";
 
 /**
    * "teamSkillData"
@@ -82,11 +84,11 @@ const demo_user_list = [
    * */
 
 interface SelectUserTemplate {
-  userList: PaticipantSelectionIncludeTeamInfoType;
+  userLists: PaticipantSelectionIncludeTeamInfoType;
   teamSkill: SkillType
 }
 export default function SelectUserTemplate({
-  userList,
+  userLists,
   teamSkill
 }: SelectUserTemplate) {
   // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
@@ -101,15 +103,38 @@ export default function SelectUserTemplate({
     template.map((obj) => ({
       ...obj,
       value: teamSkill[obj.id] || 0,
-      fullMark: userList.RequirementNumber * 5,
+      fullMark: userLists.RequirementNumber * 5,
     }))
   );
-  const applicationUser: PaticipantSelectionType[] = userList.paticipants.UNAPPROVED
-  console.log(applicationUser)
+  const applicationUser: PaticipantSelectionType[] = userLists.paticipants.UNAPPROVED
+  const userList: any[] = []
+  for (var i in applicationUser) {
+    const data = 
+      {
+          name: applicationUser[i].userInfo.displayName,
+          display_name: applicationUser[i].userInfo.displayName,
+          email: applicationUser[i].userInfo.email,
+          affiliation_id: applicationUser[i].userInfo,
+          lab: applicationUser[i].userInfo.affiliationId,
+          gender: applicationUser[i].userInfo.gender,
+          hobby: applicationUser[i].userInfo.hobby,
+          comment: applicationUser[i].userInfo.comment,
+          DiscordID: applicationUser[i].userInfo.discordId,
+          XID: applicationUser[i].userInfo.xId,
+          FaceBookID: applicationUser[i].userInfo.facebookId,
+          free_form: applicationUser[i].userInfo.freeForm,
+          deleted_at: applicationUser[i].userInfo.deletedAt,
+          skill: applicationUser[i].skills,
+      }
+      userList.push(data)
+  }
+  //console.log(teamSkill)
+  //console.log(applicationUser)
   // 選択されたユーザのリスト
   const [selectedUser, setSelectedUser] = useState([]);
-  const createSelectedUserList = (indexList: object) => {
-    var selectedUserList: object = [];
+  const createSelectedUserList = (indexList: []) => {
+    var selectedUserList: object[] = [];
+    console.log(indexList)
     indexList.map((index) => {
       selectedUserList.push(userList[index]);
     });

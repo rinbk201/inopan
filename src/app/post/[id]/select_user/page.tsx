@@ -66,11 +66,11 @@ export default async function SelectUser({ params }: { params: { id: string } })
   const postId: number = parseInt(params.id);
   const data :PaticipantSelectionIncludeTeamInfoType = await getAllApplicationUser(postId)
   const teamSkill: SkillType = await getTeamSkill(postId)
-  console.log(data.paticipants.UNAPPROVED)
-  console.log(teamSkill.FRONTEND)
+  //console.log(data.paticipants.UNAPPROVED)
+  //console.log(teamSkill.FRONTEND)
   return (
     <SelectUserTemplate
-      userList={data}
+      userLists={data}
       teamSkill={teamSkill}
     ></SelectUserTemplate>
   );
