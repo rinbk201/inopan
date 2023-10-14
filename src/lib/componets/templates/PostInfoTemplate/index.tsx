@@ -48,7 +48,7 @@ export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
         title={postData.title}
       ></PostInfoTitle>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <PostImageBox imgSrc={postData.img}></PostImageBox>
           <PostDetailBox

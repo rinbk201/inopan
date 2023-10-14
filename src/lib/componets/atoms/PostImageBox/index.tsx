@@ -7,7 +7,7 @@ export default function PostImageBox({ imgSrc }: PostImageBox) {
   return (
     <Box
       sx={{
-        width: "38vw",
+        width: "100%",
         height: "22rem",
         borderRadius: 1,
         overflow: "hidden",
