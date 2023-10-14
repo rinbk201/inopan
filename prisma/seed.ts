@@ -1,16 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+import { user } from './user'
 
 
-
-/** 追加の記述
- *   import { User } from './User'
 
 async function main() {
 	await user();
 }
-*/
+
 
 /*
 async function main() {
