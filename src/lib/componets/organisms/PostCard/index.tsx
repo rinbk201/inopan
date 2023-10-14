@@ -49,11 +49,11 @@ interface PostCardProps {
 export default function PostCard({ postData }:PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
-      {/* <CardMedia
+      <CardMedia
         sx={{ height: 198 }}
-        image={postData.id}
+        image="https://source.unsplash.com/random"  
         title="green iguana"
-      /> */}
+      />
       <CardContent>
         <PostTypeText>ハッカソン</PostTypeText>
         <PostTitle>{postData.title}</PostTitle>
