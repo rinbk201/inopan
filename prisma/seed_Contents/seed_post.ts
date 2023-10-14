@@ -104,5 +104,22 @@ export const post  = async () => {
 		}
 	})
 
+	const sample_post7 = await prisma.post.create({
+		data: {
+			id: 7,
+			userInfoId: 3,
+			title: "東京電機大学-Unity勉強会!!!",
+			eventType: "STUDY",
+			launchDay: "2023-10-10T13:50:40+09:00",
+			deadline: "2023-10-9T13:50:40+09:00",
+			recruitmentNumbers: 10,
+			description: "Unityを一緒に勉強してくれる方探してます！ホームランダービーみたいなゲームを作るのを目標にしています！",
+			matchingMessage: "ご応募いただきありがとうございます．ぜひ参加していただきたいと思い承諾させていただきました．コミュニケーションツールはdiscordを使用するため，サーバーに参加してください． www.sesfsf.iojs@ijgo.com",
+			createdAt: "2023-10-01T13:50:40+09:00",
+			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "Unity"
+		}
+	})
+
 
 }
