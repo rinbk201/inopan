@@ -122,7 +122,16 @@ export type ConfirmedPostType = {
 export type UserRelatedPostType = {
 	posts:[
 		{
-			BOOKMARK
+			APPROVED: [PostType]:
+		},
+		{
+			UNAPPROVED: [PostType]:
+		},
+		{
+			CONFIRMED: [PostType]:
+		},
+		{
+			BOOKMARK: [PostType]:
 		}
 	]
 }
