@@ -6,6 +6,7 @@ import { userInfo } from './seed_Contents/userInfo'
 import { skills } from './seed_Contents/skills'
 import { post } from './seed_Contents/post'
 import { affiliation } from './seed_Contents/affiliation'
+import { language } from './seed_Contents/language'
 
 
 async function main() {
@@ -14,7 +15,7 @@ async function main() {
 	skills();
 	post();
 	affiliation();
-
+	language();
 }
 
 
