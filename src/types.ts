@@ -190,20 +190,20 @@ export type EditSkillType = {
 }
 
 
-enum Gender {
+export enum Gender {
   MAN,
   WOMAN,
   OTHER
 }
 
 // 付与される権限
-enum Role {
+export enum Role {
   ADMIN,
   ROLE
 }
 
 //リアクションの強さ
-enum ReactionLevel {
+export enum ReactionLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -211,26 +211,26 @@ enum ReactionLevel {
 }
 
 //興味の強さ
-enum InterestLevel {
+export enum InterestLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3
 }
 
-enum ApplicationLevel {
+export enum ApplicationLevel {
   BOOKMARK,
   CASUALLY_JOIN,
   NORMAL_JOIN,
   SERIOUSLY_JOIN
 }
 
-enum RelationState {
+export enum RelationState {
   UNAPPROVED,
   APPROVED
 }
 
 //学部学科略称のリスト
-enum AffrilationInitial {
+export enum AffrilationInitial {
   // 工学部
   EJ, //電気電子工学科
   EH, //電子システム工学科
@@ -267,7 +267,7 @@ enum AffrilationInitial {
 }
 
 //ユーザーの保有スキルのフィールド
-enum SkillFields {
+export enum SkillFields {
   PLANNING,
   DESIGN,
   FRONTEND,
@@ -277,7 +277,7 @@ enum SkillFields {
 }
 
 //保有スキル・取得言語のレベル・興味の度合い
-enum SkillLevels {
+export enum SkillLevels {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -286,7 +286,7 @@ enum SkillLevels {
 }
 
 //プログラミング言語
-enum ProgrammingLanguageEnum {
+export enum ProgrammingLanguageEnum {
   C_Cpp, // C/C++
   Csharp, // C#
   Java,
@@ -296,7 +296,7 @@ enum ProgrammingLanguageEnum {
 }
 
 //業界
-enum Industorys {
+export enum Industorys {
   WEB,
   GAME,
   SI,
