@@ -19,18 +19,18 @@ export const GET = async (req: Request, res: NextResponse) => {
     for (var i in posts) {
       if (posts[i].relationState === "APPROVED") {
         if (posts[i].post.confirmed === true) {
-          data["CONFIRMED"].push(posts[i])
+          data["CONFIRMED"].push(posts[i].post)
           continue
         }
-        data["APPROVED"].push(posts[i])
+        data["APPROVED"].push(posts[i].post)
         continue
       }
       if (posts[i].relationState === "UNAPPROVED") {
         if (posts[i].applicationLevel === "BOOKMARK") {
-          data["BOOKMARK"].push(posts[i])
+          data["BOOKMARK"].push(posts[i].post)
           continue
         }
-        data["UNAPPROVED"].push(posts[i])
+        data["UNAPPROVED"].push(posts[i].post)
         continue
       }
     }
