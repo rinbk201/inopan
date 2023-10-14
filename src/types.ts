@@ -7,6 +7,7 @@ export type PostType = {
   launchDay: Date;
   deadline: Date;
   recruitmentNumbers: number;
+  requirementLanguages:string;
   description: string;
   matchingMessage: string;
   confirmed: boolean;
@@ -14,6 +15,8 @@ export type PostType = {
   modifiedAt: Date|undefined;
   deletedAt: Date;
 };
+
+
 
 export type NewPostType = {
   userInfoId: number;

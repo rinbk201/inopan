@@ -15,6 +15,7 @@ const newPost = async (title:string,description:string|undefined) => {
     );
     return res.json
 }
+//userRerationの追加関数をここに追記する
 
 
 const AddPost = ()=>{
