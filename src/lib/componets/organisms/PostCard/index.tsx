@@ -10,6 +10,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import UserIcon from "../../atoms/UserIcon";
 import { PostCardType, PostType } from "@/types";
 import Link from "next/link";
+import PostImageBox from "../../atoms/PostImageBox";
 
 const PostTypeText = styled.p`
   font-size: 0.9rem;
@@ -50,12 +51,14 @@ interface PostCardProps {
 export default function PostCard({ postCardData }: PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
-      <CardMedia
+      <Link href={`/post/${postCardData.PostType.id}`} passHref>
+      {/* <CardMedia
         sx={{ height: 198 }}
         image="https://source.unsplash.com/random"
         title="green iguana"
-      />
-      <Link href={`/post/${postCardData.PostType.id}`} passHref>
+      /> */}
+      <PostImageBox imgSrc="https://source.unsplash.com/random"></PostImageBox>
+      
         <CardContent>
           <PostTypeText>ハッカソン</PostTypeText>
           <PostTitle>{postCardData.PostType.title}</PostTitle>
