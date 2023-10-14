@@ -53,7 +53,7 @@ export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
 
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <PostImageBox imgSrc="../../../../../test.png"></PostImageBox>
+          <PostImageBox imgSrc="https://source.unsplash.com/random"></PostImageBox>
           <PostDetailBox
             title={postData.PostType.title}
             description={postData.PostType.description}
