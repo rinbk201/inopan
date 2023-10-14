@@ -8,7 +8,8 @@ import { post } from './seed_Contents/seed_post'
 import { affiliation } from './seed_Contents/seed_affiliation'
 import { language } from './seed_Contents/seed_language'
 import { requirementLanguages } from './seed_Contents/seed_requirementLanguages'
-
+import { programmingLanguages } from './seed_Contents/seed_programminglanguages'
+ 
 
 
 async function main() {
@@ -19,6 +20,7 @@ async function main() {
 	affiliation();
 	language();
 	requirementLanguages();
+	programmingLanguages();
 }
 
 main()
