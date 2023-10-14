@@ -69,19 +69,12 @@ model Skills {
 model ProgrammingLanguages {
   id         Int         @id @default(autoincrement())
   userInfoId Int
-  languageId Int
+  language   ProgrammingLanguageEnum
   level      SkillLevels
   userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
-  language   Language    @relation(fields: [languageId], references: [id])
 }
 
-model Language {
-  id                   Int                     @id @default(autoincrement())
-  languageName         ProgrammingLanguageEnum @map("language_name")
-  area                 String
-  programmingLanguages ProgrammingLanguages[]
-  requirementLanguages RequirementLanguages[]
-}
+
 
 model InterestedIndustory {
   id          Int           @id @default(autoincrement())
@@ -103,6 +96,7 @@ model Post {
   id                   Int                    @id @default(autoincrement())
   userInfoId           Int
   title                String
+  eventType            EventType
   launchDay            DateTime
   deadline             DateTime
   recruitmentNumbers   Int                    @map("recruitment_numbers")
@@ -114,17 +108,10 @@ model Post {
   deletedAt            DateTime?              @map("deleted_at")
   userInfo             UserInfo               @relation(fields: [userInfoId], references: [id])
   logs                 Log[]
-  requirementLanguages RequirementLanguages[]
+  requirementLanguages String
   UserPostRelationship UserPostRelationship[]
 }
 
-model RequirementLanguages {
-  id         Int      @id @default(autoincrement())
-  postId     Int      @map("ponts_id")
-  languageId Int
-  post       Post     @relation(fields: [postId], references: [id])
-  language   Language @relation(fields: [languageId], references: [id])
-}
 
 model Log {
   id         Int        @id @default(autoincrement())
@@ -242,7 +229,7 @@ enum SkillFields {
   OTHER
 }
 
-//保有スキル・取得言語のレベル・興味の度合い
+//保有スキル・取得言語のレベル
 enum SkillLevels {
   LEVEL1
   LEVEL2
@@ -253,50 +240,49 @@ enum SkillLevels {
 
 //プログラミング言語
 enum ProgrammingLanguageEnum {
-ActionScript
-ASPNET //ASP.NET
-Csharp //C#
-CakePHP
-COBOL
-CSS
-C_Cpp // C/C++
-Delphi 
-Django
-Facebook_Application //Facebookアプリ
-Fortran
-HTML
-RubyonRails
-Java
-jQuery
-JavaScript
-Kotlin
-Laravel
-MATLAB
-MySQL
-Nodejs //Node.js
-ObjectiveC
-OpenCV
-OpenGL
-Oracle
-Pascal
-Perl
-PHP
-Python
-Ruby
-Go
-SQL
-MYSQL
-PostgreSQL
-Unity
-VBnet
-Vuejs
-R
-React
-Scala
-Swift
-AdobeXd
-Photoshop
-Illustrator
+  ActionScript
+  ASPNET //ASP.NET
+  Csharp //C#
+  CakePHP
+  COBOL
+  CSS
+  C_Cpp // C/C++
+  Delphi 
+  Django
+  Facebook_Application //Facebookアプリ
+  Fortran
+  HTML
+  RubyonRails
+  Java
+  jQuery
+  JavaScript
+  Kotlin
+  Laravel
+  MATLAB
+  MySQL
+  Nodejs //Node.js
+  ObjectiveC
+  OpenCV
+  OpenGL
+  Oracle
+  Pascal
+  Perl
+  PHP
+  Python
+  Ruby
+  Go
+  SQL
+  PostgreSQL
+  Unity
+  VBnet
+  Vuejs
+  R
+  React
+  Scala
+  Swift
+  AdobeXd
+  Photoshop
+  Illustrator
 }
 
 //業界
@@ -307,4 +293,9 @@ enum Industorys {
   CHEMISTRY
   ADVERTISEMENT
   OTHER
+}
+
+enum EventType{
+  HACKATHON
+  STUDY
 }

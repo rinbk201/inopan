@@ -28,6 +28,7 @@ export const POST = async (req: Request, res: NextResponse) => {
     const {
       userInfoId,
       title,
+      eventType,
       launchDay,
       deadline,
       recruitmentNumbers,
@@ -42,6 +43,7 @@ export const POST = async (req: Request, res: NextResponse) => {
         userInfoId,
         title,
         launchDay,
+        eventType,
         deadline,
         recruitmentNumbers,
         description,

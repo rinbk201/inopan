@@ -1,3 +1,4 @@
+"use client"
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,6 +8,7 @@ import DashedLine from "../../atoms/DashedLine";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import PersonIcon from "@mui/icons-material/Person";
 import UserIcon from "../../atoms/UserIcon";
+import { PostCardType, PostType } from "@/types";
 
 const PostTypeText = styled.p`
   font-size: 0.9rem;
@@ -42,47 +44,48 @@ const RecruitmentNumbersText = styled.p`
 `;
 
 interface PostCardProps {
-  postData: object;
+  postCardData: PostCardType;
 }
-export default function PostCard({ postData }: PostCardProps) {
+export default function PostCard({ postCardData }:PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
       <CardMedia
         sx={{ height: 198 }}
-        image={postData.img}
+        image="https://source.unsplash.com/random"  
         title="green iguana"
       />
       <CardContent>
-        <PostTypeText>{postData.type}</PostTypeText>
-        <PostTitle>{postData.title}</PostTitle>
+        <PostTypeText>ハッカソン</PostTypeText>
+        <PostTitle>{postCardData.PostType.title}</PostTitle>
         <InfoBox>
           <UserIcon iconSize="1.5rem" iconImg="/images/"></UserIcon>
-          <UserName>{postData.userInfold}</UserName>
+          <UserName>{postCardData.autherName}</UserName>
         </InfoBox>
 
         <DashedLine></DashedLine>
         <InfoBox>
           <WatchLaterIcon sx={{ width: 18 }}></WatchLaterIcon>
-          <PostInfo>{formatDate(postData.launchDay, "/")}</PostInfo>
+          <PostInfo>{formatDate(postCardData.PostType.deadline, "/")}</PostInfo>
         </InfoBox>
         <InfoBox>
           <PersonIcon sx={{ width: 18 }}></PersonIcon>
           <PostInfo>募集人数</PostInfo>
         </InfoBox>
         <RecruitmentNumbersText>
-          {postData.recruitmentNumbers}人
+        {postCardData.approvedCount}/{postCardData.PostType.recruitmentNumbers}人
         </RecruitmentNumbersText>
-        <LinearProgress
+        {/* <LinearProgress
           color={"primary"}
           variant="determinate"
-          value={(postData.nowMemberNum / postData.recruitmentNumbers) * 100}
-        />
+          value={(postData.userInfoId / postData.recruitmentNumbers) * 100}
+        /> */}
       </CardContent>
     </Card>
   );
 }
 
-function formatDate(date, sep = "") {
+function formatDate(date:Date, sep = "") {
+  date = new Date(date);
   const yyyy = date.getFullYear();
   const mm = ("00" + (date.getMonth() + 1)).slice(-2);
   const dd = ("00" + date.getDate()).slice(-2);

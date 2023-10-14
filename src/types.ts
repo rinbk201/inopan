@@ -1,63 +1,68 @@
-import { type } from "os";
-
+//postからのレスポンスの型
 export type PostType = {
-	id: number;
-	userInfoId: number;
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	description: string | undefined;
-	matchingMessage: string | undefined;
-	confirmed: boolean;
-	createdAt: Date;
-	modifiedAt: Date | undefined;
-	deletedAt: Date | undefined;
-}
+  id: number;
+  userInfoId: number;
+  title: string;
+  eventType: EventType;
+  launchDay: Date;
+  deadline: Date;
+  recruitmentNumbers: number;
+  requirementLanguages:string;
+  description: string;
+  matchingMessage: string;
+  confirmed: boolean;
+  createdAt: Date;
+  modifiedAt: Date|undefined;
+  deletedAt: Date;
+};
+
+
 
 export type NewPostType = {
+  userInfoId: number;
+  title: string;
+  launchDay: Date;
+  deadline: Date;
+  recruitmentNumbers: number;
+  description: string | undefined;
+  matchingMessage: string | undefined;
+  requirementLanguages: string | undefined;
+  modifiedAt: Date;
+};
+
+export type PostCardType = {
+  PostType: PostType;
+  approvedCount:number;
+  autherName: string;
+}
+
+export type EditPostRequestType = {
+	title: string;
+	launchDay: Date;
+	deadline: Date;
+	recruitmentNumbers: number;
+	matchingMessage: string | undefined;
+	requirementLanguages: LanguageType[]| undefined;
+	modifiedAt: Date | undefined;
+}
+
+//ユーザー
+export type UserRelationPostRequestType = {
 	userInfoId: number;
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	description: string | undefined;
-	matchingMessage: string | undefined;
-	requirementLanguages: string | undefined;
-	modifiedAt: Date | undefined;
-}
-
-export type EditPostType = {
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	matchingMessage: string | undefined;
-	requirementLanguages: [
-		{
-			language: string;
-			level: number;
-		}
-	] | undefined;
-	modifiedAt: Date | undefined;
-}
-
-export type NewUserRelationType = {
-	UserInfoId: number;
 }
 
 export type UserRelationType = {
-	userReration: [
+	userReration: 
 		{
 			id: number;
 			userInfoId: number;
 			applicationLevel: string;
       relationState: RelationState;
-		}
-	] | undefined
+		}[]
+	| undefined
 }
 
-export type EditUserRelationStateType = {
+export type UserRelationStatePutRequestType = {
 	userInfoId: Number;
 	relationState: RelationState;
 }
@@ -84,7 +89,7 @@ export type UserInfoType = {
 	deletedAt: Date | null
 }
 
-export type EditUserInfo = {
+export type EditUserInfoRequestType = {
 	email: string;
 	displayName: string;
 	affiliationId: number;
@@ -100,35 +105,44 @@ export type EditUserInfo = {
 
 
 export type ApplicationPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type ApprovedPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type AutherPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type BookmarkedPostType = {
-	posts: [PostType]
+	posts: PostType[]
 }
 
 export type ConfirmedPostType = {
-	posts: [PostType]
+	posts: PostType[]
 }
 
 export type UserRelatedPostType = {
 	posts:[
 		{
-			BOOKMARK
+			APPROVED: PostType[];
+		},
+		{
+			UNAPPROVED: PostType[];
+		},
+		{
+			CONFIRMED: PostType[];
+		},
+		{
+			BOOKMARK: PostType[];
 		}
 	]
 }
 
 
-export type NewApplicationPostType = {
+export type NewApplicationPostRequestType = {
 	postId: number;
 	applicationLevel: ApplicationLevel;
 }
@@ -146,12 +160,11 @@ export type DeleteBookmarkedPostType = {
 }
 
 export type LanguageType = {
-	language: [
+	language: 
 		{
 			languageName: string;
 			level: number;
-		}
-	] | undefined
+		}[]
 }
 
 export type SkillType = {
@@ -290,4 +303,10 @@ enum Industorys {
   CHEMISTRY,
   ADVERTISEMENT,
   OTHER
+}
+
+
+export enum EventType {
+  HACKATHON='HACKATHON',
+  STUDY='STUDY',
 }
