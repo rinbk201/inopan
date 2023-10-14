@@ -10,8 +10,6 @@ import { language } from './seed_Contents/seed_language'
 import { requirementLanguages } from './seed_Contents/seed_requirementLanguages'
 import { programmingLanguages } from './seed_Contents/seed_programmingLanguages'
  
-
-
 async function main() {
 	user();
 	userInfo();
