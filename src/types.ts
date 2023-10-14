@@ -1,3 +1,4 @@
+//postからのレスポンスの型
 export type PostType = {
   id: number;
   userInfoId: number;
@@ -26,6 +27,11 @@ export type NewPostType = {
   modifiedAt: Date;
 };
 
+export type PostCardType = {
+  PostType: PostType;
+
+
+}
 
 export enum EventType {
   HACKATHON='HACKATHON',
