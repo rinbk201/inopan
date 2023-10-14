@@ -50,7 +50,7 @@ export type EditPostRequestType = {
 export type UserRelationPostRequestType = {
 	userInfoId: number;
 }
-
+/**
 export type UserRelationType = {
 	userReration: 
 		{
@@ -60,6 +60,30 @@ export type UserRelationType = {
       relationState: RelationState;
 		}[]
 	| undefined
+}*/
+
+export type UserRelationPostType = {
+	id: number;
+  userInfoId: number;
+  postId: number;
+  applicationLevel: ApplicationLevel;
+  relationState: RelationState;
+}
+
+export type UserApplicationType = {
+  APPROVED: PaticipantSelectionType[]
+  UNAPPROVED: PaticipantSelectionType[]
+}
+export type PaticipantSelectionType = {
+  userInfo: UserInfoType;
+  userRelationPost: UserRelationPostType;
+  skills: SkillType;
+}
+
+export type PaticipantSelectionIncludeTeamInfoType = {
+  paticipants: UserApplicationType;
+  teamSkill: SkillType;
+  RequirementNumber: number;
 }
 
 export type UserRelationStatePutRequestType = {
@@ -168,15 +192,14 @@ export type LanguageType = {
 }
 
 export type SkillType = {
-	skills: {
 		PLANNING: number;
-		PRESENTATION: number,
+		PRESENTATION: number;
 		FRONTEND: number;
 		BACKEND: number;
 		DESIGN: number;
 		OTHER: number;
-	}
 }
+
 
 export type EditSkillType = {
 	skills: {
@@ -225,8 +248,8 @@ export enum ApplicationLevel {
 }
 
 export enum RelationState {
-  UNAPPROVED,
-  APPROVED
+  UNAPPROVED="UNAPPROVED",
+  APPROVED="APPROVED"
 }
 
 //学部学科略称のリスト
