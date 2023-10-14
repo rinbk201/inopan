@@ -9,8 +9,6 @@ export const getUserInfo = async(userId:number): Promise<UserInfoType> => {
 		next:{revalidate: 60*30}
     }
     );
-    console.log("1");
     const data = await res.json();
-    console.log(data);
     return data.user_info;
 }

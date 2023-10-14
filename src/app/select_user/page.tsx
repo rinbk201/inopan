@@ -85,7 +85,6 @@ export default function Home() {
   );
 
   const handleCheckedAbilityCard = (selectedUserData: object) => {
-    console.log(selectedUserData);
     setTeamData(
       convertedTeamData.map((obj) => ({
         ...obj,

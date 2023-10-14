@@ -1,9 +1,12 @@
+"use client"
 import { Container, Grid } from "@mui/material";
 import PostInfoTitle from "../../organisms/PostInfoTopTitleBox";
 import PostImageBox from "../../atoms/PostImageBox";
 import PostDetailBox from "../../organisms/PostDetailBox";
 import PostInfoBox from "../../organisms/PostInfoBox";
 import TeamSkillBox from "../../organisms/TeamSkillBox";
+import { PostDetailType } from "@/types";
+import { Noto_Sans_Canadian_Aboriginal } from "next/font/google";
 
 /**
  * 
@@ -37,49 +40,52 @@ const demo_post_data = {
  */
 
 interface PostInfoTemplateProps {
-  // postData:postType[] これにするべき?
-  postData: object;
+  postData: PostDetailType;
 }
 export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
+  
   return (
     <Container>
       <PostInfoTitle
-        type={postData.type}
-        title={postData.title}
+        type={postData.PostType.eventType}
+        title={postData.PostType.title}
       ></PostInfoTitle>
 
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <PostImageBox imgSrc={postData.img}></PostImageBox>
+          <PostImageBox imgSrc="../../../../../test.png"></PostImageBox>
           <PostDetailBox
-            title={postData.title}
-            description={postData.description}
-            updateDate={formatDate(postData.modifiedAt, "/")}
-            launchDay={formatDate(postData.launchDay, "/")}
+            title={postData.PostType.title}
+            description={postData.PostType.description}
+            updateDate={formatDate(postData.PostType.modifiedAt, "/")}
+            launchDay={formatDate(postData.PostType.launchDay, "/")}
           ></PostDetailBox>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <PostInfoBox
-            deadline={formatDate(postData.deadline, "/")}
-            bookmarkUserNum={postData.bookmarkUserNum}
-            requestUserNum={postData.requestUserNum}
-            matchingUserNum={postData.matchingUserNum}
-            recruitmentNumbers={postData.recruitmentNumbers}
+            deadline={formatDate(postData.PostType.deadline, "/")}
+            bookmarkUserNum={postData.bookmarkCount}
+            requestUserNum={postData.requestCount}
+            matchingUserNum={postData.approvedCount}
+            recruitmentNumbers={postData.PostType.recruitmentNumbers}
           ></PostInfoBox>
-          <TeamSkillBox
-            requestUserNum={postData.requestUserNum}
+          {/* <TeamSkillBox
+            requestUserNum={postData.requestCount}
             teamSkill={postData.teamSkill}
-          ></TeamSkillBox>
+          ></TeamSkillBox> */}
         </Grid>
       </Grid>
     </Container>
   );
 }
-function formatDate(date, sep = "") {
+function formatDate(date: Date|undefined, sep = "") {
+if(date != undefined){
+  date = new Date(date!);
   const yyyy = date.getFullYear();
   const mm = ("00" + (date.getMonth() + 1)).slice(-2);
   const dd = ("00" + date.getDate()).slice(-2);
-
   return `${yyyy}${sep}${mm}${sep}${dd}`;
+}
+  return `${2023}${sep}${10}${sep}${14}`;
 }

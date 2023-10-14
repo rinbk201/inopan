@@ -8,7 +8,7 @@ import {
 
 export default function raderchart(props: any) {
   const { data } = props;
-  console.log(data);
+
   return (
     <>
       <div>

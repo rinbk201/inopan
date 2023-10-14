@@ -35,7 +35,6 @@ export default function TeamSkillBox({
     value: teamSkill[obj.id] || 0,
     fullMark: requestUserNum * 5,
   }));
-  console.log(convertedTeamSkill);
 
   return (
     <Box

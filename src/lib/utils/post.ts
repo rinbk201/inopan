@@ -31,6 +31,35 @@ export const getApprovedCount = async(postId:number): Promise<number> => {
     
     return approvedCount;
 }
+//bookmarkの人数
+export const getBookmarkCount = async(postId:number): Promise<number> => {
+	
+    const res = await fetch(`http://localhost:3000/api/post/${postId}/user-relation/bookmark`,
+    {
+        method: 'GET',
+		next:{revalidate: 60*30}
+    }
+    );
+    const data = await res.json();
+    const approvedCount = data.userRelation.length;
+    
+    return approvedCount;
+}
+
+//requestの人数　応募中のユーザー
+export const getRequestCount = async(postId:number): Promise<number> => {
+    const res = await fetch(`http://localhost:3000/api/post/${postId}/user-relation/request`,
+    {
+        method: 'GET',
+		next:{revalidate: 60*30}
+    }
+    );
+    const data = await res.json();
+    const approvedCount = data.userRelation.length;
+    
+    return approvedCount;
+}
+
 
 //postCardに渡す状態
 export const getPostCardInfo= async(posts:PostType[]): Promise<PostCardType[]|undefined> => {
@@ -111,5 +140,15 @@ export const getBookmarkPosts = async(user_id:number): Promise<PostType[]> => {
 }
 
 
-
-
+//postの詳細を取得
+export const getPostDetail = async(post_id:number): Promise<PostType> => {
+	const res = await fetch(`http://localhost:3000/api/post/2`,
+    {
+        method: 'GET',
+        // cache:"no-cache"
+		next:{revalidate: 10}
+    }
+    );
+    const data = await res.json();
+    return data.post;
+}

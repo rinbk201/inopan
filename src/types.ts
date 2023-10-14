@@ -36,6 +36,13 @@ export type PostCardType = {
   autherName: string;
 }
 
+export type PostDetailType = {
+  PostType: PostType;
+  approvedCount:number;
+  bookmarkCount:number;
+  requestCount:number;
+}
+
 export type EditPostRequestType = {
 	title: string;
 	launchDay: Date;
