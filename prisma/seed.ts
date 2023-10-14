@@ -2,11 +2,12 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 import { user } from './user'
-
+import { userInfo } from './userInfo'
 
 
 async function main() {
 	await user();
+	await userInfo();
 }
 
 
