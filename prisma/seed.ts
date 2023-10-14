@@ -21,8 +21,20 @@ async function main() {
 	requirementLanguages();
 }
 
+main()
+	.catch(e => {
+		console.error(e)
+		process.exit(1)
+	})
+	.finally(async () => {
+		await prisma.$disconnect()
+	})
 
-/*
+
+/**
+ * 分離部分が動かない時用
+
+
 async function main() {
 
 	//User
@@ -846,11 +858,3 @@ async function main() {
 
 */
 
-main()
-	.catch(e => {
-		console.error(e)
-		process.exit(1)
-	})
-	.finally(async () => {
-		await prisma.$disconnect()
-	})
