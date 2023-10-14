@@ -1,22 +1,20 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-import { user } from './seed_Contents/seed_user'
-import { userInfo } from './seed_Contents/seed_userInfo'
-import { skills } from './seed_Contents/seed_skills'
-import { post } from './seed_Contents/seed_post'
-import { affiliation } from './seed_Contents/seed_affiliation'
-// import { language } from './seed_Contents/seed_language'
-// import { requirementLanguages } from './seed_Contents/seed_requirementLanguages'
-import { programmingLanguages } from './seed_Contents/seed_programmingLanguages'
+import { user } from './seed_user'
+import { userInfo } from './seed_userInfo'
+import { skills } from './seed_skills'
+import { post } from './seed_post'
+import { affiliation } from './seed_affiliation'
+import { programmingLanguages } from './seed_programmingLanguages'
  
 async function main() {
-	user();
-	userInfo();
-	skills();
-	post();
-	affiliation();
-	programmingLanguages();
+	await user();
+	await userInfo();
+	await skills();
+	await post();
+	await affiliation();
+	await programmingLanguages();
 }
 
 main()
@@ -29,6 +27,18 @@ main()
 	})
 
 
+
+
+// async function main() {
+
+// 	//User
+// 	const sample_user1 = await prisma.user.create({
+// 		data: {
+// 			email: 'XXfiXXX@ms.dendai.ac.jp',
+// 			password: 'test',
+// 		}
+// 	})
+// }
 /**
  * 分離部分が動かない時用
 
