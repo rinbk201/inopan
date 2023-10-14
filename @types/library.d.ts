@@ -98,7 +98,7 @@ export type EditUserInfo = {
 	freeForm: string | undefined;
 }
 
-/**
+
 export type ApplicationPostType = {
 	posts: [PostType];
 }
@@ -126,7 +126,7 @@ export type UserRelatedPostType = {
 		}
 	]
 }
-*/
+
 
 export type NewApplicationPostType = {
 	postId: number;
