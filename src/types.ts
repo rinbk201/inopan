@@ -32,8 +32,8 @@ export type NewPostType = {
 
 export type PostCardType = {
   PostType: PostType;
-  
-
+  approvedCount:number;
+  autherName: string;
 }
 
 export type EditPostRequestType = {
