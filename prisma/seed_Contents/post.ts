@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 export const post  = async () => {
     const sample_post1 = await prisma.post.create({
 		data: {
+			id: 1,
 			userInfoId: 1,
 			title: "HackU",
 			eventType: "HACKATHON",
@@ -19,6 +20,7 @@ export const post  = async () => {
 
 	const sample_post2 = await prisma.post.create({
 		data: {
+			id:2 ,
 			userInfoId: 2,
 			title: "HackU",
 			eventType: "HACKATHON",
@@ -34,6 +36,7 @@ export const post  = async () => {
 
 	const sample_post3 = await prisma.post.create({
 		data: {
+			id: 3,
 			userInfoId: 3,
 			title: "HackU",
 			eventType: "HACKATHON",
@@ -49,6 +52,7 @@ export const post  = async () => {
 
 	const sample_post4 = await prisma.post.create({
 		data: {
+			id:4 ,
 			userInfoId: 4,
 			title: "HackU",
 			eventType: "HACKATHON",
@@ -64,6 +68,7 @@ export const post  = async () => {
 
 	const sample_post5 = await prisma.post.create({
 		data: {
+			id:5 ,
 			userInfoId: 5,
 			title: "HackU",
 			eventType: "STUDY",
@@ -79,6 +84,7 @@ export const post  = async () => {
 
 	const sample_post6 = await prisma.post.create({
 		data: {
+			id: 6,
 			userInfoId: 4,
 			title: "東京電機大学-Node.js勉強会!!!",
 			eventType: "STUDY",
