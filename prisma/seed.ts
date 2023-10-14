@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-import { user } from './seed_Contents/user'
-import { userInfo } from './seed_Contents/userInfo'
-import { skills } from './seed_Contents/skills'
-import { post } from './seed_Contents/post'
-import { affiliation } from './seed_Contents/affiliation'
-import { language } from './seed_Contents/language'
-import { requirementLanguages } from './seed_Contents/requirementLanguages'
+import { user } from './seed_Contents/seed_user'
+import { userInfo } from './seed_Contents/seed_userInfo'
+import { skills } from './seed_Contents/seed_skills'
+import { post } from './seed_Contents/seed_post'
+import { affiliation } from './seed_Contents/seed_affiliation'
+import { language } from './seed_Contents/seed_language'
+import { requirementLanguages } from './seed_Contents/seed_requirementLanguages'
 
 
 
