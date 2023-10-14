@@ -242,7 +242,7 @@ enum SkillFields {
   OTHER
 }
 
-//保有スキル・取得言語のレベル・興味の度合い
+//保有スキル・取得言語のレベル
 enum SkillLevels {
   LEVEL1
   LEVEL2
@@ -253,50 +253,49 @@ enum SkillLevels {
 
 //プログラミング言語
 enum ProgrammingLanguageEnum {
-ActionScript
-ASPNET //ASP.NET
-Csharp //C#
-CakePHP
-COBOL
-CSS
-C_Cpp // C/C++
-Delphi 
-Django
-Facebook_Application //Facebookアプリ
-Fortran
-HTML
-RubyonRails
-Java
-jQuery
-JavaScript
-Kotlin
-Laravel
-MATLAB
-MySQL
-Nodejs //Node.js
-ObjectiveC
-OpenCV
-OpenGL
-Oracle
-Pascal
-Perl
-PHP
-Python
-Ruby
-Go
-SQL
-MYSQL
-PostgreSQL
-Unity
-VBnet
-Vuejs
-R
-React
-Scala
-Swift
-AdobeXd
-Photoshop
-Illustrator
+  ActionScript
+  ASPNET //ASP.NET
+  Csharp //C#
+  CakePHP
+  COBOL
+  CSS
+  C_Cpp // C/C++
+  Delphi 
+  Django
+  Facebook_Application //Facebookアプリ
+  Fortran
+  HTML
+  RubyonRails
+  Java
+  jQuery
+  JavaScript
+  Kotlin
+  Laravel
+  MATLAB
+  MySQL
+  Nodejs //Node.js
+  ObjectiveC
+  OpenCV
+  OpenGL
+  Oracle
+  Pascal
+  Perl
+  PHP
+  Python
+  Ruby
+  Go
+  SQL
+  PostgreSQL
+  Unity
+  VBnet
+  Vuejs
+  R
+  React
+  Scala
+  Swift
+  AdobeXd
+  Photoshop
+  Illustrator
 }
 
 //業界
