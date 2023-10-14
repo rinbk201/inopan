@@ -6,6 +6,7 @@ export const post  = async () => {
 		data: {
 			userInfoId: 1,
 			title: "HackU",
+			eventType: "HACKATHON",
 			launchDay: "2023-10-10T13:50:40+09:00",
 			deadline: "2023-10-9T13:50:40+09:00",
 			recruitmentNumbers: 4,
@@ -20,6 +21,7 @@ export const post  = async () => {
 		data: {
 			userInfoId: 2,
 			title: "HackU",
+			eventType: "HACKATHON",
 			launchDay: "2023-10-10T13:50:40+09:00",
 			deadline: "2023-10-9T13:50:40+09:00",
 			recruitmentNumbers: 5,
@@ -34,6 +36,7 @@ export const post  = async () => {
 		data: {
 			userInfoId: 3,
 			title: "HackU",
+			eventType: "HACKATHON",
 			launchDay: "2023-10-10T13:50:40+09:00",
 			deadline: "2023-10-9T13:50:40+09:00",
 			recruitmentNumbers: 4,
@@ -48,6 +51,7 @@ export const post  = async () => {
 		data: {
 			userInfoId: 4,
 			title: "HackU",
+			eventType: "HACKATHON",
 			launchDay: "2023-10-10T13:50:40+09:00",
 			deadline: "2023-10-9T13:50:40+09:00",
 			recruitmentNumbers: 3,
@@ -62,11 +66,27 @@ export const post  = async () => {
 		data: {
 			userInfoId: 5,
 			title: "HackU",
+			eventType: "STUDY",
 			launchDay: "2023-10-10T13:50:40+09:00",
 			deadline: "2023-10-9T13:50:40+09:00",
 			recruitmentNumbers: 5,
 			description: "同志募集！！ 友達が少なくて参加したいけど参加できない や ハッカソンをきっかけに研鑽できる友人が欲しい... と考えているそこのあなた！ ぜひ一緒に開発を行いませんか？ チームでコミュニケーションを図りながら楽しく進めたいと考えています！",
 			matchingMessage: "希望申請有難うございます！ 一緒に開発をしたいと思い承諾させていただきました． 協力しながら楽しく開発していきましょう！ 参加にあたり次のdiscordサーバーへの参加をお願いします！   www.adwapdma.ifhriduhdu3.com",
+			createdAt: "2023-10-01T13:50:40+09:00",
+			modifiedAt: "2023-10-10T13:50:40+09:00",
+		}
+	})
+
+	const sample_post6 = await prisma.post.create({
+		data: {
+			userInfoId: 4,
+			title: "東京電機大学-Node.js勉強会!!!",
+			eventType: "STUDY",
+			launchDay: "2023-10-10T13:50:40+09:00",
+			deadline: "2023-10-9T13:50:40+09:00",
+			recruitmentNumbers: 10,
+			description: "Next.jsを一緒に勉強してくれる方探してます！Node.jsに明るい方もそうでない方も大歓迎！",
+			matchingMessage: "ご応募いただきありがとうございます．ぜひ参加していただきたいと思い承諾させていただきました．コミュニケーションツールはdiscordを使用するため，サーバーに参加してください． www.sesfsf.iojs@ijgo.com",
 			createdAt: "2023-10-01T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
 		}
