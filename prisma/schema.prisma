@@ -253,12 +253,50 @@ enum SkillLevels {
 
 //プログラミング言語
 enum ProgrammingLanguageEnum {
-  C_Cpp // C/C++
-  Csharp // C#
-  Java
-  Python
-  JavaScript
-  OTHER
+ActionScript
+ASPNET //ASP.NET
+Csharp //C#
+CakePHP
+COBOL
+CSS
+C_Cpp // C/C++
+Delphi 
+Django
+Facebook_Application //Facebookアプリ
+Fortran
+HTML
+RubyonRails
+Java
+jQuery
+JavaScript
+Kotlin
+Laravel
+MATLAB
+MySQL
+Nodejs //Node.js
+ObjectiveC
+OpenCV
+OpenGL
+Oracle
+Pascal
+Perl
+PHP
+Python
+Ruby
+Go
+SQL
+MYSQL
+PostgreSQL
+Unity
+VBnet
+Vuejs
+R
+React
+Scala
+Swift
+AdobeXd
+Photoshop
+Illustrator
 }
 
 //業界
