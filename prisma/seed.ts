@@ -3,11 +3,13 @@ const prisma = new PrismaClient()
 
 import { user } from './user'
 import { userInfo } from './userInfo'
+import { skills } from './skills'
 
 
 async function main() {
 	await user();
 	await userInfo();
+	await skills();
 }
 
 

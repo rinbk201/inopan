@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const user  = async () => {
+export const skills  = async () => {
     await prisma.skills.create({
         data: {
         id: 1,
