@@ -2,6 +2,7 @@ export type PostType = {
   id: number;
   userInfoId: number;
   title: string;
+  eventType: EventType;
   launchDay: Date;
   deadline: Date;
   recruitmentNumbers: number;
@@ -24,3 +25,9 @@ export type NewPostType = {
   requirementLanguages: string | undefined;
   modifiedAt: Date;
 };
+
+
+export enum EventType {
+  HACKATHON='HACKATHON',
+  STUDY='STUDY',
+}
