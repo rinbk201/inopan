@@ -29,9 +29,9 @@ const StyledHover = `
 `;
 
 const StyledCard = styled.label`
-  width: 45rem;
+  width: 100%;
   height: 5rem;
-  background-color: ${(props) => (props.isChecked ? "#c8e6c9" : "white")};
+  background-color: white;
   color: black;
   border-left: solid 8px ${(props) => getAffiliationColor(props.affiliationId)};
   line-height: 1.5;
@@ -48,7 +48,7 @@ const StyledCard = styled.label`
 
 const UserAffiliationbox = styled.div`
   width: 12rem;
-  margin: 0.3rem;
+  margin: 0 0.5rem;
 `;
 
 const UserNameText = styled.h2`
@@ -63,9 +63,13 @@ const AffiliationText = styled.h2`
 `;
 
 const CheckedIcon = styled.div`
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  zindex: 1;
   width: 1.8rem;
   height: 1.8rem;
-  background-color: red;
+  background-color: var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -124,6 +128,20 @@ export default function abilityCard({
         {Object.keys(userData.skill).map((key) => (
           <SkillData skillName={key} value={userData.skill[key]}></SkillData>
         ))}
+        {isChecked && (
+          <div
+            style={{
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(80, 80, 80, 0.3)",
+              pointerEvents: "none",
+            }}
+          ></div>
+        )}
         {isChecked && <CheckedIcon>{selectedNum + 1}</CheckedIcon>}
       </StyledCard>
     </>

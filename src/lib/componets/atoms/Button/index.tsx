@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 
 const StyledButton = styled.div`
   width: 100%;
-  min-height: 5rem;
+  min-height: ${(props) => props.height || "5rem"};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,14 +35,15 @@ const getButtonStyle = (type: string) => {
 };
 
 interface ButtonProps {
-  type: "button" | "submit";
+  type: "default" | "second";
   text: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  height?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
-export default function Button({ type, text, onClick }: ButtonProps) {
+export default function Button({ type, text, height, onClick }: ButtonProps) {
   const buttonStyle = getButtonStyle(type);
   return (
-    <StyledButton onClick={onClick} style={buttonStyle}>
+    <StyledButton onClick={onClick} style={buttonStyle} height={height}>
       {text}
     </StyledButton>
   );

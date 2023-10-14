@@ -31,14 +31,16 @@ export default function raderchart(props: any) {
             dataKey="value"
             stroke="#8884d8"
             fill="#8884d8"
-            fillOpacity={0.6}
+            fillOpacity={1}
           />
-          <Radar
-            dataKey="newValue"
-            stroke="#8884d8"
-            fill="#8884d8"
-            fillOpacity={0.6}
-          />
+          {data[1].newValue != undefined && (
+            <Radar
+              dataKey="newValue"
+              stroke="var(--pink)"
+              fill="var(--pink)"
+              fillOpacity={0.5}
+            />
+          )}
         </RadarChart>
       </div>
     </>

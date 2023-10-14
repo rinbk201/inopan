@@ -35,8 +35,6 @@ export default function TeamSkillBox({
     value: teamSkill[obj.id] || 0,
     fullMark: requestUserNum * 5,
   }));
-  console.log(convertedTeamSkill);
-
   return (
     <Box
       sx={{
@@ -54,7 +52,7 @@ export default function TeamSkillBox({
         <H1>チームの開発スキル</H1>
       </TitleBox>
       <div
-        style={{ display: "flex", justifyContent: "center", margin: "2rem 0" }}
+        style={{ display: "flex", justifyContent: "center", margin: "2rem" }}
       >
         <RaderChart data={convertedTeamSkill}></RaderChart>
       </div>
