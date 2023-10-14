@@ -7,7 +7,6 @@ import { M_PLUS_2 } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 const MPlus2 = M_PLUS_2({
-  weight: "400",
   subsets: ["latin"],
 });
 

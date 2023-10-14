@@ -3,11 +3,13 @@
 @tailwind utilities;
 :root {
   /* color */
+  --primary: #5f72d9;
   --pink: #db4c7c;
   --orange: #f08247;
   --green: #67be45;
   --blue: #309ae8;
   --purple: #a749c9;
+
   /* font */
   --font: "m-plus-2p", sans-serif;
   /* font weight */
@@ -27,14 +29,14 @@
 
 html {
   color-scheme: normal;
-  font-family: MS PMincho;
-  font-weight: var(--regular);
   font-style: normal;
 }
 
 body {
-  max-width: 100vw;
-  overflow: hidden;
+  /* max-width: 100vw;
+  overflow: hidden; */
+  background-color: whitesmoke;
+  font-weight: var(--regular);
 }
 
 a {

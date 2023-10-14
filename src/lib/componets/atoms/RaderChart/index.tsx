@@ -8,19 +8,20 @@ import {
 
 export default function raderchart(props: any) {
   const { data } = props;
+  console.log(data);
   return (
     <>
       <div>
         <RadarChart
-          cx={250}
-          cy={250}
+          cx={200}
+          cy={140}
           outerRadius={100}
-          width={500}
-          height={500}
+          width={400}
+          height={250}
           data={data}
         >
           <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
+          <PolarAngleAxis dataKey="subject" tick={{ fill: "#494949" }} />
           <PolarRadiusAxis
             domain={[0, data[0].fullMark]}
             axisLine={false}
