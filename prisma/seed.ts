@@ -4,14 +4,17 @@ const prisma = new PrismaClient()
 import { user } from './seed_Contents/user'
 import { userInfo } from './seed_Contents/userInfo'
 import { skills } from './seed_Contents/skills'
-// import { post } from './seed_Contents/post'
+import { post } from './seed_Contents/post'
+import { affiliation } from './seed_Contents/affiliation'
 
 
 async function main() {
 	user();
 	userInfo();
 	skills();
-	 
+	post();
+	affiliation();
+
 }
 
 
