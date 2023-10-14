@@ -103,6 +103,7 @@ model Post {
   id                   Int                    @id @default(autoincrement())
   userInfoId           Int
   title                String
+  eventType            EventType
   launchDay            DateTime
   deadline             DateTime
   recruitmentNumbers   Int                    @map("recruitment_numbers")
@@ -306,4 +307,9 @@ enum Industorys {
   CHEMISTRY
   ADVERTISEMENT
   OTHER
+}
+
+enum EventType{
+  HACKATHON
+  STUDY
 }

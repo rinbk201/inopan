@@ -1,3 +1,4 @@
+"use client"
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,6 +8,7 @@ import DashedLine from "../../atoms/DashedLine";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import PersonIcon from "@mui/icons-material/Person";
 import UserIcon from "../../atoms/UserIcon";
+import { PostType } from "@/types";
 
 const PostTypeText = styled.p`
   font-size: 0.9rem;
@@ -42,22 +44,22 @@ const RecruitmentNumbersText = styled.p`
 `;
 
 interface PostCardProps {
-  postData: object;
+  postData: PostType;
 }
-export default function PostCard({ postData }: PostCardProps) {
+export default function PostCard({ postData }:PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
-      <CardMedia
+      {/* <CardMedia
         sx={{ height: 198 }}
-        image={postData.img}
+        image={postData.id}
         title="green iguana"
-      />
+      /> */}
       <CardContent>
-        <PostTypeText>{postData.type}</PostTypeText>
+        <PostTypeText>ハッカソン</PostTypeText>
         <PostTitle>{postData.title}</PostTitle>
         <InfoBox>
           <UserIcon iconSize="1.5rem" iconImg="/images/"></UserIcon>
-          <UserName>{postData.userInfold}</UserName>
+          <UserName>{postData.userInfoId}</UserName>
         </InfoBox>
 
         <DashedLine></DashedLine>
@@ -75,14 +77,15 @@ export default function PostCard({ postData }: PostCardProps) {
         <LinearProgress
           color={"primary"}
           variant="determinate"
-          value={(postData.nowMemberNum / postData.recruitmentNumbers) * 100}
+          value={(postData.userInfoId / postData.recruitmentNumbers) * 100}
         />
       </CardContent>
     </Card>
   );
 }
 
-function formatDate(date, sep = "") {
+function formatDate(date:Date, sep = "") {
+  date = new Date(date);
   const yyyy = date.getFullYear();
   const mm = ("00" + (date.getMonth() + 1)).slice(-2);
   const dd = ("00" + date.getDate()).slice(-2);
