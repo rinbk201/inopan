@@ -15,6 +15,7 @@ export const post  = async () => {
 			matchingMessage: "ご応募いただきありがとうございました．ぜひあなたと一緒に参加したいと思い希望承諾させていただきました．Discordのリンクを記載しますのでそちらにご参加くださいm(-m-)m  www.xxx.aaaa.ddd.com",
 			createdAt: "2023-10-02T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "特になし"
 		}
 	})
 
@@ -31,6 +32,7 @@ export const post  = async () => {
 			matchingMessage: "参加希望していただきありがとうございます！　ぜひ一緒にハッカソンに挑戦していただきたいと思い承諾させていただきました．宜しくお願い致します．　コミュニケーションツールはdiscordを使用するため，サーバーにご参加ください．www.www.www.dasdaw.adwasd.wdad.com",
 			createdAt: "2023-10-01T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "特になし"
 		}
 	})
 
@@ -47,6 +49,7 @@ export const post  = async () => {
 			matchingMessage: "マッチング有難うございます！！一緒に開発を開始する日を心待ちにしています！　参加に際し，次のdiscordサーバーにご参加ください．　　サーバー：www.sadwad.ffefsgrs.sdawdad.com",
 			createdAt: "2023-10-01T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "Java"
 		}
 	})
 
@@ -63,6 +66,7 @@ export const post  = async () => {
 			matchingMessage: "ご応募いただきありがとうございます．保有スキルを拝見させていただきぜひ参加していただきたいと思い承諾させていただきました．コミュニケーションツールはdiscordを使用するため，サーバーに参加してください． www.sesfsf.iojs@ijgo.com",
 			createdAt: "2023-10-10T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "Node.js"
 		}
 	})
 
@@ -79,6 +83,7 @@ export const post  = async () => {
 			matchingMessage: "希望申請有難うございます！ 一緒に開発をしたいと思い承諾させていただきました． 協力しながら楽しく開発していきましょう！ 参加にあたり次のdiscordサーバーへの参加をお願いします！   www.adwapdma.ifhriduhdu3.com",
 			createdAt: "2023-10-01T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "特になし"
 		}
 	})
 
@@ -95,6 +100,7 @@ export const post  = async () => {
 			matchingMessage: "ご応募いただきありがとうございます．ぜひ参加していただきたいと思い承諾させていただきました．コミュニケーションツールはdiscordを使用するため，サーバーに参加してください． www.sesfsf.iojs@ijgo.com",
 			createdAt: "2023-10-01T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
+			requirementLanguages: "Node.js"
 		}
 	})
 
