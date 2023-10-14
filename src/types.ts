@@ -77,12 +77,12 @@ export type UserApplicationType = {
 export type PaticipantSelectionType = {
   userInfo: UserInfoType;
   userRelationPost: UserRelationPostType;
-  skills: SkillTypeA;
+  skills: SkillType;
 }
 
 export type PaticipantSelectionIncludeTeamInfoType = {
   paticipants: UserApplicationType;
-  teamSkill: SkillTypeA;
+  teamSkill: SkillType;
   RequirementNumber: number;
 }
 
@@ -192,17 +192,6 @@ export type LanguageType = {
 }
 
 export type SkillType = {
-	skills: {
-		PLANNING: number;
-		PRESENTATION: number;
-		FRONTEND: number;
-		BACKEND: number;
-		DESIGN: number;
-		OTHER: number;
-	}
-}
-
-export type SkillTypeA = {
 		PLANNING: number;
 		PRESENTATION: number;
 		FRONTEND: number;

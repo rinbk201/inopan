@@ -5,7 +5,7 @@ import { RelationState } from "@/types"
 import { PaticipantSelectionType } from "@/types"
 import { UserInfoType } from "@/types"
 import { getUserInfo } from "./user"
-import { SkillTypeA } from "@/types"
+import { SkillType } from "@/types"
 import { PaticipantSelectionIncludeTeamInfoType } from "@/types"
 import { UserApplicationType } from "@/types"
 
@@ -21,7 +21,7 @@ export const getAllRelations = async (post_id: number): Promise<UserRelationPost
   return data.userRelation;
 }
 
-export const getUserSkill = async (user_id: number): Promise<SkillTypeA> => {
+export const getUserSkill = async (user_id: number): Promise<SkillType> => {
   const res = await fetch(`http://localhost:3000/api/user/${user_id}/skill`,
 		{
 			method: 'GET',
@@ -38,8 +38,8 @@ export const getPost = async (post_id: number): Promise<PostType> => {
   const res = await fetch(`http://localhost:3000/api/post/${post_id}`,
 		{
 			method: 'GET',
-			//next: { revalidate: 60 * 30 }
-      next: { revalidate: 10 }
+			next: { revalidate: 60 * 30 }
+      //next: { revalidate: 10 }
       //cache: "no-cache"
 		}
 	);
@@ -51,7 +51,6 @@ export const getAllApplicationUser = async (post_id: number): Promise<Paticipant
   const application_users_APPROVED: PaticipantSelectionType[] = []
   const application_users_UNAPPROVED: PaticipantSelectionType[] = []
   const relations_all = await(getAllRelations(post_id))
-  console.log(relations_all)
   const post = await(getPost(post_id))
   const requirement_number: number = post.recruitmentNumbers
   var PLANNING = 0;
@@ -64,8 +63,6 @@ export const getAllApplicationUser = async (post_id: number): Promise<Paticipant
     if (relations_all[i].relationState === RelationState.UNAPPROVED) {
       const user = await (getUserInfo(relations_all[i].userInfoId))
       const user_skill = await (getUserSkill(relations_all[i].userInfoId))
-      //console.log("called")
-      //console.log(user_skill)
       const paticipants: PaticipantSelectionType= {
         userInfo: user,
         userRelationPost: relations_all[i],
@@ -94,7 +91,7 @@ export const getAllApplicationUser = async (post_id: number): Promise<Paticipant
     APPROVED: application_users_APPROVED,
     UNAPPROVED: application_users_UNAPPROVED
   }
-  const teamSkill: SkillTypeA = {
+  const teamSkill: SkillType = {
     PLANNING: PLANNING,
     PRESENTATION: PRESENTATION,
     FRONTEND: FRONTEND,
@@ -134,4 +131,34 @@ export const changeRelationState = async (user_id: number[]): Promise<PostType[]
 	);
 	const data = await res.json();
 	return data.posts;
+}
+export const getTeamSkill = async (post_id: number): Promise<SkillType> => {
+  const relations_all = await(getAllRelations(post_id))
+  var PLANNING = 0;
+  var PRESENTATION = 0;
+  var FRONTEND = 0;
+  var BACKEND = 0;
+  var DESIGN = 0;
+  var OTHER = 0;
+  for (var i in relations_all) {
+    if (relations_all[i].relationState === RelationState.APPROVED) {
+      const user_skill = await (getUserSkill(relations_all[i].userInfoId))
+      PLANNING += user_skill.PLANNING
+      PRESENTATION += user_skill.PRESENTATION
+      FRONTEND += user_skill.FRONTEND
+      BACKEND += user_skill.BACKEND
+      DESIGN += user_skill.DESIGN
+      OTHER += user_skill.OTHER
+    }
+  }
+  const teamSkill: SkillType = {
+    PLANNING: PLANNING,
+    PRESENTATION: PRESENTATION,
+    FRONTEND: FRONTEND,
+    BACKEND: BACKEND,
+    DESIGN: DESIGN,
+    OTHER: OTHER
+  }
+  console.log(teamSkill)
+	return teamSkill;
 }
