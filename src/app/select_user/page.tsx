@@ -60,6 +60,32 @@ const demo_user_list = [
   },
 ];
 export default function Home() {
+
+  // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
+  const template = [
+    { id: "PLANNING", subject: "アイデア・企画力" },
+    { id: "PRESENTATION", subject: "プレゼン力" },
+    { id: "DESIGN", subject: "デザイン" },
+    { id: "FRONTEND", subject: "フロントエンド" },
+    { id: "BACKEND", subject: "バックエンド" },
+  ];
+  const [convertedTeamData, setTeamData] = useState(
+    template.map((obj) => ({
+      ...obj,
+      value: demo_team_skill_data[obj.id] || 0,
+      // FIX: 募集人数から算出する式
+      fullMark: 25,
+    }))
+  );
+
+  const handleCheckedAbilityCard = (selectedUserData: object) => {
+    setTeamData(
+      convertedTeamData.map((obj) => ({
+        ...obj,
+        newValue: obj.value + selectedUserData[obj.id] || 0,
+      }))
+    );
+  };
   return (
     <SelectUserTemplate
       teamSkillData={demo_team_skill_data}

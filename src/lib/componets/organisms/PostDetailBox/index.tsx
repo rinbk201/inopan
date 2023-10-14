@@ -23,7 +23,7 @@ export default function PostInfoBox({
   return (
     <Box
       sx={{
-        width: "38vw",
+        width: "100%",
         borderRadius: 1,
         backgroundColor: "white",
         marginTop: "1rem",

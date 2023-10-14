@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Box } from "@mui/material";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import RaderChart from "../../atoms/RaderChart";
+import { SkillType } from "@/types";
 const H1 = styled.h1`
   font-size: 1.3rem;
   font-weight: var(--heavy);
@@ -16,7 +17,7 @@ const TitleBox = styled.div`
 interface TeamSkillBoxProps {
   requestUserNum: number;
   matchingUserNum: number;
-  teamSkill: object;
+  teamSkill: SkillType;
 }
 export default function TeamSkillBox({
   teamSkill,
@@ -35,10 +36,11 @@ export default function TeamSkillBox({
     value: teamSkill[obj.id] || 0,
     fullMark: requestUserNum * 5,
   }));
+  
   return (
     <Box
       sx={{
-        width: "38vw",
+        width: "100%",
         borderRadius: 1,
         backgroundColor: "white",
         padding: "1.5rem",

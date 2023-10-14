@@ -1,63 +1,100 @@
-import { type } from "os";
-
+//postからのレスポンスの型
 export type PostType = {
-	id: number;
-	userInfoId: number;
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	description: string | undefined;
-	matchingMessage: string | undefined;
-	confirmed: boolean;
-	createdAt: Date;
-	modifiedAt: Date | undefined;
-	deletedAt: Date | undefined;
-}
+  id: number;
+  userInfoId: number;
+  title: string;
+  eventType: EventType;
+  launchDay: Date;
+  deadline: Date;
+  recruitmentNumbers: number;
+  requirementLanguages:string;
+  description: string;
+  matchingMessage: string;
+  confirmed: boolean;
+  createdAt: Date;
+  modifiedAt: Date|undefined;
+  deletedAt: Date;
+};
+
+
 
 export type NewPostType = {
+  userInfoId: number;
+  title: string;
+  launchDay: Date;
+  deadline: Date;
+  recruitmentNumbers: number;
+  description: string | undefined;
+  matchingMessage: string | undefined;
+  requirementLanguages: string | undefined;
+  modifiedAt: Date;
+};
+
+export type PostCardType = {
+  PostType: PostType;
+  approvedCount:number;
+  autherName: string;
+}
+
+export type PostDetailType = {
+  PostType: PostType;
+  approvedCount:number;
+  bookmarkCount:number;
+  requestCount:number;
+  teamSkill:SkillType;
+}
+
+export type EditPostRequestType = {
+	title: string;
+	launchDay: Date;
+	deadline: Date;
+	recruitmentNumbers: number;
+	matchingMessage: string | undefined;
+	requirementLanguages: LanguageType[]| undefined;
+	modifiedAt: Date | undefined;
+}
+
+//ユーザー
+export type UserRelationPostRequestType = {
 	userInfoId: number;
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	description: string | undefined;
-	matchingMessage: string | undefined;
-	requirementLanguages: string | undefined;
-	modifiedAt: Date | undefined;
 }
-
-export type EditPostType = {
-	title: string;
-	launchDay: Date;
-	deadline: Date;
-	recruitmentNumbers: number;
-	matchingMessage: string | undefined;
-	requirementLanguages: [
-		{
-			language: string;
-			level: number;
-		}
-	] | undefined;
-	modifiedAt: Date | undefined;
-}
-
-export type NewUserRelationType = {
-	UserInfoId: number;
-}
-
+/**
 export type UserRelationType = {
-	userReration: [
+	userReration: 
 		{
 			id: number;
 			userInfoId: number;
 			applicationLevel: string;
       relationState: RelationState;
-		}
-	] | undefined
+		}[]
+	| undefined
+}*/
+
+export type UserRelationPostType = {
+	id: number;
+  userInfoId: number;
+  postId: number;
+  applicationLevel: ApplicationLevel;
+  relationState: RelationState;
 }
 
-export type EditUserRelationStateType = {
+export type UserApplicationType = {
+  APPROVED: PaticipantSelectionType[]
+  UNAPPROVED: PaticipantSelectionType[]
+}
+export type PaticipantSelectionType = {
+  userInfo: UserInfoType;
+  userRelationPost: UserRelationPostType;
+  skills: SkillType;
+}
+
+export type PaticipantSelectionIncludeTeamInfoType = {
+  paticipants: UserApplicationType;
+  teamSkill: SkillType;
+  RequirementNumber: number;
+}
+
+export type UserRelationStatePutRequestType = {
 	userInfoId: Number;
 	relationState: RelationState;
 }
@@ -84,7 +121,7 @@ export type UserInfoType = {
 	deletedAt: Date | null
 }
 
-export type EditUserInfo = {
+export type EditUserInfoRequestType = {
 	email: string;
 	displayName: string;
 	affiliationId: number;
@@ -100,35 +137,44 @@ export type EditUserInfo = {
 
 
 export type ApplicationPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type ApprovedPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type AutherPostType = {
-	posts: [PostType];
+	posts: PostType[];
 }
 
 export type BookmarkedPostType = {
-	posts: [PostType]
+	posts: PostType[]
 }
 
 export type ConfirmedPostType = {
-	posts: [PostType]
+	posts: PostType[]
 }
 
 export type UserRelatedPostType = {
 	posts:[
 		{
-			BOOKMARK
+			APPROVED: PostType[];
+		},
+		{
+			UNAPPROVED: PostType[];
+		},
+		{
+			CONFIRMED: PostType[];
+		},
+		{
+			BOOKMARK: PostType[];
 		}
 	]
 }
 
 
-export type NewApplicationPostType = {
+export type NewApplicationPostRequestType = {
 	postId: number;
 	applicationLevel: ApplicationLevel;
 }
@@ -146,24 +192,22 @@ export type DeleteBookmarkedPostType = {
 }
 
 export type LanguageType = {
-	language: [
+	language: 
 		{
 			languageName: string;
 			level: number;
-		}
-	] | undefined
+		}[]
 }
 
 export type SkillType = {
-	skills: {
 		PLANNING: number;
-		PRESENTATION: number,
+		PRESENTATION: number;
 		FRONTEND: number;
 		BACKEND: number;
 		DESIGN: number;
 		OTHER: number;
-	}
 }
+
 
 export type EditSkillType = {
 	skills: {
@@ -177,20 +221,20 @@ export type EditSkillType = {
 }
 
 
-enum Gender {
+export enum Gender {
   MAN,
   WOMAN,
   OTHER
 }
 
 // 付与される権限
-enum Role {
+export enum Role {
   ADMIN,
   ROLE
 }
 
 //リアクションの強さ
-enum ReactionLevel {
+export enum ReactionLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -198,26 +242,26 @@ enum ReactionLevel {
 }
 
 //興味の強さ
-enum InterestLevel {
+export enum InterestLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3
 }
 
-enum ApplicationLevel {
+export enum ApplicationLevel {
   BOOKMARK,
   CASUALLY_JOIN,
   NORMAL_JOIN,
   SERIOUSLY_JOIN
 }
 
-enum RelationState {
-  UNAPPROVED,
-  APPROVED
+export enum RelationState {
+  UNAPPROVED="UNAPPROVED",
+  APPROVED="APPROVED"
 }
 
 //学部学科略称のリスト
-enum AffrilationInitial {
+export enum AffrilationInitial {
   // 工学部
   EJ, //電気電子工学科
   EH, //電子システム工学科
@@ -254,7 +298,7 @@ enum AffrilationInitial {
 }
 
 //ユーザーの保有スキルのフィールド
-enum SkillFields {
+export enum SkillFields {
   PLANNING,
   DESIGN,
   FRONTEND,
@@ -264,7 +308,7 @@ enum SkillFields {
 }
 
 //保有スキル・取得言語のレベル・興味の度合い
-enum SkillLevels {
+export enum SkillLevels {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -273,7 +317,7 @@ enum SkillLevels {
 }
 
 //プログラミング言語
-enum ProgrammingLanguageEnum {
+export enum ProgrammingLanguageEnum {
   C_Cpp, // C/C++
   Csharp, // C#
   Java,
@@ -283,11 +327,17 @@ enum ProgrammingLanguageEnum {
 }
 
 //業界
-enum Industorys {
+export enum Industorys {
   WEB,
   GAME,
   SI,
   CHEMISTRY,
   ADVERTISEMENT,
   OTHER
+}
+
+
+export enum EventType {
+  HACKATHON='HACKATHON',
+  STUDY='STUDY',
 }

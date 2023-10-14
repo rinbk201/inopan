@@ -8,8 +8,10 @@ const prisma = new PrismaClient();
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const postId: number = parseInt(req.url.split("/")[5]);
-    const { userInfoId } = await req.json();
-    const applicationLevel = "SERIOUSLY_JOIN";
+    const { 
+      userInfoId,
+      applicationLevel,
+     } = await req.json();
     const relationState = "UNAPPROVED";
     await main();
     const userPostRelationship = await prisma.userPostRelationship.create({
