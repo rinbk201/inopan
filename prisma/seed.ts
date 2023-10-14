@@ -1,15 +1,17 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-import { user } from './user'
-import { userInfo } from './userInfo'
-import { skills } from './skills'
+import { user } from './seed_Contents/user'
+import { userInfo } from './seed_Contents/userInfo'
+import { skills } from './seed_Contents/skills'
+// import { post } from './seed_Contents/post'
 
 
 async function main() {
-	await user();
-	await userInfo();
-	await skills();
+	user();
+	userInfo();
+	skills();
+	 
 }
 
 
