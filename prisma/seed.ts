@@ -13,6 +13,8 @@ for(let i = 0; i < 100; i++) {
 */
 
 async function main() {
+
+	//User
 	const sample_user1 = await prisma.user.create({
 		data: {
 			email: 'XXfiXXX@ms.dendai.ac.jp',
@@ -83,7 +85,7 @@ async function main() {
 		}
 	})
 
-
+	// Affiliation(学部・学科情報)
 	const sample_affiliation1 = await prisma.affiliation.create({
 		data: {
 			faculty: "システムデザイン工学部",
@@ -108,6 +110,7 @@ async function main() {
 		}
 	})
 
+	//UserInfo
 	const sample_person1 = await prisma.userInfo.create({
 		data: {
 			userId: 1,
@@ -278,6 +281,138 @@ async function main() {
 		}
 	})
 
+	//Skills
+	const sampleskills1 = await prisma.skills.create({
+		data: {
+		id: 1,
+		userInfoId: 1,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL1",      
+		BACKEND:"LEVEL3",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL1"
+		}   
+	})
+
+	const sampleskills2 = await prisma.skills.create({
+		data: {
+		id: 2,
+		userInfoId: 2,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL3",        
+		FRONTEND:"LEVEL3",      
+		BACKEND:"LEVEL1",       
+		PRESENTATION:"LEVEL2",  
+		OTHER:"LEVEL1"
+		}   
+	})
+
+	const sampleskills3 = await prisma.skills.create({
+		data: {
+		id: 3,
+		userInfoId: 3,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL1",      
+		BACKEND:"LEVEL4",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL3"
+		}   
+	})
+
+	const sampleskills4 = await prisma.skills.create({
+		data: {
+		id: 4,
+		userInfoId: 4,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL2",      
+		BACKEND:"LEVEL1",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL1"
+		}   
+	})
+
+	const sampleskills5 = await prisma.skills.create({
+		data: {
+		id: 5,
+		userInfoId: 5,
+		PLANNING: "LEVEL3",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL2",      
+		BACKEND:"LEVEL5",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL3"
+		}   
+	})
+
+	const sampleskills6 = await prisma.skills.create({
+		data: {
+		id: 6,
+		userInfoId: 6,
+		PLANNING: "LEVEL3",
+		DESIGN:"LEVEL2",        
+		FRONTEND:"LEVEL1",      
+		BACKEND:"LEVEL5",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL2"
+		}   
+	})
+
+	const sampleskills7 = await prisma.skills.create({
+		data: {
+		id: 7,
+		userInfoId: 7,
+		PLANNING: "LEVEL3",
+		DESIGN:"LEVEL2",        
+		FRONTEND:"LEVEL1",      
+		BACKEND:"LEVEL5",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL2"
+		}   
+	})
+
+	const sampleskills8 = await prisma.skills.create({
+		data: {
+		id: 8,
+		userInfoId: 8,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL2",      
+		BACKEND:"LEVEL2",       
+		PRESENTATION:"LEVEL3",  
+		OTHER:"LEVEL1"
+		}   
+	})
+
+	const sampleskills9 = await prisma.skills.create({
+		data: {
+		id: 9,
+		userInfoId: 9,
+		PLANNING: "LEVEL1",
+		DESIGN:"LEVEL1",        
+		FRONTEND:"LEVEL1",      
+		BACKEND:"LEVEL4",       
+		PRESENTATION:"LEVEL1",  
+		OTHER:"LEVEL2"
+		}   
+	})
+
+	const sampleskills10 = await prisma.skills.create({
+		data: {
+		id: 10,
+		userInfoId: 10,
+		PLANNING: "LEVEL2",
+		DESIGN:"LEVEL2",        
+		FRONTEND:"LEVEL2",      
+		BACKEND:"LEVEL2",       
+		PRESENTATION:"LEVEL2",  
+		OTHER:"LEVEL2"
+		}   
+	})
+
+	// Post 
 	const samplepost1 = await prisma.post.create({
 		data: {
 			userInfoId: 1,
@@ -290,10 +425,6 @@ async function main() {
 			createdAt: "2023-10-02T13:50:40+09:00",
 			modifiedAt: "2023-10-10T13:50:40+09:00",
 		}
-	})
-
-	const requirementLanguages1 = await prisma.requirementLanguages.create( {
-		
 	})
 
 	const samplepost2 = await prisma.post.create({
@@ -351,6 +482,12 @@ async function main() {
 			modifiedAt: "2023-10-10T13:50:40+09:00",
 		}
 	})
+
+
+
+		// const requirementLanguages1 = await prisma.requirementLanguages.create( {
+		
+	// })
 }
 
 main()
