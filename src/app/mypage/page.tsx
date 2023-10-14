@@ -1,3 +1,4 @@
+
 // データベースに接続するためのクライアントをインポート
 import Header from "@/lib/componets/header";
 import { prisma } from "@/lib/prismaClient";
@@ -77,4 +78,3 @@ export default async function Home() {
       </main>
     </>
   );
-}
