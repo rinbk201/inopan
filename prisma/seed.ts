@@ -7,6 +7,8 @@ import { skills } from './seed_Contents/skills'
 import { post } from './seed_Contents/post'
 import { affiliation } from './seed_Contents/affiliation'
 import { language } from './seed_Contents/language'
+import { requirementLanguages } from './seed_Contents/requirementLanguages'
+
 
 
 async function main() {
@@ -16,6 +18,7 @@ async function main() {
 	post();
 	affiliation();
 	language();
+	requirementLanguages();
 }
 
 
