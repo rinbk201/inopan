@@ -1,17 +1,18 @@
 import { PrismaClient } from '@prisma/client'
-//import { Faker, en, ja } from '@faker-js/faker'
-//import { allFakers, allLocales } from '@faker-js/faker';
 const prisma = new PrismaClient()
-/*
-const faker = new Faker({ locale: [ja] })
-const faker_en = new Faker({ locale: [en] })
-console.log(allFakers['ja']); // the prebuilt Faker instance for de_AT
-console.log(allLocales['ja']); // the raw locale definitions for de_AT
-for(let i = 0; i < 100; i++) {
-	console.log(String(faker.person.sex()))
+
+
+
+
+/** 追加の記述
+ *   import { User } from './User'
+
+async function main() {
+	await user();
 }
 */
 
+/*
 async function main() {
 
 	//User
@@ -832,6 +833,8 @@ async function main() {
 		
 	// })
 }
+
+*/
 
 main()
 	.catch(e => {
