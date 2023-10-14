@@ -13,8 +13,9 @@ export const getAllRelations = async (post_id: number): Promise<UserRelationPost
   const res = await fetch(`http://localhost:3000/api/post/${post_id}/user-relation`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
+			//next: { revalidate: 60 * 30 }
       //next: { revalidate: 10 }
+      cache: "no-cache"
 		}
 	);
   const data = await res.json();
@@ -25,9 +26,9 @@ export const getUserSkill = async (user_id: number): Promise<SkillType> => {
   const res = await fetch(`http://localhost:3000/api/user/${user_id}/skill`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
+			//next: { revalidate: 60 * 30 }
       //next: { revalidate: 10 }
-      //cache: "no-cache"
+      cache: "no-cache"
 		}
 	);
   const data = await res.json();
@@ -38,9 +39,9 @@ export const getPost = async (post_id: number): Promise<PostType> => {
   const res = await fetch(`http://localhost:3000/api/post/${post_id}`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
+			//next: { revalidate: 60 * 30 }
       //next: { revalidate: 10 }
-      //cache: "no-cache"
+      cache: "no-cache"
 		}
 	);
   const data = await res.json();
@@ -115,7 +116,9 @@ export const getBookmarkPostsForMypage = async (user_id: number): Promise<PostTy
 	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/bookmarked-post`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
+			//next: { revalidate: 60 * 30 }
+      //next: { revalidate: 10 }
+      cache:"no-cache"
 		}
 	);
 	const data = await res.json();
@@ -126,7 +129,8 @@ export const changeRelationState = async (user_id: number[]): Promise<PostType[]
 	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/bookmarked-post`,
 		{
 			method: 'GET',
-			next: { revalidate: 60 * 30 }
+			// next: { revalidate: 10 }
+      cache:"no-cache"
 		}
 	);
 	const data = await res.json();
@@ -141,14 +145,16 @@ export const getTeamSkill = async (post_id: number): Promise<SkillType> => {
   var DESIGN = 0;
   var OTHER = 0;
   for (var i in relations_all) {
+    console.log(i);
     if (relations_all[i].relationState === RelationState.APPROVED) {
       const user_skill = await (getUserSkill(relations_all[i].userInfoId))
-      PLANNING += user_skill.PLANNING
+      PLANNING = PLANNING + user_skill.PLANNING
       PRESENTATION += user_skill.PRESENTATION
       FRONTEND += user_skill.FRONTEND
       BACKEND += user_skill.BACKEND
       DESIGN += user_skill.DESIGN
       OTHER += user_skill.OTHER
+      
     }
   }
   const teamSkill: SkillType = {
@@ -159,6 +165,5 @@ export const getTeamSkill = async (post_id: number): Promise<SkillType> => {
     DESIGN: DESIGN,
     OTHER: OTHER
   }
-  console.log(teamSkill)
 	return teamSkill;
 }

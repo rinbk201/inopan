@@ -70,10 +70,10 @@ export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
             matchingUserNum={postData.approvedCount}
             recruitmentNumbers={postData.PostType.recruitmentNumbers}
           ></PostInfoBox>
-          {/* <TeamSkillBox
+          <TeamSkillBox
             requestUserNum={postData.requestCount}
             teamSkill={postData.teamSkill}
-          ></TeamSkillBox> */}
+          ></TeamSkillBox>
         </Grid>
       </Grid>
     </Container>

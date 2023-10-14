@@ -41,6 +41,7 @@ export type PostDetailType = {
   approvedCount:number;
   bookmarkCount:number;
   requestCount:number;
+  teamSkill:SkillType;
 }
 
 export type EditPostRequestType = {
