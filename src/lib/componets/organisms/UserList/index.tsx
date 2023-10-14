@@ -18,24 +18,9 @@ export default function userList({ list, onCheckAbilityCard }: userListProps) {
       tmp = [...selectedUserIndexList, index];
       setSelectedUserIndexList(tmp);
     }
-    onCheckAbilityCard(createSelectedUserData(tmp));
+    onCheckAbilityCard(tmp);
   };
-  // 選択されたユーザのIndexListを元に全員分を足した値を返す
-  const createSelectedUserData = (indexList: object) => {
-    var template = {
-      PLANNING: 0,
-      DESIGN: 0,
-      FRONTEND: 0,
-      BACKEND: 0,
-      PRESENTATION: 0,
-    };
-    indexList.map((index) => {
-      Object.keys(template).map((key) => {
-        template[key] += list[index].skill[key];
-      });
-    });
-    return template;
-  };
+
   return (
     <>
       {list.map((item: any, index: number) => (
