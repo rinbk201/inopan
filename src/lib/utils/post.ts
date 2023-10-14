@@ -1,7 +1,5 @@
 `server-only`
 import { PostCardType, PostType } from "@/types"
-import PostCard from "../componets/organisms/PostCard";
-import { UserInfo } from "@prisma/client";
 import { getUserInfo } from "./user";
 
 
@@ -18,19 +16,8 @@ export const getAllPosts = async(): Promise<PostType[]> => {
     return data.posts;
 }
 
-export const getAutherPosts = async(user_id:number): Promise<PostType[]> => {
-	const res = await fetch(`http://localhost:3000/api/user/${user_id}/auther-post`,
-    {
-        method: 'GET',
-		next:{revalidate: 100}
-    }
-    );
-    
-    const data = await res.json();
-    return data.posts;
-}
 
-//
+//approvedの人数
 export const getApprovedCount = async(postId:number): Promise<number> => {
 	
     const res = await fetch(`http://localhost:3000/api/post/${postId}/user-relation/approved`,
@@ -45,6 +32,7 @@ export const getApprovedCount = async(postId:number): Promise<number> => {
     return approvedCount;
 }
 
+//postCardに渡す状態
 export const getPostCardInfo= async(posts:PostType[]): Promise<PostCardType[]|undefined> => {
 	const postCardInfos: PostCardType[] = [];
     for (const post of posts) {
@@ -59,10 +47,58 @@ export const getPostCardInfo= async(posts:PostType[]): Promise<PostCardType[]|un
 return postCardInfos;
 }
 
+//自分が作成したpost
+export const getAutherPosts = async(user_id:number): Promise<PostType[]> => {
+	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/auther-post`,
+    {
+        method: 'GET',
+		next:{revalidate: 100}
+    }
+    );
+    
+    const data = await res.json();
+    return data.posts;
+}
 
+//参加予定のpost
+export const getConfirmedPosts = async(user_id:number): Promise<PostType[]> => {
+	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/confirmed-post`,
+    {
+        method: 'GET',
+		next:{revalidate: 100}
+    }
+    );
+    
+    const data = await res.json();
+    return data.posts;
+}
 
-
-export const getBookmarkPostsForMypage = async(user_id:number): Promise<PostType[]> => {
+//承認待ちのpost
+export const getApplicationPosts = async(user_id:number): Promise<PostType[]> => {
+	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/application-post`,
+    {
+        method: 'GET',
+		next:{revalidate: 100}
+    }
+    );
+    
+    const data = await res.json();
+    return data.posts;
+}
+//承認済みのpost
+export const getApprovedPosts = async(user_id:number): Promise<PostType[]> => {
+	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/approved-post`,
+    {
+        method: 'GET',
+		next:{revalidate: 100}
+    }
+    );
+    
+    const data = await res.json();
+    return data.posts;
+}
+//bookmarkしたポスト
+export const getBookmarkPosts = async(user_id:number): Promise<PostType[]> => {
 	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/bookmarked-post`,
     {
         method: 'GET',
