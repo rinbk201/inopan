@@ -7,7 +7,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 1,
-            languageId: 3,
+            language: "Csharp",
             level: "LEVEL1"
         }
     })
@@ -15,7 +15,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 1,
-            languageId: 12,
+            language: "HTML",
             level: "LEVEL2"
         }
     })
@@ -23,7 +23,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 1,
-            languageId: 13,
+            language: "RubyonRails",
             level: "LEVEL3"
         }
     })
@@ -31,7 +31,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 1,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL3"
         }
     })
@@ -40,7 +40,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 16,
+            language: "JavaScript",
             level: "LEVEL3"
         }
     })
@@ -48,7 +48,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 21,
+            language: "Nodejs",
             level: "LEVEL3"
         }
     })
@@ -56,7 +56,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 38,
+            language: "React",
             level: "LEVEL2"
         }
     })
@@ -64,7 +64,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 40,
+            language: "Swift",
             level: "LEVEL2"
         }
     })
@@ -72,7 +72,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 41,
+            language: "AdobeXd",
             level: "LEVEL2"
         }
     })  
@@ -80,7 +80,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 2,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL2"
         }
     }) 
@@ -89,7 +89,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL2"
         }
     })
@@ -97,7 +97,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 20,
+            language: "MySQL",
             level: "LEVEL4"
         }
     })
@@ -105,7 +105,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 34,
+            language: "Unity",
             level: "LEVEL3"
         }
     })
@@ -113,7 +113,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 40,
+            language: "Swift",
             level: "LEVEL4"
         }
     })
@@ -122,7 +122,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL2"
         }
     })
@@ -130,7 +130,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 20,
+            language: "MySQL",
             level: "LEVEL4"
         }
     })
@@ -138,7 +138,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 34,
+            language: "MySQL",
             level: "LEVEL3"
         }
     })
@@ -146,7 +146,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 3,
-            languageId: 40,
+            language: "Swift",
             level: "LEVEL4"
         }
     })  
@@ -155,7 +155,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 4,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL4"
         }
     })
@@ -163,7 +163,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 4,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL4"
         }
     })
@@ -171,7 +171,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 4,
-            languageId: 21,
+            language: "Nodejs" ,
             level: "LEVEL1"
         }
     })
@@ -179,7 +179,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 4,
-            languageId: 23,
+            language: "OpenCV",
             level: "LEVEL1"
         }
     })
@@ -188,7 +188,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 5,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL2"
         }
     })
@@ -196,7 +196,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 5,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL3"
         }
     })
@@ -204,7 +204,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 5,
-            languageId: 29,
+            language: "Python" ,
             level: "LEVEL3"
         }
     })
@@ -212,7 +212,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 5,
-            languageId: 32,
+            language: "SQL",
             level: "LEVEL2"
         }
     })
@@ -220,7 +220,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 5,
-            languageId: 21,
+            language: "Nodejs" ,
             level: "LEVEL1"
         }
     })
@@ -229,7 +229,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 6,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL3"
         }
     })
@@ -237,7 +237,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 6,
-            languageId: 30,
+            language: "Ruby",
             level: "LEVEL3"
         }
     })
@@ -245,7 +245,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 6,
-            languageId: 20,
+            language: "MySQL",
             level: "LEVEL5"
         }
     })
@@ -254,7 +254,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 7,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL4"
         }
     })
@@ -262,7 +262,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 7,
-            languageId: 23,
+            language: "OpenCV",
             level: "LEVEL4"
         }
     })
@@ -270,7 +270,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 7,
-            languageId: 29,
+            language: "Python" ,
             level: "LEVEL4"
         }
     })
@@ -278,7 +278,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 7,
-            languageId: 19,
+            language: "MATLAB",
             level: "LEVEL2"
         }
     })
@@ -287,7 +287,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 8,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL2"
         }
     })
@@ -296,7 +296,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 9,
-            languageId: 7,
+            language: "C_Cpp",
             level: "LEVEL3"
         }
     })
@@ -304,7 +304,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 9,
-            languageId: 33,
+            language: "PostgreSQL",
             level: "LEVEL2"
         }
     })
@@ -312,7 +312,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 9,
-            languageId: 37,
+            language: "R",
             level: "LEVEL2"
         }
     })
@@ -320,7 +320,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 9,
-            languageId: 29,
+            language: "Python" ,
             level: "LEVEL1"
         }
     })
@@ -329,7 +329,7 @@ export const programmingLanguages  = async () => {
     await prisma.programmingLanguages.create({
         data:{
             userInfoId: 10,
-            languageId: 14,
+            language: "Java",
             level: "LEVEL5"
         }
     })
