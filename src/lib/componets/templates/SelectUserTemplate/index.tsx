@@ -10,6 +10,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import styled from "styled-components";
 import SelectedMemberCard from "../../organisms/SelectedMemberCard";
 import { Card, CardContent } from "@mui/material";
+import { PaticipantSelectionIncludeTeamInfoType, SkillType, SkillFields , PaticipantSelectionType} from "@/types";
 
 /**
    * "teamSkillData"
@@ -81,30 +82,30 @@ const demo_user_list = [
    * */
 
 interface SelectUserTemplate {
-  teamSkillData: object;
-  userList: object;
-  paticipant: object;
+  userList: PaticipantSelectionIncludeTeamInfoType;
+  teamSkill: SkillType
 }
 export default function SelectUserTemplate({
-  teamSkillData,
   userList,
-  paticipant,
+  teamSkill
 }: SelectUserTemplate) {
   // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
   const template = [
-    { id: "PLANNING", subject: "アイデア・企画力" },
-    { id: "PRESENTATION", subject: "プレゼン力" },
-    { id: "DESIGN", subject: "デザイン" },
-    { id: "FRONTEND", subject: "フロントエンド" },
-    { id: "BACKEND", subject: "バックエンド" },
+    { id: SkillFields.PLANNING, subject: "アイデア・企画力" },
+    { id: SkillFields.PRESENTATION, subject: "プレゼン力" },
+    { id: SkillFields.DESIGN, subject: "デザイン" },
+    { id: SkillFields.FRONTEND, subject: "フロントエンド" },
+    { id: SkillFields.BACKEND, subject: "バックエンド" },
   ];
   const [convertedTeamData, setTeamData] = useState(
     template.map((obj) => ({
       ...obj,
-      value: teamSkillData.skill[obj.id] || 0,
-      fullMark: teamSkillData.recruitmentNumbers * 5,
+      value: teamSkill[obj.id] || 0,
+      fullMark: userList.RequirementNumber * 5,
     }))
   );
+  const applicationUser: PaticipantSelectionType[] = userList.paticipants.UNAPPROVED
+  console.log(applicationUser)
   // 選択されたユーザのリスト
   const [selectedUser, setSelectedUser] = useState([]);
   const createSelectedUserList = (indexList: object) => {

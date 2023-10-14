@@ -1,3 +1,5 @@
+import { userInfo } from "os";
+
 //postからのレスポンスの型
 export type PostType = {
   id: number;
@@ -127,6 +129,9 @@ export type EditUserInfoRequestType = {
 	freeForm: string | undefined;
 }
 
+export type userListType = {
+  
+}
 
 export type ApplicationPostType = {
 	posts: PostType[];
@@ -199,6 +204,7 @@ export type SkillType = {
 		DESIGN: number;
 		OTHER: number;
 }
+
 
 
 export type EditSkillType = {
@@ -291,13 +297,23 @@ export enum AffrilationInitial {
 
 //ユーザーの保有スキルのフィールド
 export enum SkillFields {
-  PLANNING,
-  DESIGN,
-  FRONTEND,
-  BACKEND,
-  PRESENTATION,
-  OTHER
+  PLANNING="PLANNING",
+  DESIGN="DESIGN",
+  FRONTEND="FRONTEND",
+  BACKEND="BACKEND",
+  PRESENTATION="PRESENTATION",
+  OTHER="OTHER"
 }
+/**
+export enum SkillFields {
+  PLANNING="PLANNING",
+  DESIGN="DESIGN",
+  FRONTEND="FRONTEND",
+  BACKEND="BACKEND",
+  PRESENTATION="PRESENTATION",
+  OTHER="OTHER"
+}
+ */
 
 //保有スキル・取得言語のレベル・興味の度合い
 export enum SkillLevels {
