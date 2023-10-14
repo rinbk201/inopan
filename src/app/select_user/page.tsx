@@ -69,7 +69,7 @@ export default function Home() {
 
   // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
   const template = [
-    { id: "PLANNING", subject: "企画力" },
+    { id: "PLANNING", subject: "アイデア・企画力" },
     { id: "PRESENTATION", subject: "プレゼン力" },
     { id: "DESIGN", subject: "デザイン" },
     { id: "FRONTEND", subject: "フロントエンド" },

@@ -47,6 +47,7 @@ interface PostCardProps {
   postCardData: PostCardType;
 }
 export default function PostCard({ postCardData }:PostCardProps) {
+  
   return (
     <Card sx={{ maxWidth: 380 }}>
       <CardMedia
@@ -74,11 +75,11 @@ export default function PostCard({ postCardData }:PostCardProps) {
         <RecruitmentNumbersText>
         {postCardData.approvedCount}/{postCardData.PostType.recruitmentNumbers}人
         </RecruitmentNumbersText>
-        {/* <LinearProgress
+        <LinearProgress
           color={"primary"}
           variant="determinate"
-          value={(postData.userInfoId / postData.recruitmentNumbers) * 100}
-        /> */}
+          value={(postCardData.approvedCount/ postCardData.PostType.recruitmentNumbers) * 100}
+        />
       </CardContent>
     </Card>
   );
