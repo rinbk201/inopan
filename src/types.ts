@@ -50,7 +50,7 @@ export type EditPostRequestType = {
 export type UserRelationPostRequestType = {
 	userInfoId: number;
 }
-
+/**
 export type UserRelationType = {
 	userReration: 
 		{
@@ -60,6 +60,30 @@ export type UserRelationType = {
       relationState: RelationState;
 		}[]
 	| undefined
+}*/
+
+export type UserRelationPostType = {
+	id: number;
+  userInfoId: number;
+  postId: number;
+  applicationLevel: ApplicationLevel;
+  relationState: RelationState;
+}
+
+export type UserApplicationType = {
+  APPROVED: PaticipantSelectionType[]
+  UNAPPROVED: PaticipantSelectionType[]
+}
+export type PaticipantSelectionType = {
+  userInfo: UserInfoType;
+  userRelationPost: UserRelationPostType;
+  skills: SkillTypeA;
+}
+
+export type PaticipantSelectionIncludeTeamInfoType = {
+  paticipants: UserApplicationType;
+  teamSkill: SkillTypeA;
+  RequirementNumber: number;
 }
 
 export type UserRelationStatePutRequestType = {
@@ -170,13 +194,23 @@ export type LanguageType = {
 export type SkillType = {
 	skills: {
 		PLANNING: number;
-		PRESENTATION: number,
+		PRESENTATION: number;
 		FRONTEND: number;
 		BACKEND: number;
 		DESIGN: number;
 		OTHER: number;
 	}
 }
+
+export type SkillTypeA = {
+		PLANNING: number;
+		PRESENTATION: number;
+		FRONTEND: number;
+		BACKEND: number;
+		DESIGN: number;
+		OTHER: number;
+}
+
 
 export type EditSkillType = {
 	skills: {
@@ -190,20 +224,20 @@ export type EditSkillType = {
 }
 
 
-enum Gender {
+export enum Gender {
   MAN,
   WOMAN,
   OTHER
 }
 
 // 付与される権限
-enum Role {
+export enum Role {
   ADMIN,
   ROLE
 }
 
 //リアクションの強さ
-enum ReactionLevel {
+export enum ReactionLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -211,26 +245,26 @@ enum ReactionLevel {
 }
 
 //興味の強さ
-enum InterestLevel {
+export enum InterestLevel {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3
 }
 
-enum ApplicationLevel {
+export enum ApplicationLevel {
   BOOKMARK,
   CASUALLY_JOIN,
   NORMAL_JOIN,
   SERIOUSLY_JOIN
 }
 
-enum RelationState {
-  UNAPPROVED,
-  APPROVED
+export enum RelationState {
+  UNAPPROVED="UNAPPROVED",
+  APPROVED="APPROVED"
 }
 
 //学部学科略称のリスト
-enum AffrilationInitial {
+export enum AffrilationInitial {
   // 工学部
   EJ, //電気電子工学科
   EH, //電子システム工学科
@@ -267,7 +301,7 @@ enum AffrilationInitial {
 }
 
 //ユーザーの保有スキルのフィールド
-enum SkillFields {
+export enum SkillFields {
   PLANNING,
   DESIGN,
   FRONTEND,
@@ -277,7 +311,7 @@ enum SkillFields {
 }
 
 //保有スキル・取得言語のレベル・興味の度合い
-enum SkillLevels {
+export enum SkillLevels {
   LEVEL1=1,
   LEVEL2=2,
   LEVEL3=3,
@@ -286,7 +320,7 @@ enum SkillLevels {
 }
 
 //プログラミング言語
-enum ProgrammingLanguageEnum {
+export enum ProgrammingLanguageEnum {
   C_Cpp, // C/C++
   Csharp, // C#
   Java,
@@ -296,7 +330,7 @@ enum ProgrammingLanguageEnum {
 }
 
 //業界
-enum Industorys {
+export enum Industorys {
   WEB,
   GAME,
   SI,
