@@ -206,6 +206,7 @@ export type SkillType = {
 		BACKEND: number;
 		DESIGN: number;
 		OTHER: number;
+    [key: string]: number; 
 }
 
 
