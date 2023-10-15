@@ -52,12 +52,12 @@ export default function PostCard({ postCardData }: PostCardProps) {
   return (
     <Card sx={{ maxWidth: 380 }}>
       <Link href={`/post/${postCardData.PostType.id}`} passHref>
-      {/* <CardMedia
+      <CardMedia
         sx={{ height: 198 }}
-        image="https://source.unsplash.com/random"
+        image="../../../../../1.jpeg"
         title="green iguana"
-      /> */}
-      <PostImageBox imgSrc="https://source.unsplash.com/random"></PostImageBox>
+      />
+      {/* <PostImageBox imgSrc="../../../../../1.jpeg"></PostImageBox> */}
       
         <CardContent>
           <PostTypeText>ハッカソン</PostTypeText>
