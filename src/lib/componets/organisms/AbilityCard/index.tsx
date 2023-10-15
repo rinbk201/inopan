@@ -100,6 +100,8 @@ export default function abilityCard({
   const checkedLabelStyle = {
     backgroundColor: "#c8e6c9",
   };
+  const userId = userData.id;
+  const path = "@/img/" + userId + ".jpg";
 
   return (
     <>
@@ -119,7 +121,7 @@ export default function abilityCard({
           initial="FI"
           affiliationColor={getAffiliationColor(userData.affiliation_id)}
         ></AfficationIcon>
-        <UserIcon iconSize="4rem"></UserIcon>
+        <UserIcon iconSize="4rem" iconImg={userData.img_path} ></UserIcon>
         <UserAffiliationbox>
           <UserNameText>{userData.display_name}</UserNameText>
           <AffiliationText>未来科学部情報メディア学科</AffiliationText>

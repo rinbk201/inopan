@@ -110,7 +110,8 @@ export default function SelectUserTemplate({
   const userList: any[] = []
   for (var i in applicationUser) {
     const data = 
-      {
+      {   id: applicationUser[i].userInfo.id,
+          img_path: "@/img/" + String(applicationUser[i].userInfo.id),
           name: applicationUser[i].userInfo.displayName,
           display_name: applicationUser[i].userInfo.displayName,
           email: applicationUser[i].userInfo.email,

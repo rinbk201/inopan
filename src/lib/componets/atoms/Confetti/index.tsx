@@ -27,7 +27,7 @@ export default function Confetti() {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Throw Confetti</button>
+      {/* <button onClick={handleButtonClick}>Throw Confetti</button> */}
       <canvas
         ref={canvasRef}
         style={{
@@ -36,6 +36,8 @@ export default function Confetti() {
           top: 0,
           left: 0,
           zIndex: 10,
+          position: "absolute",
+          pointerEvents: "none",
         }}
       ></canvas>
     </div>
