@@ -1,17 +1,14 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-const user_process = {
-	async get_user_profile(id: Number): Promise<any> {
-		try {
-			const res = await await prisma.profile.findUnique({
-        where: { user_ID: id }
-      })
-			return res
-		} catch (e: unknown) {
-			if (e instanceof Error) {
-				console.error(e.message);
-			}
-		}
-	},
+import { UserInfoType } from "@/types"
+
+`server-only`
+
+export const getUserInfo = async(userId:number): Promise<UserInfoType> => {
+	const res = await fetch(`http://localhost:3000/api/user/${userId}`,
+    {
+        method: 'GET',
+		next:{revalidate: 60*30}
+    }
+    );
+    const data = await res.json();
+    return data.user_info;
 }
-export default user_process

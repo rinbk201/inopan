@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  userId    Int       @id @map("user_id") @default(autoincrement())
+  userId    Int       @id @default(autoincrement()) @map("user_id")
   email     String    @map("e_mail")
   password  String
   createdAt DateTime  @default(now()) @map("created_at")
@@ -42,8 +42,7 @@ model UserInfo {
   skills               Skills[]
   programmingLanguages ProgrammingLanguages[]
   interestedIndustory  InterestedIndustory[]
-  interestedPosts      InterestedPosts[]
-  participants         Participants[]
+  userPostRelationship UserPostRelationship[]
   log                  Log[]
 }
 
@@ -56,30 +55,26 @@ model Affiliation {
 }
 
 model Skills {
-  id         Int         @id @default(autoincrement())
-  userInfoId Int
-  level      SkillLevels
-  userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
-  skillName  SkillFields
-  skillId    Int?
+  id            Int         @id @default(autoincrement())
+  userInfoId    Int         @unique
+  userInfo      UserInfo    @relation(fields: [userInfoId], references: [id])
+  PLANNING      SkillLevels @default(LEVEL1)
+  DESIGN        SkillLevels @default(LEVEL1)
+  FRONTEND      SkillLevels @default(LEVEL1)
+  BACKEND       SkillLevels @default(LEVEL1)
+  PRESENTATION  SkillLevels @default(LEVEL1)
+  OTHER         SkillLevels @default(LEVEL1)
 }
 
 model ProgrammingLanguages {
   id         Int         @id @default(autoincrement())
   userInfoId Int
-  languageId Int
+  language   ProgrammingLanguageEnum
   level      SkillLevels
   userInfo   UserInfo    @relation(fields: [userInfoId], references: [id])
-  language   Language    @relation(fields: [languageId], references: [id])
 }
 
-model Language {
-  id                   Int                     @id @default(autoincrement())
-  languageName         ProgrammingLanguageEnum @map("language_name")
-  area                 String
-  programmingLanguages ProgrammingLanguages[]
-  requirementLanguages RequirementLanguages[]
-}
+
 
 model InterestedIndustory {
   id          Int           @id @default(autoincrement())
@@ -101,28 +96,22 @@ model Post {
   id                   Int                    @id @default(autoincrement())
   userInfoId           Int
   title                String
+  eventType            EventType
   launchDay            DateTime
   deadline             DateTime
   recruitmentNumbers   Int                    @map("recruitment_numbers")
   description          String
   matchingMessage      String                 @map("matching_message")
+  confirmed            Boolean                @default(false)
   createdAt            DateTime               @default(now()) @map("created_at")
   modifiedAt           DateTime?              @map("modifyed_at")
   deletedAt            DateTime?              @map("deleted_at")
   userInfo             UserInfo               @relation(fields: [userInfoId], references: [id])
   logs                 Log[]
-  requirementLanguages RequirementLanguages[]
-  interestedPosts      InterestedPosts[]
-  participants         Participants[]
+  requirementLanguages String
+  UserPostRelationship UserPostRelationship[]
 }
 
-model RequirementLanguages {
-  id         Int      @id @default(autoincrement())
-  postId     Int      @map("ponts_id")
-  languageId Int
-  post       Post     @relation(fields: [postId], references: [id])
-  language   Language @relation(fields: [languageId], references: [id])
-}
 
 model Log {
   id         Int        @id @default(autoincrement())
@@ -142,21 +131,16 @@ model Reaction {
   log           Log           @relation(fields: [logId], references: [id])
 }
 
-model InterestedPosts {
-  id            Int           @id @default(autoincrement())
-  userInfoId    Int
-  postId        Int
-  interestLevel InterestLevel
-  userInfo      UserInfo      @relation(fields: [userInfoId], references: [id])
-  post          Post          @relation(fields: [postId], references: [id])
-}
+model UserPostRelationship {
+  id               Int              @id @default(autoincrement())
+  userInfoId       Int
+  postId           Int
+  applicationLevel ApplicationLevel
+  relationState    RelationState    @default(UNAPPROVED)
+  userInfo         UserInfo         @relation(fields: [userInfoId], references: [id])
+  post             Post             @relation(fields: [postId], references: [id])
 
-model Participants {
-  id         Int      @id @default(autoincrement())
-  postId     Int      @map("posts_id")
-  userInfoId Int
-  post       Post     @relation(fields: [postId], references: [id])
-  userInfo   UserInfo @relation(fields: [userInfoId], references: [id])
+  @@unique([userInfoId, postId], name: "postId_userInfoId")
 }
 
 enum Gender {
@@ -176,6 +160,7 @@ enum ReactionLevel {
   LEVEL1
   LEVEL2
   LEVEL3
+  LEVEL4
 }
 
 //興味の強さ
@@ -183,6 +168,18 @@ enum InterestLevel {
   LEVEL1
   LEVEL2
   LEVEL3
+}
+
+enum ApplicationLevel {
+  BOOKMARK
+  CASUALLY_JOIN
+  NORMAL_JOIN
+  SERIOUSLY_JOIN
+}
+
+enum RelationState {
+  UNAPPROVED
+  APPROVED
 }
 
 //学部学科略称のリスト
@@ -232,9 +229,8 @@ enum SkillFields {
   OTHER
 }
 
-//保有スキル・取得言語のレベル・興味の度合い
+//保有スキル・取得言語のレベル
 enum SkillLevels {
-  LEVEL0
   LEVEL1
   LEVEL2
   LEVEL3
@@ -244,12 +240,49 @@ enum SkillLevels {
 
 //プログラミング言語
 enum ProgrammingLanguageEnum {
+  ActionScript
+  ASPNET //ASP.NET
+  Csharp //C#
+  CakePHP
+  COBOL
+  CSS
   C_Cpp // C/C++
-  Csharp // C#
+  Delphi 
+  Django
+  Facebook_Application //Facebookアプリ
+  Fortran
+  HTML
+  RubyonRails
   Java
-  Python
+  jQuery
   JavaScript
-  OTHER
+  Kotlin
+  Laravel
+  MATLAB
+  MySQL
+  Nodejs //Node.js
+  ObjectiveC
+  OpenCV
+  OpenGL
+  Oracle
+  Pascal
+  Perl
+  PHP
+  Python
+  Ruby
+  Go
+  SQL
+  PostgreSQL
+  Unity
+  VBnet
+  Vuejs
+  R
+  React
+  Scala
+  Swift
+  AdobeXd
+  Photoshop
+  Illustrator
 }
 
 //業界
@@ -260,4 +293,9 @@ enum Industorys {
   CHEMISTRY
   ADVERTISEMENT
   OTHER
+}
+
+enum EventType{
+  HACKATHON
+  STUDY
 }
