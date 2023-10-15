@@ -5,7 +5,7 @@ import { main } from "../../../route";
 
 const prisma = new PrismaClient();
 
-//人数とuserInfoを返却
+//userInfoを返却
 //postに対するユーザーの承認段階と申し込み状態を取得するAPI
 export const GET = async (req: Request, res: NextResponse) => {
     try {

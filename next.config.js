@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['source.unsplash.com','stock.adobe.io/Rest'],
+  },
 };
 
 module.exports = nextConfig;

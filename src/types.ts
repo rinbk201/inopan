@@ -38,6 +38,14 @@ export type PostCardType = {
   autherName: string;
 }
 
+export type PostDetailType = {
+  PostType: PostType;
+  approvedCount:number;
+  bookmarkCount:number;
+  requestCount:number;
+  teamSkill:SkillType;
+}
+
 export type EditPostRequestType = {
 	title: string;
 	launchDay: Date;
@@ -203,6 +211,7 @@ export type SkillType = {
 		BACKEND: number;
 		DESIGN: number;
 		OTHER: number;
+    [key: string]: number; 
 }
 
 
