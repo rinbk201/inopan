@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { M_PLUS_2 } from "next/font/google";
 import Header from "@/lib/componets/header";
+import Header from "@/lib/componets/header";
 
 const inter = Inter({ subsets: ["latin"] });
 

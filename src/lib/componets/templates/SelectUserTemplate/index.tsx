@@ -230,12 +230,12 @@ export default function SelectUserTemplate({
               <RaderChart data={convertedTeamData}></RaderChart>
             </div>
             <div>
-              <div style={{ display: "flex" }}>
+              {/* <div style={{ display: "flex" }}>
                 <PeopleAltIcon sx={{ width: 25 }}></PeopleAltIcon>{" "}
                 <h2 style={{ marginLeft: "0.3rem" }}>参加中のメンバー</h2>
-              </div>
-              <div style={{ display: "flex", overflowX: "scroll" }}>
-                {selectedUser.map((item, index) => (
+              </div> */}
+              {/* <div style={{ display: "flex", overflowX: "scroll" }}>
+                {paticipant.map((item, index) => (
                   <SelectedMemberCard
                     key={index}
                     imgSrc={item.id}
@@ -243,7 +243,7 @@ export default function SelectUserTemplate({
                     userSkill={item.skill}
                   ></SelectedMemberCard>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </Grid>
@@ -266,7 +266,6 @@ export default function SelectUserTemplate({
           matchingUserList={selectedUser}
         ></CelebrateModal>
       </Modal>
-      <Confetti></Confetti>
     </Container>
   );
 }

@@ -5,7 +5,9 @@ const Image = styled.div`
   height: ${(props) => props.iconSize};
   border-radius: 50%;
   border: 2px solid gainsboro;
-  background-image: ${(props) => props.iconImg};
+  background-image: url(${(props) => props.iconImg});
+  background-repeat: no-repeat; /*背景画像の繰り返しを解除*/
+  background-size: ${(props) => props.iconSize}; /*背景画像のサイズ指定*/
 `;
 interface UserIconProps {
   iconSize: string;

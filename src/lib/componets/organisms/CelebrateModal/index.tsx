@@ -40,7 +40,7 @@ export default function CelebrateModal({
         {matchingUserList.map((item, index) => (
           <div key={index}>
             <MatchingUserCard
-              imgSrc={item.id}
+              imgSrc={item.imgSrc}
               userName={item.display_name}
             ></MatchingUserCard>
           </div>
