@@ -36,7 +36,6 @@ const StyledCard = styled.label`
   border-left: solid 8px ${(props) => getAffiliationColor(props.affiliationId)};
   line-height: 1.5;
   border-radius: 2px;
-  padding: 0.5rem;
   margin: 1rem 0rem;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -116,13 +115,13 @@ export default function abilityCard({
         isChecked={isChecked}
       >
         <AfficationIcon
-          initial="FI"
+          initial={userData.gakka}
           affiliationColor={getAffiliationColor(userData.affiliation_id)}
         ></AfficationIcon>
-        <UserIcon iconSize="4rem"></UserIcon>
+        <UserIcon iconSize="4rem" iconImg={userData.imgSrc}></UserIcon>
         <UserAffiliationbox>
           <UserNameText>{userData.display_name}</UserNameText>
-          <AffiliationText>未来科学部情報メディア学科</AffiliationText>
+          <AffiliationText>{userData.gakkaText}</AffiliationText>
           <DashedLine></DashedLine>
         </UserAffiliationbox>
         {Object.keys(userData.skill).map((key) => (
