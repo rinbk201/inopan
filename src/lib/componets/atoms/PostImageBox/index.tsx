@@ -16,7 +16,6 @@ export default function PostImageBox({ imgSrc }: PostImageBox) {
       }}
     >
       <Image 
-
         src={imgSrc}
         width={600} // ここで幅を指定します
         height={300} // ここで高さを指定します

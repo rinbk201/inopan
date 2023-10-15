@@ -37,6 +37,7 @@ export default function PostInfoBox({
       <p style={{ marginBottom: "1rem" }}>{description}</p>
       <div style={{ margin: "3rem 0" }}>
         <PostInfoTitle title="イベント情報"></PostInfoTitle>
+        <p>{description}</p>
         <PostInfoData title="イベント名" data={title}></PostInfoData>
         <PostInfoData title="開催日時" data={launchDay}></PostInfoData>
       </div>

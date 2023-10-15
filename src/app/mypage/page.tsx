@@ -43,7 +43,6 @@ export default async function Home() {
 
   return (
     <>
-      <Header />
       <div>
         <p>メンバー募集中POST</p>
       </div>
@@ -56,7 +55,7 @@ export default async function Home() {
         {autherPostCards!.map((postCard) => (
           <Box key={postCard.PostType.id} flexShrink={0} mx={1} minWidth={300}>
             <PostCard key={postCard.PostType.id} postCardData={postCard} />
-            <Button variant="contained">Contained</Button>
+            
           </Box>
         ))}
       </Box>
