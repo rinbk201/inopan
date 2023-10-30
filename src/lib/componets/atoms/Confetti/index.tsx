@@ -4,7 +4,6 @@ export default function Confetti() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const colors = ["#bb0000", "#ffffff"];
   const handleButtonClick = () => {
-    console.log("発火");
     const myCanvas = canvasRef.current;
     if (myCanvas) {
       const myConfetti = confetti.create(myCanvas, { resize: true });
@@ -28,7 +27,7 @@ export default function Confetti() {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Throw Confetti</button>
+      {/* <button onClick={handleButtonClick}>Throw Confetti</button> */}
       <canvas
         ref={canvasRef}
         style={{
@@ -36,7 +35,9 @@ export default function Confetti() {
           height: "100%",
           top: 0,
           left: 0,
-          zIndex: -1,
+          zIndex: 10,
+          position: "absolute",
+          pointerEvents: "none",
         }}
       ></canvas>
     </div>

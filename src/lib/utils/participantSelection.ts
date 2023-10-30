@@ -8,6 +8,7 @@ import { getUserInfo } from "./user"
 import { SkillType } from "@/types"
 import { PaticipantSelectionIncludeTeamInfoType } from "@/types"
 import { UserApplicationType } from "@/types"
+import { UserRelationStatePutRequestType } from "@/types"
 
 export const getAllRelations = async (post_id: number): Promise<UserRelationPostType[]> => {
   const res = await fetch(`http://localhost:3000/api/post/${post_id}/user-relation`,
@@ -106,7 +107,7 @@ export const getAllApplicationUser = async (post_id: number): Promise<Paticipant
     teamSkill: teamSkill,
     RequirementNumber: requirement_number
   }
-  console.log(paticipants)
+  //console.log(paticipants)
 
 	return paticipants;
 }
@@ -125,16 +126,21 @@ export const getBookmarkPostsForMypage = async (user_id: number): Promise<PostTy
 	return data.posts;
 }
 
-export const changeRelationState = async (user_id: number[]): Promise<PostType[]> => {
-	const res = await fetch(`http://localhost:3000/api/user/${user_id}/post/bookmarked-post`,
-		{
-			method: 'GET',
-			// next: { revalidate: 10 }
-      cache:"no-cache"
-		}
-	);
-	const data = await res.json();
-	return data.posts;
+export const changeRelationState = async (relationData: UserRelationStatePutRequestType[], post_id: number): Promise<SkillType[]> => {
+	const datas: SkillType[] = []
+  for (var i in relationData) {
+    const res = await fetch(`http://localhost:3000/api/post/${post_id}/post/`, {
+      method: 'PUT',
+      body: JSON.stringify(relationData[i]), // データをJSON文字列に変換
+      headers: {
+        'Content-Type': 'application/json', // リクエストヘッダーでJSON形式のデータを指定
+      },
+    });
+    const data = await res.json();
+    datas.push(data)
+  }
+
+	return datas;
 }
 export const getTeamSkill = async (post_id: number): Promise<SkillType> => {
   const relations_all = await(getAllRelations(post_id))

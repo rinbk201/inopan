@@ -53,7 +53,8 @@ export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
 
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
-          <PostImageBox imgSrc="/../../../../../1.jpeg"></PostImageBox>
+          <PostImageBox imgSrc={`/${postData.PostType.id%6+1}.jpeg`}></PostImageBox>
+          
           <PostDetailBox
             title={postData.PostType.title}
             description={postData.PostType.description}
@@ -69,6 +70,7 @@ export default function PostInfoTemplate({ postData }: PostInfoTemplateProps) {
             requestUserNum={postData.requestCount}
             matchingUserNum={postData.approvedCount}
             recruitmentNumbers={postData.PostType.recruitmentNumbers}
+            postId = {postData.PostType.id}
           ></PostInfoBox>
           <TeamSkillBox
             requestUserNum={postData.requestCount}

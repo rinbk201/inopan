@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import { M_PLUS_2 } from "next/font/google";
+import Header from "@/lib/componets/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,20 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={MPlus2.className}>
-        <header
-          className={`
-            h-16
-            bg-transparent
-            backdrop-blur-md
-            flex
-            fixed
-            w-full
-            px-6
-          `}
-        >
-          <div>Inopan App</div>
-        </header>
-
+        <Header />
         <main className="pt-20 pb-8 min-h-screen">
           <Suspense fallback={"loading..."}>{children}</Suspense>
         </main>

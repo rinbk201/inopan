@@ -1,5 +1,8 @@
 "use client";
 import SelectUserTemplate from "@/lib/componets/templates/SelectUserTemplate";
+import { getAllApplicationUser } from "@/lib/utils/participantSelection";
+import { PaticipantSelectionIncludeTeamInfoType, SkillType } from "@/types";
+import { getTeamSkill } from "@/lib/utils/participantSelection";
 // FIX:DBからのデータ取得に修正
 
 const demo_team_skill_data = {
@@ -59,37 +62,16 @@ const demo_user_list = [
     },
   },
 ];
-export default function Home() {
-
-  // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
-  const template = [
-    { id: "PLANNING", subject: "アイデア・企画力" },
-    { id: "PRESENTATION", subject: "プレゼン力" },
-    { id: "DESIGN", subject: "デザイン" },
-    { id: "FRONTEND", subject: "フロントエンド" },
-    { id: "BACKEND", subject: "バックエンド" },
-  ];
-  const [convertedTeamData, setTeamData] = useState(
-    template.map((obj) => ({
-      ...obj,
-      value: demo_team_skill_data[obj.id] || 0,
-      // FIX: 募集人数から算出する式
-      fullMark: 25,
-    }))
-  );
-
-  const handleCheckedAbilityCard = (selectedUserData: object) => {
-    setTeamData(
-      convertedTeamData.map((obj) => ({
-        ...obj,
-        newValue: obj.value + selectedUserData[obj.id] || 0,
-      }))
-    );
-  };
+export default async function SelectUser({ params }: { params: { id: string } }) {
+  const postId: number = parseInt(params.id);
+  const data :PaticipantSelectionIncludeTeamInfoType = await getAllApplicationUser(postId)
+  const teamSkill: SkillType = await getTeamSkill(postId)
+  //console.log(data.paticipants.UNAPPROVED)
+  //console.log(teamSkill.FRONTEND)
   return (
     <SelectUserTemplate
-      teamSkillData={demo_team_skill_data}
-      userList={demo_user_list}
+      userLists={data}
+      teamSkill={teamSkill}
     ></SelectUserTemplate>
   );
 }

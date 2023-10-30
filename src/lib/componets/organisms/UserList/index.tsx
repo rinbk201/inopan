@@ -8,6 +8,7 @@ interface userListProps {
 }
 export default function userList({ list, onCheckAbilityCard }: userListProps) {
   // チェックボックスを選択されたユーザのIndexを保持する
+  console.log(list)
   const [selectedUserIndexList, setSelectedUserIndexList] = useState([]);
   const handleCheckedAbilityCard = (index: number) => {
     var tmp: any = [];

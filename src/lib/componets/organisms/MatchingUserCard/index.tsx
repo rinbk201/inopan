@@ -1,12 +1,15 @@
 import { Card, CardContent } from "@mui/material";
 import UserIcon from "../../atoms/UserIcon";
+import SelectMemberPageSkill from "../../atoms/SelectMemberPageSkill";
 interface MatchingUserCardProps {
   imgSrc: string;
   userName: string;
+  userSkill: object;
 }
 export default function MatchingUserCard({
   imgSrc,
   userName,
+  userSkill,
 }: MatchingUserCardProps) {
   return (
     <Card sx={{ margin: "0.5rem", textAlign: "center" }}>

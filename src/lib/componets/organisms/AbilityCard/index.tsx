@@ -29,14 +29,13 @@ const StyledHover = `
 `;
 
 const StyledCard = styled.label`
-  width: 45rem;
+  width: 100%;
   height: 5rem;
-  background-color: ${(props) => (props.isChecked ? "#c8e6c9" : "white")};
+  background-color: white;
   color: black;
   border-left: solid 8px ${(props) => getAffiliationColor(props.affiliationId)};
   line-height: 1.5;
   border-radius: 2px;
-  padding: 0.5rem;
   margin: 1rem 0rem;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -48,7 +47,7 @@ const StyledCard = styled.label`
 
 const UserAffiliationbox = styled.div`
   width: 12rem;
-  margin: 0.3rem;
+  margin: 0 0.5rem;
 `;
 
 const UserNameText = styled.h2`
@@ -63,9 +62,13 @@ const AffiliationText = styled.h2`
 `;
 
 const CheckedIcon = styled.div`
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  zindex: 1;
   width: 1.8rem;
   height: 1.8rem;
-  background-color: red;
+  background-color: var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -96,6 +99,8 @@ export default function abilityCard({
   const checkedLabelStyle = {
     backgroundColor: "#c8e6c9",
   };
+  const userId = userData.id;
+  const path = "@/img/" + userId + ".jpg";
 
   return (
     <>
@@ -112,18 +117,32 @@ export default function abilityCard({
         isChecked={isChecked}
       >
         <AfficationIcon
-          initial="FI"
+          initial={userData.gakka}
           affiliationColor={getAffiliationColor(userData.affiliation_id)}
         ></AfficationIcon>
-        <UserIcon iconSize="4rem"></UserIcon>
+        <UserIcon iconSize="4rem" iconImg={userData.imgSrc}></UserIcon>
         <UserAffiliationbox>
           <UserNameText>{userData.display_name}</UserNameText>
-          <AffiliationText>未来科学部情報メディア学科</AffiliationText>
+          <AffiliationText>{userData.gakkaText}</AffiliationText>
           <DashedLine></DashedLine>
         </UserAffiliationbox>
         {Object.keys(userData.skill).map((key) => (
           <SkillData skillName={key} value={userData.skill[key]}></SkillData>
         ))}
+        {isChecked && (
+          <div
+            style={{
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(80, 80, 80, 0.3)",
+              pointerEvents: "none",
+            }}
+          ></div>
+        )}
         {isChecked && <CheckedIcon>{selectedNum + 1}</CheckedIcon>}
       </StyledCard>
     </>

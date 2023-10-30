@@ -6,6 +6,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import Link from "next/link";
 import Button from "../../atoms/Button";
+import { PostType } from "@/types";
 
 const InfoBox = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ interface PostInfoBox {
   requestUserNum: number;
   matchingUserNum: number;
   recruitmentNumbers: number;
+  poostId: number;
 }
 export default function PostInfoBox({
   deadline,
@@ -37,6 +39,7 @@ export default function PostInfoBox({
   requestUserNum,
   matchingUserNum,
   recruitmentNumbers,
+  poostId
 }: PostInfoBox) {
   return (
     <Box
@@ -91,8 +94,7 @@ export default function PostInfoBox({
         sx={{ height: 8, margin: "0.5rem 0" }}
       />
       <div style={{ marginTop: "1.5rem" }}></div>
-
-      <Link href="/select_user">
+      <Link href={`/post/${poostId}/select_user`} passHref>
         <Button type="default" text="メンバー編成"></Button>
       </Link>
       <Button type="second" text="POSTを編集"></Button>

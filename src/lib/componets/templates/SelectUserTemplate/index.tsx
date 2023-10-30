@@ -1,4 +1,3 @@
-import Header from "@/lib/componets/header";
 import RaderChart from "@/lib/componets/atoms/RaderChart";
 import { Container, Grid, Modal } from "@mui/material";
 import UserList from "@/lib/componets/organisms/UserList";
@@ -7,6 +6,13 @@ import Button from "@/lib/componets/atoms/Button";
 import Confetti from "@/lib/componets/atoms/Confetti";
 import CheckModel from "../../organisms/CheckModal";
 import CelebrateModal from "../../organisms/CelebrateModal";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import styled from "styled-components";
+import SelectedMemberCard from "../../organisms/SelectedMemberCard";
+import { Card, CardContent } from "@mui/material";
+import { PaticipantSelectionIncludeTeamInfoType, SkillType, SkillFields , PaticipantSelectionType} from "@/types";
+import userList from "@/lib/componets/organisms/UserList";
+import { getAllApplicationUser } from "@/lib/utils/participantSelection";
 
 /**
    * "teamSkillData"
@@ -32,6 +38,7 @@ const demo_user_list = [
 {
     name: "電大太郎",
     display_name: "でん君",
+
     email: "denkun@example.com",
     affiliation_id: 1,
     lab: "情報セキュリティ研究室",
@@ -77,32 +84,58 @@ const demo_user_list = [
    * */
 
 interface SelectUserTemplate {
-  teamSkillData: object;
-  userList: object;
+  userLists: PaticipantSelectionIncludeTeamInfoType;
+  teamSkill: SkillType
 }
 export default function SelectUserTemplate({
-  teamSkillData,
-  userList,
+  userLists,
+  teamSkill
 }: SelectUserTemplate) {
   // templateを元にDBから取得したチームスキルをRaderChartに渡せる形式に整形
   const template = [
-    { id: "PLANNING", subject: "アイデア・企画力" },
-    { id: "PRESENTATION", subject: "プレゼン力" },
-    { id: "DESIGN", subject: "デザイン" },
-    { id: "FRONTEND", subject: "フロントエンド" },
-    { id: "BACKEND", subject: "バックエンド" },
+    { id: SkillFields.PLANNING, subject: "アイデア・企画力" },
+    { id: SkillFields.PRESENTATION, subject: "プレゼン力" },
+    { id: SkillFields.DESIGN, subject: "デザイン" },
+    { id: SkillFields.FRONTEND, subject: "フロントエンド" },
+    { id: SkillFields.BACKEND, subject: "バックエンド" },
   ];
   const [convertedTeamData, setTeamData] = useState(
     template.map((obj) => ({
       ...obj,
-      value: teamSkillData.skill[obj.id] || 0,
-      fullMark: teamSkillData.recruitmentNumbers * 5,
+      value: teamSkill[obj.id] || 0,
+      fullMark: userLists.RequirementNumber * 5,
     }))
   );
+  const applicationUser: PaticipantSelectionType[] = userLists.paticipants.UNAPPROVED
+  const userList: any[] = []
+  for (var i in applicationUser) {
+    const data = 
+      {   id: applicationUser[i].userInfo.id,
+          img_path: "@/img/" + String(applicationUser[i].userInfo.id),
+          name: applicationUser[i].userInfo.displayName,
+          display_name: applicationUser[i].userInfo.displayName,
+          email: applicationUser[i].userInfo.email,
+          affiliation_id: applicationUser[i].userInfo,
+          lab: applicationUser[i].userInfo.affiliationId,
+          gender: applicationUser[i].userInfo.gender,
+          hobby: applicationUser[i].userInfo.hobby,
+          comment: applicationUser[i].userInfo.comment,
+          DiscordID: applicationUser[i].userInfo.discordId,
+          XID: applicationUser[i].userInfo.xId,
+          FaceBookID: applicationUser[i].userInfo.facebookId,
+          free_form: applicationUser[i].userInfo.freeForm,
+          deleted_at: applicationUser[i].userInfo.deletedAt,
+          skill: applicationUser[i].skills,
+      }
+      userList.push(data)
+  }
+  //console.log(teamSkill)
+  //console.log(applicationUser)
   // 選択されたユーザのリスト
   const [selectedUser, setSelectedUser] = useState([]);
-  const createSelectedUserList = (indexList: object) => {
-    var selectedUserList: object = [];
+  const createSelectedUserList = (indexList: []) => {
+    var selectedUserList: object[] = [];
+    console.log(indexList)
     indexList.map((index) => {
       selectedUserList.push(userList[index]);
     });
@@ -153,24 +186,69 @@ export default function SelectUserTemplate({
   };
   return (
     <Container>
-      <Header />
-      <Grid container spacing={3}>
-        <Grid>
-          <h2>参加希望者一覧</h2>
-          <UserList
-            list={userList}
-            onCheckAbilityCard={handleCheckedAbilityCard}
-          ></UserList>
-          <Button
-            type="default"
-            text="選択したユーザの参加を承諾"
-            onClick={handleOpenCheckModal}
-          ></Button>
+      <Title>メンバー編成</Title>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={7}>
+          <div style={{ margin: "1rem 0" }}>
+            <div style={{ display: "flex" }}>
+              <PeopleAltIcon sx={{ width: 25 }}></PeopleAltIcon>{" "}
+              <h2 style={{ marginLeft: "0.3rem" }}>応募ユーザを選定</h2>
+            </div>
+            <UserList
+              list={userList}
+              onCheckAbilityCard={handleCheckedAbilityCard}
+            ></UserList>
+            <Button
+              type="default"
+              text="選択したユーザの参加を承諾"
+              onClick={handleOpenCheckModal}
+            ></Button>
+          </div>
         </Grid>
-        <Grid>
-          <RaderChart data={convertedTeamData}></RaderChart>
+        <Grid item xs={12} sm={5}>
+          <div
+            style={{
+              backgroundColor: "white",
+              padding: "1rem",
+              borderRadius: 2,
+            }}
+          >
+            <div style={{ display: "flex" }}>
+              <PeopleAltIcon sx={{ width: 25 }}></PeopleAltIcon>{" "}
+              <h2 style={{ marginLeft: "0.3rem" }}>現在のチームの開発スキル</h2>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "white",
+                flexDirection: "column",
+                padding: "1rem",
+                borderRadius: 2,
+              }}
+            >
+              <RaderChart data={convertedTeamData}></RaderChart>
+            </div>
+            <div>
+              {/* <div style={{ display: "flex" }}>
+                <PeopleAltIcon sx={{ width: 25 }}></PeopleAltIcon>{" "}
+                <h2 style={{ marginLeft: "0.3rem" }}>参加中のメンバー</h2>
+              </div> */}
+              {/* <div style={{ display: "flex", overflowX: "scroll" }}>
+                {paticipant.map((item, index) => (
+                  <SelectedMemberCard
+                    key={index}
+                    imgSrc={item.id}
+                    userName={item.display_name}
+                    userSkill={item.skill}
+                  ></SelectedMemberCard>
+                ))}
+              </div> */}
+            </div>
+          </div>
         </Grid>
       </Grid>
+
       <Modal
         open={openCheckModal}
         onClose={handleCloseCheckModal}
@@ -188,7 +266,13 @@ export default function SelectUserTemplate({
           matchingUserList={selectedUser}
         ></CelebrateModal>
       </Modal>
-      <Confetti></Confetti>
     </Container>
   );
 }
+
+const Title = styled.p`
+  font-size: 1.5rem;
+  font-weight: var(--bold);
+  text-align: center;
+  margin-bottom: 2rem;
+`;
